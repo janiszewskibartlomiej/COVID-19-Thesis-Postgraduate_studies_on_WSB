@@ -12,5 +12,5 @@
 #### Start instructions:
 
 1. clone repo
-2. run recreate_db.py
-3...
+2. run `recreate_db.py`
+3. 
