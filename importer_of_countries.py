@@ -1,4 +1,5 @@
 import json
+import sqlite3
 from urllib.request import urlopen
 
 API = "https://restcountries.eu/rest/v2/all"
@@ -20,12 +21,31 @@ def load_data_from_api(url):
                    'symbol_of_country': symbol_of_country,
                    'country_code': country_code,
                    'population': population,
-                   'latlag': latlag,
-                   'flag': flag}
+                   'latlag': str(latlag),
+                   'flag': str(flag)}
             solution.append(row)
         return solution
 
 
+def insert_data_to_db(data):
+    conn = sqlite3.connect('./db.sqlite')
+    c = conn.cursor()
+    for row in data:
+        if row['country_code'] == None:
+            row['country_code'] = 0
+        row = (row.values())
+        query = 'INSERT INTO countries ' \
+                'VALUES(null, "{}", "{}", {}, {}, "{}", "{}");'.format(*row)
+        # print(query)
+        try:
+            c.execute(query)
+            conn.commit()
+        except sqlite3.IntegrityError:
+            continue
+    conn.close()
+    return print(f'Script executed pass')
+
+
 if __name__ == '__main__':
     data_slice = load_data_from_api(API)
-    print(data_slice)
+    execute = insert_data_to_db(data_slice)

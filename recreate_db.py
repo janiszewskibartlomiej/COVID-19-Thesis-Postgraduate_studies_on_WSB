@@ -10,7 +10,7 @@ def run_script(scripts, db_name):
     conn.commit()
     conn.close()
 
-    print(F'Script "{file.name}" executed')
+    print(f'Script "{file.name}" executed pass')
 
 
 if __name__ == '__main__':
