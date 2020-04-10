@@ -15,5 +15,5 @@ def run_script(scripts, db_name):
 
 if __name__ == '__main__':
     DATABASE_NAME = 'db.sqlite'
-    SCRIPT = './Sql/db_init.sql'
+    SCRIPT = './sql/db_init.sql'
     run_script(SCRIPT, DATABASE_NAME)
