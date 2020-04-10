@@ -13,4 +13,4 @@
 
 1. `clone` repo
 2. run `recreate_db.py`
-3. 
+3. run `importer_of_countries.py`
