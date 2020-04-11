@@ -27,16 +27,15 @@ def load_data_from_api(url):
         return solution
 
 
-def insert_data_to_db(data):
-    conn = sqlite3.connect('./db.sqlite')
+def insert_data_to_db(data, db):
+    conn = sqlite3.connect(db)
     c = conn.cursor()
     for row in data:
         if row['country_code'] == None:
             row['country_code'] = 0
         row = (row.values())
-        query = 'INSERT INTO countries ' \
-                'VALUES(null, "{}", "{}", {}, {}, "{}", "{}");'.format(*row)
-        # print(query)
+        query = 'INSERT INTO countries VALUES(null, "{}", "{}", {}, {}, "{}", "{}");'.format(*row)
+        print(query)
         try:
             c.execute(query)
             conn.commit()
@@ -47,5 +46,8 @@ def insert_data_to_db(data):
 
 
 if __name__ == '__main__':
+    DATABASE_NAME = 'db.sqlite'
+
     data_slice = load_data_from_api(API)
-    execute = insert_data_to_db(data_slice)
+
+    insert_data_to_db(data_slice, DATABASE_NAME)

@@ -10,10 +10,11 @@ def run_script(scripts, db_name):
     conn.commit()
     conn.close()
 
-    print(f'Script "{file.name}" executed pass')
+    print(f'\n --> Script "{file.name}" executed <--')
 
 
 if __name__ == '__main__':
     DATABASE_NAME = 'db.sqlite'
     SCRIPT = './sql/db_init.sql'
+
     run_script(SCRIPT, DATABASE_NAME)
