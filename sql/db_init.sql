@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS cases;
 CREATE TABLE countries(
   id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
-  alpha3Code TEXT NOT NULL,
+  alpha_3_code TEXT NOT NULL,
   country_code INTEGER NOT NULL,
   population INTEGER NOT NULL,
   latlng TEXT UNIQUE NOT NULL,
