@@ -42,11 +42,11 @@ def insert_data_to_db(data, db):
         except sqlite3.IntegrityError:
             continue
     conn.close()
-    return print(f'Script executed pass')
+    return print(f'--> Script executed pass <--')
 
 
 if __name__ == '__main__':
-    DATABASE_NAME = 'db.sqlite'
+    DATABASE_NAME = '../db.sqlite'
 
     data_slice = load_data_from_api(API)
 
