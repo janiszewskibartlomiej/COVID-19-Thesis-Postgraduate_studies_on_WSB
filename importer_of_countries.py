@@ -1,6 +1,7 @@
 import json
 import sqlite3
 from urllib.request import urlopen
+from conect_to_db import connect_to_db
 
 API = "https://restcountries.eu/rest/v2/all"
 
@@ -27,8 +28,8 @@ def load_data_from_api(url):
         return solution
 
 
-def insert_data_to_db(data, db):
-    conn = sqlite3.connect(db)
+def insert_data_to_db(data):
+    conn = connect_to_db()
     c = conn.cursor()
     for row in data:
         if row['country_code'] == None:
@@ -42,12 +43,10 @@ def insert_data_to_db(data, db):
         except sqlite3.IntegrityError:
             continue
     conn.close()
-    return print(f'Script executed pass')
+    return print(f'--> Script executed pass <--')
 
 
 if __name__ == '__main__':
-    DATABASE_NAME = 'db.sqlite'
-
     data_slice = load_data_from_api(API)
 
-    insert_data_to_db(data_slice, DATABASE_NAME)
+    insert_data_to_db(data_slice)
