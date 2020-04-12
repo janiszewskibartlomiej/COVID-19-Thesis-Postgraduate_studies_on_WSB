@@ -13,5 +13,5 @@ def run_script(scripts):
 
 
 if __name__ == '__main__':
-    SCRIPT = './sql/db_init.sql'
+    SCRIPT = './resources/sql/db_init.sql'
     run_script(SCRIPT)
