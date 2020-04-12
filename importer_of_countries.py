@@ -10,17 +10,18 @@ def load_data_from_api(url):
     with urlopen(url) as file:
         response = file.read()
         data_load = json.loads(response)
+        print(data_load)
         solution = []
         for item in data_load:
             name = (item['name'])
-            symbol_of_country = (item['alpha3Code'])
-            country_code = (item['numericCode'])
+            alpha3code = (item['alpha3Code'])
+            alpha2code = (item['alpha2Code'])
             population = (item['population'])
             latlag = (item['latlng'])
             flag = (item['flag'])
             row = {'name': name,
-                   'symbol_of_country': symbol_of_country,
-                   'country_code': country_code,
+                   'alpha3code': alpha3code,
+                   'alpha2code': alpha2code,
                    'population': population,
                    'latlag': str(latlag),
                    'flag': str(flag)}
@@ -32,10 +33,8 @@ def insert_data_to_db(data):
     conn = connect_to_db()
     c = conn.cursor()
     for row in data:
-        if row['country_code'] == None:
-            row['country_code'] = 0
         row = (row.values())
-        query = 'INSERT INTO countries VALUES(null, "{}", "{}", {}, {}, "{}", "{}");'.format(*row)
+        query = 'INSERT INTO countries VALUES(null, "{}", "{}", "{}", {}, "{}", "{}");'.format(*row)
         print(query)
         try:
             c.execute(query)
