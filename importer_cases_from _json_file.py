@@ -15,21 +15,21 @@ def load_data_from_json_file_and_insert_to_db(path):
         c = conn.cursor()
         # print(len(data))
         # print(data.keys())
-        for el in data['Countries']:
+        for element in data['Countries']:
             try:
-                country_id = symbol_dict[f"{el['CountryCode']}"]
+                country_id = symbol_dict[f"{element['CountryCode']}"]
                 row = {
                     'timestamp': int(time.time()),
                     'cod2': country_id,
-                    'confirmed': el['TotalConfirmed'],
-                    'recovery': el['TotalRecovered'],
-                    'deaths': el['TotalDeaths'],
-                    'last_update': el['Date']
+                    'confirmed': element['TotalConfirmed'],
+                    'recovery': element['TotalRecovered'],
+                    'deaths': element['TotalDeaths'],
+                    'last_update': element['Date']
                 }
                 query_select = f"SELECT last_update FROM cases WHERE country_id = {country_id}"
                 c.execute(query_select)
-                last_update = c.fetchone()
-                if last_update[0] == row['last_update']:
+                db_last_update = c.fetchone()
+                if db_last_update['last_update'] == element['Date']:
                     break
                 row = (row.values())
                 query_insert = 'INSERT INTO cases VALUES(null, {}, "{}", {}, {}, {}, "{}");'.format(*row)
