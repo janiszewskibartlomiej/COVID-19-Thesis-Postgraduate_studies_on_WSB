@@ -1,8 +1,8 @@
 PRAGMA foreign_keys = ON;
 
 
-DROP TABLE IF EXISTS countries;
 DROP TABLE IF EXISTS cases;
+DROP TABLE IF EXISTS countries;
 
 
 CREATE TABLE countries(
@@ -18,11 +18,11 @@ CREATE TABLE countries(
 CREATE TABLE cases(
   id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT UNIQUE,
   created_at INTEGER NOT NULL,
-  country_id INTEGER NOT NULL UNIQUE,
+  country_id INTEGER NOT NULL,
   confirmed INTEGER,
   recovered INTEGER,
   deaths INTEGER,
-  lastUpdate TEXT NOT NULL,
+  last_update TEXT NOT NULL,
   FOREIGN KEY (country_id) REFERENCES countries (id)
 );
 
