@@ -17,7 +17,8 @@ def load_data_from_json_file_and_insert_to_db(path):
         # print(data.keys())
         for element in data['Countries']:
             try:
-                country_id = symbol_dict[f"{element['CountryCode']}"]
+                coutry_code = element['CountryCode']
+                country_id = symbol_dict[coutry_code]
                 row = {
                     'timestamp': int(time.time()),
                     'cod2': country_id,
@@ -26,19 +27,27 @@ def load_data_from_json_file_and_insert_to_db(path):
                     'deaths': element['TotalDeaths'],
                     'last_update': element['Date']
                 }
-                query_select = f"SELECT last_update FROM cases WHERE country_id = {country_id}"
+                row_like_select_construction = (element['TotalConfirmed'], element['TotalRecovered'], element['TotalDeaths'])
+                query_select = f"SELECT confirmed, recovered, deaths FROM cases WHERE country_id = {country_id}"
                 c.execute(query_select)
                 db_last_update = c.fetchone()
-                if db_last_update['last_update'] == element['Date']:
+                if db_last_update[0:] == row_like_select_construction:
                     break
+
                 row = (row.values())
-                query_insert = 'INSERT INTO cases VALUES(null, {}, "{}", {}, {}, {}, "{}");'.format(*row)
+                query_insert = 'INSERT INTO cases VALUES(null, {}, {}, {}, {}, {}, "{}");'.format(*row)
                 c.execute(query_insert)
                 conn.commit()
                 print(query_insert)
             except KeyError:
                 if KeyError == 'AN':
                     continue
+            except TypeError:
+                row = (row.values())
+                query_insert = 'INSERT INTO cases VALUES(null, {}, {}, {}, {}, {}, "{}");'.format(*row)
+                c.execute(query_insert)
+                conn.commit()
+                print(query_insert)
         print(f'--> Insert cases from json file {path} is done <--')
         c.close()
 
