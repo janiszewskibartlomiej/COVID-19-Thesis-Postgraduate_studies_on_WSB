@@ -1,17 +1,14 @@
-from connect_to_db import connect_to_db
+from connect_to_db import ConnectToDb
+from path_and_api import *
 
 
 def run_script(scripts):
-    conn = connect_to_db()
-    c = conn.cursor()
+    conn = ConnectToDb()
     with open(scripts, mode='r', encoding='utf-8') as file:
         query = file.read()
-    c.executescript(query)
-    conn.commit()
-    conn.close()
+        conn.execute_script(query=query)
     print(f'\n --> Script "{file.name}" executed <--')
 
 
 if __name__ == '__main__':
-    SCRIPT = './resources/sql/db_init.sql'
-    run_script(SCRIPT)
+    run_script(Files.SCRIPT)
