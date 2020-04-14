@@ -1,7 +1,7 @@
 import json
 import requests
 import time
-from conect_to_db import ConnectToDb
+from connect_to_db import ConnectToDb
 from path_and_api import *
 
 

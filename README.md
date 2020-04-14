@@ -12,5 +12,6 @@
 #### Start instructions:
 
 1. `clone` repo
-2. run `recreate_db.py`
-3. run `importer/importer_of_countries.py`
+2. `pip install -r requirements.txt`
+4. run `recreate_db.py`
+5. run `importer_of_countries.py`

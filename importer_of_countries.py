@@ -1,7 +1,7 @@
 import json
 import sqlite3
 from urllib.request import urlopen
-from conect_to_db import ConnectToDb
+from connect_to_db import ConnectToDb
 from path_and_api import *
 
 
