@@ -1,4 +1,4 @@
-from conect_to_db import connect_to_db
+from connect_to_db import connect_to_db
 
 
 def run_script(scripts):

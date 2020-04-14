@@ -1,6 +1,6 @@
 import json
 import time
-from conect_to_db import connect_to_db
+from connect_to_db import connect_to_db
 
 JSON_ALL_DATA = "./resources/json/all_data.json"
 JSON_CURRENT_DATA = "./resources/json/current_data.json"

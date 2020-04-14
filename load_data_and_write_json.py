@@ -4,8 +4,8 @@ import requests
 API_JSON_CURRENT_CASES = "https://api.covid19api.com/summary"
 API_JSON_HISTORICAL_CASES = "https://api.covid19api.com/all"
 
-JSON_ALL_DATA = "./resources/json/all_data.json"
-JSON_CURRENT_DATA = "./resources/json/current_data.json"
+JSON_ALL_DATA = "./resources/json/all_data_13.json"
+JSON_CURRENT_DATA = "./resources/json/current_data_13.json"
 
 
 def load_data_and_write_json(url, file_name):

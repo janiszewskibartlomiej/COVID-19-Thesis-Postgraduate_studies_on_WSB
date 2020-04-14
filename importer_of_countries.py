@@ -1,7 +1,7 @@
 import json
 import sqlite3
 from urllib.request import urlopen
-from conect_to_db import connect_to_db
+from connect_to_db import connect_to_db
 
 API = "https://restcountries.eu/rest/v2/all"
 
@@ -10,7 +10,6 @@ def load_data_from_api(url):
     with urlopen(url) as file:
         response = file.read()
         data_load = json.loads(response)
-        print(data_load)
         solution = []
         for item in data_load:
             name = (item['name'])
@@ -33,11 +32,11 @@ def insert_data_to_db(data):
     conn = connect_to_db()
     c = conn.cursor()
     for row in data:
-        row = (row.values())
-        query = 'INSERT INTO countries VALUES(null, "{}", "{}", "{}", {}, "{}", "{}");'.format(*row)
-        print(query)
+        parameters = row.values()
+        parameters = tuple(parameters)
+        query = 'INSERT INTO countries VALUES(null, ?, ?, ?, ?, ?, ?);'
         try:
-            c.execute(query)
+            c.execute(query, parameters)
             conn.commit()
         except sqlite3.IntegrityError:
             continue
