@@ -95,5 +95,6 @@ if __name__ == '__main__':
     importer.load_data_and_write_json(JsonApi.API_CURRENT_CASES, Files.JSON_CURRENT_DATA)
     importer.load_data_and_write_json(JsonApi.API_HISTORICAL_CASES, Files.JSON_ALL_DATA)
 
-    # importer.load_data_from_json_and_insert_to_db(path=JsonApi.API_CURRENT_CASES)
-    # importer.load_data_from_json_and_insert_to_db(path='./resources/json/current_data.json_12', api=False)
+    importer.load_current_data_from_json_and_insert_to_db(path=JsonApi.API_CURRENT_CASES)
+    importer.load_current_data_from_json_and_insert_to_db(path='./resources/json/current_data.json', api=False)
+
