@@ -1,4 +1,5 @@
 import sqlite3
+from path_and_api import Files
 
 
 class ConnectToDb:
@@ -7,6 +8,13 @@ class ConnectToDb:
         self.conn = sqlite3.connect(db)
         # self.conn.row_factory = sqlite3.Row
         self.c = self.conn.cursor()
+
+    def run_sql_script(self, scripts):
+        conn = ConnectToDb()
+        with open(scripts, mode='r', encoding='utf-8') as file:
+            query = file.read()
+            conn.execute_script(query=query)
+        print(f'\n --> Script "{file.name}" executed <--')
 
     def row_factory(self):
         self.conn.row_factory = sqlite3.Row
@@ -33,3 +41,8 @@ class ConnectToDb:
 
     def close_connect(self):
         self.c.close()
+
+
+if __name__ == '__main__':
+    run = ConnectToDb()
+    run.run_sql_script(Files.SQL_SCRIPT)
