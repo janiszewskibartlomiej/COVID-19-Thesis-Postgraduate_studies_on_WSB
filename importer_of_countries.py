@@ -7,7 +7,7 @@ from path_and_api import *
 
 class ImporterOfCountries(ConnectToDb):
 
-    def load_data_from_api(self, url):
+    def load_countries_from_api(self, url):
         with urlopen(url) as file:
             response = file.read()
             data_load = json.loads(response)
@@ -26,10 +26,10 @@ class ImporterOfCountries(ConnectToDb):
                        'latlag': str(latlag),
                        'flag': str(flag)}
                 solution.append(row)
-            print(f'--> Script {ImporterOfCountries.load_data_from_api.__name__} executed <--')
+            print(f'--> Script {ImporterOfCountries.load_countries_from_api.__name__} executed <--')
             return solution
 
-    def insert_data_to_db(self, data):
+    def insert_countries_to_db(self, data):
         conn = ConnectToDb()
         for row in data:
             parameters = row.values()
@@ -41,10 +41,10 @@ class ImporterOfCountries(ConnectToDb):
             except sqlite3.IntegrityError:
                 continue
         conn.close_connect()
-        return print(f'--> Script {ImporterOfCountries.insert_data_to_db.__name__} executed <--')
+        return print(f'--> Script {ImporterOfCountries.insert_countries_to_db.__name__} executed <--')
 
 
 if __name__ == '__main__':
     importer = ImporterOfCountries()
-    data = importer.load_data_from_api(url=JsonApi.API_COUNTRIES)
-    importer.insert_data_to_db(data=data)
+    data = importer.load_countries_from_api(url=JsonApi.API_COUNTRIES)
+    importer.insert_countries_to_db(data=data)

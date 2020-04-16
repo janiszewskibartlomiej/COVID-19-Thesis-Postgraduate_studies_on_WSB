@@ -2,13 +2,15 @@ import time
 
 from path_and_api import *
 from importer_current_cases_json import ImporterCurrentCases
+from importer_of_countries import ImporterOfCountries
 
 
-class ImporterAllCases(ImporterCurrentCases):
+class ImporterAllCases(ImporterCurrentCases, ImporterOfCountries):
 
     def load_all_data_from_json_and_insert_to_db(self, path, api=True):
 
         importer = ImporterAllCases()
+
         if api is True:
             data = importer.read_json_api(path)
         else:
@@ -28,29 +30,22 @@ class ImporterAllCases(ImporterCurrentCases):
                     'deaths': element['Deaths'],
                     'last_update': element['Date']
                 }
-                parameters = row.values()
-                parameters = tuple(parameters)
-
-                query_select = "SELECT confirmed, recovered, deaths FROM cases WHERE country_id = ?"
+                parameters = importer.creating_row_to_insert_db(row_dict=row)
 
                 row_like_select_construction = (
                     element['Confirmed'], element['Recovered'], element['Deaths'])
 
-                query_insert = 'INSERT INTO cases VALUES(null, ?, ?, ?, ?, ?, ?);'
-
-                db_last_update = importer.select_all_record(query=query_select, parameter=(country_id,))
-                # print(tuple(db_last_update), row_like_select_construction)
-                # print(row_like_select_construction not in tuple(db_last_update))
+                db_last_update = importer.select_all_records(query=self.query_select_cases, parameter=(country_id,))
 
                 if row_like_select_construction not in db_last_update:
-                    importer.insert_record(query=query_insert, parameters=parameters)
+                    importer.insert_record(query=self.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
 
             except KeyError:
                 if KeyError == 'AN':
                     continue
             except TypeError:
-                importer.insert_record(query=query_insert, parameters=parameters)
+                importer.insert_record(query=self.query_insert_cases, parameters=parameters)
                 print('Insert record: ', parameters)
 
         print(f'--> Insert cases from json {path} is done <--')
@@ -60,8 +55,8 @@ class ImporterAllCases(ImporterCurrentCases):
 if __name__ == '__main__':
     importer = ImporterAllCases()
 
-    importer.load_all_data_from_json_and_insert_to_db(path=JsonApi.API_HISTORICAL_CASES)
+    importer.load_all_data_from_json_and_insert_to_db(path=JsonApi.API_ALL_CASES)
     # importer.load_all_data_from_json_and_insert_to_db(path='./resources/json/all_data.json', api=False)
 
-    # data = importer.read_json_api(JsonApi.API_HISTORICAL_CASES)
+    # data = importer.read_json_api(JsonApi.API_ALL_CASES)
     # print('len: ', len(data), '\n', data[0].keys(), '\n', data[0:3], end="")

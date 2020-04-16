@@ -27,7 +27,7 @@ class ConnectToDb:
         self.c.execute(query, parameter)
         return self.c.fetchone()
 
-    def select_all_record(self, query, parameter):
+    def select_all_records(self, query, parameter):
         self.c.execute(query, parameter)
         return self.c.fetchall()
 

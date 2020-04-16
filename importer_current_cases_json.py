@@ -8,6 +8,16 @@ from path_and_api import *
 
 class ImporterCurrentCases(ConnectToDb):
 
+    def __init__(self):
+
+        super().__init__()
+        self.query_select_cases = "SELECT confirmed, recovered, deaths FROM cases WHERE country_id = ?"
+        self.query_insert_cases = 'INSERT INTO cases VALUES(null, ?, ?, ?, ?, ?, ?);'
+
+    def creating_row_to_insert_db(self, row_dict):
+        parameters = row_dict.values()
+        return tuple(parameters)
+
     def read_json_file(self, path):
 
         with open(path, mode='r', encoding='utf-8') as f:
@@ -49,26 +59,24 @@ class ImporterCurrentCases(ConnectToDb):
                     'deaths': element['TotalDeaths'],
                     'last_update': element['Date']
                 }
-                parameters = row.values()
-                parameters = tuple(parameters)
-                query_select = "SELECT confirmed, recovered, deaths FROM cases WHERE country_id = ?"
+                parameters = importer.creating_row_to_insert_db(row_dict=row)
+
                 row_like_select_construction = (
                     element['TotalConfirmed'], element['TotalRecovered'], element['TotalDeaths'])
-                query_insert = 'INSERT INTO cases VALUES(null, ?, ?, ?, ?, ?, ?);'
 
-                db_last_update = importer.select_all_record(query=query_select, parameter=(country_id,))
+                db_last_update = importer.select_all_records(query=self.query_select_cases, parameter=(country_id,))
                 # print(tuple(db_last_update), row_like_select_construction)
                 # print(row_like_select_construction not in tuple(db_last_update))
 
                 if row_like_select_construction not in db_last_update:
-                    importer.insert_record(query=query_insert, parameters=parameters)
+                    importer.insert_record(query=self.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
 
             except KeyError:
                 if KeyError == 'AN':
                     continue
             except TypeError:
-                importer.insert_record(query=query_insert, parameters=parameters)
+                importer.insert_record(query=self.query_insert_cases, parameters=parameters)
                 print('Insert record: ', parameters)
         print(f'--> Insert cases from json {path} is done <--')
         importer.close_connect()
@@ -77,7 +85,7 @@ class ImporterCurrentCases(ConnectToDb):
 
         query = 'SELECT alpha_2_code, id FROM countries;'
         connect = ConnectToDb()
-        list_of_data = connect.select_all_record(query=query, parameter='')
+        list_of_data = connect.select_all_records(query=query, parameter='')
         connect.close_connect()
         print(f'--> Script {ImporterCurrentCases.load_name_and_id_of_countries.__name__} executed <--')
         return list_of_data
@@ -93,8 +101,8 @@ class ImporterCurrentCases(ConnectToDb):
 
 if __name__ == '__main__':
     importer = ImporterCurrentCases()
-    importer.load_data_and_write_json(JsonApi.API_CURRENT_CASES, Files.JSON_CURRENT_DATA)
-    importer.load_data_and_write_json(JsonApi.API_HISTORICAL_CASES, Files.JSON_ALL_DATA)
+    # importer.load_data_and_write_json(JsonApi.API_CURRENT_CASES, Files.JSON_CURRENT_DATA)
+    # importer.load_data_and_write_json(JsonApi.API_ALL_CASES, Files.JSON_ALL_DATA)
 
     importer.load_current_data_from_json_and_insert_to_db(path=JsonApi.API_CURRENT_CASES)
     # importer.load_current_data_from_json_and_insert_to_db(path='./resources/json/current_data.json', api=False)
