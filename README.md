@@ -13,5 +13,4 @@
 
 1. `clone` `repo`
 2. `pip install -r requirements.txt`
-4. `run` `recreate_db.py`
-5. `run` `importer_of_countries.py`
+4. `run.py` 
