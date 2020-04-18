@@ -2,7 +2,6 @@ import json
 import time
 import requests
 
-from path_and_api import *
 from importer_of_countries import ImporterOfCountries
 
 
