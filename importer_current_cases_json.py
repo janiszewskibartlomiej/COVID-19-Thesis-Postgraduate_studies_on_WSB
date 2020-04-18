@@ -1,102 +1,61 @@
-import json
 import time
-import requests
 
-from connect_to_db import ConnectToDb
+from importer_all_cases_json import ImporterAllCases
 from path_and_api import *
 
 
-class ImporterCurrentCases(ConnectToDb):
+class ImporterCurrentCases(ImporterAllCases):
 
     def __init__(self):
 
         super().__init__()
-        self.query_select_cases = "SELECT confirmed, recovered, deaths FROM cases WHERE country_id = ?"
-        self.query_insert_cases = 'INSERT INTO cases VALUES(null, ?, ?, ?, ?, ?, ?);'
-
-    def creating_row_to_insert_db(self, row_dict):
-        parameters = row_dict.values()
-        return tuple(parameters)
-
-    def read_json_file(self, path):
-
-        with open(path, mode='r', encoding='utf-8') as f:
-            data = json.load(f)
-        return data
-
-    def read_json_api(self, api):
-
-        response = requests.get(api)
-        data = response.json()
-        return data
-
-    def load_data_and_write_json(self, url, file_name):
-        response = requests.get(url)
-        data = response.json()
-        print(f'--> Success write of "{file_name}"" <--')
-        with open(file=file_name, mode='w', encoding='utf-8') as f:
-            json.dump(data, f)
 
     def load_current_data_from_json_and_insert_to_db(self, path, api=True):
 
-        importer = ImporterCurrentCases()
-        if api is True:
-            data = importer.read_json_api(path)
-        else:
-            data = importer.read_json_file(path)
+        imp = ImporterCurrentCases()
 
-        load_data = importer.load_name_and_id_of_countries()
-        symbol_dict = importer.create_dict_of_countries_name_and_id(load_data)
+        if api is True:
+            data = imp.read_json_api(path)
+        else:
+            data = imp.read_json_file(path)
+
+        load_data = imp.load_name_and_id_of_countries()
+        symbol_dict = imp.create_dict_of_countries_name_and_id(load_data)
+
         for element in data['Countries']:
             try:
                 coutry_code = element['CountryCode']
                 country_id = symbol_dict[coutry_code]
+
                 row = {
                     'timestamp': int(time.time()),
                     'cod2': country_id,
+                    'province': "",
+                    'city': "",
                     'confirmed': element['TotalConfirmed'],
                     'recovery': element['TotalRecovered'],
                     'deaths': element['TotalDeaths'],
                     'last_update': element['Date']
                 }
-                parameters = importer.creating_row_to_insert_db(row_dict=row)
 
-                row_like_select_construction = (
-                    element['TotalConfirmed'], element['TotalRecovered'], element['TotalDeaths'])
+                parameters = imp.creating_row_to_insert_db(row_dict=row)
 
-                db_last_update = importer.select_all_records(query=self.query_select_cases, parameter=(country_id,))
-                # print(tuple(db_last_update), row_like_select_construction)
-                # print(row_like_select_construction not in tuple(db_last_update))
+                row_like_select_construction = ("", "",
+                                                element['TotalConfirmed'], element['TotalRecovered'],
+                                                element['TotalDeaths'])
 
-                if row_like_select_construction not in db_last_update:
-                    importer.insert_record(query=self.query_insert_cases, parameters=parameters)
+                db_last_update = imp.select_all_records(query=imp.query_select_cases_id_and_date,
+                                                        parameter=(country_id, element['Date']))
+
+                if row_like_select_construction not in db_last_update or db_last_update == []:
+                    imp.insert_record(query=imp.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
 
             except KeyError:
                 if KeyError == 'AN':
                     continue
-            except TypeError:
-                importer.insert_record(query=self.query_insert_cases, parameters=parameters)
-                print('Insert record: ', parameters)
         print(f'--> Insert cases from json {path} is done <--')
         importer.close_connect()
-
-    def load_name_and_id_of_countries(self):
-
-        query = 'SELECT alpha_2_code, id FROM countries;'
-        connect = ConnectToDb()
-        list_of_data = connect.select_all_records(query=query, parameter='')
-        connect.close_connect()
-        print(f'--> Script {ImporterCurrentCases.load_name_and_id_of_countries.__name__} executed <--')
-        return list_of_data
-
-    def create_dict_of_countries_name_and_id(self, data):
-
-        countries_and_id_dict = {}
-        for row in data:
-            countries_and_id_dict[row[0]] = row[1]
-        print(f'--> Script {ImporterCurrentCases.create_dict_of_countries_name_and_id.__name__} executed <--')
-        return countries_and_id_dict
 
 
 if __name__ == '__main__':

@@ -5,8 +5,8 @@ from path_and_api import Files
 class ConnectToDb:
 
     def __init__(self, db='db.sqlite'):
+
         self.conn = sqlite3.connect(db)
-        # self.conn.row_factory = sqlite3.Row
         self.c = self.conn.cursor()
 
     def run_sql_script(self, scripts):

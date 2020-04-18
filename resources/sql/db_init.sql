@@ -19,6 +19,8 @@ CREATE TABLE cases(
   id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT UNIQUE,
   created_at INTEGER NOT NULL,
   country_id INTEGER NOT NULL,
+  province TEXT DEFAULT NULL,
+  city TEXT DEFAULT NULL,
   confirmed INTEGER,
   recovered INTEGER,
   deaths INTEGER,
