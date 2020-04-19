@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS countries;
 
 
 CREATE TABLE countries(
-  id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+  country_id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   alpha_3_code TEXT UNIQUE NOT NULL,
   alpha_2_code TEXT UNIQUE NOT NULL,
@@ -25,6 +25,6 @@ CREATE TABLE cases(
   recovered INTEGER,
   deaths INTEGER,
   last_update TEXT NOT NULL,
-  FOREIGN KEY (country_id) REFERENCES countries (id)
+  FOREIGN KEY (country_id) REFERENCES countries (country_id)
 );
 
