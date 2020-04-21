@@ -12,7 +12,7 @@ class DataPreparation(ImporterCurrentCases):
         ca.last_update, co.latlng, co.flag_url
         FROM cases as ca
         JOIN countries as co
-        ON co.id = ca.country_id
+        ON co.country_id = ca.country_id
         GROUP BY ca.country_id, ca.last_update
         HAVING max(ca.last_update)
         """
@@ -22,7 +22,7 @@ class DataPreparation(ImporterCurrentCases):
         ca.recovered as total_recovered, max(ca.last_update), co.latlng, co.flag_url
         FROM cases as ca
         JOIN countries as co
-        ON co.id = ca.country_id
+        ON co.country_id = ca.country_id
         GROUP BY ca.country_id
         """
 

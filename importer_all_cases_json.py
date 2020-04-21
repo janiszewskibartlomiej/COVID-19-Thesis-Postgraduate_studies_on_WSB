@@ -40,7 +40,7 @@ class ImporterAllCases(ImporterOfCountries):
 
     def load_name_and_id_of_countries(self):
 
-        query = 'SELECT alpha_2_code, id FROM countries;'
+        query = 'SELECT alpha_2_code, country_id FROM countries;'
         connect = ImporterAllCases()
         list_of_data = connect.select_all_records(query=query, parameter='')
         connect.close_connect()
@@ -112,11 +112,3 @@ if __name__ == '__main__':
 
     # data = importer.read_json_api(JsonApi.API_ALL_CASES)
     # print('len: ', len(data), '\n', data[0].keys(), '\n', data[0:3], end="")
-    x = '2020-04-06T00:00:00Z'
-    t = f"'{x[:10]}%'"
-    z = "2020-04-18T09:13:50Z"
-    db_last_update = importer.select_all_records(query=importer.query_select_cases_id_and_date,
-                                                 parameter=(240, z))
-    print(db_last_update, type(db_last_update))
-
-    print(("", "", 699148, 58545, 36758) in db_last_update)
