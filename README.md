@@ -1,7 +1,7 @@
 # COVID-19-Thesis-Postgraduate_studies_on_WSB ![alt text](https://poplawski.legal/wp-content/uploads/2017/08/Tydzie%C5%84-Mediacji-WSB-Adwokat-Szczecin-Adam-Pop%C5%82awski.jpg "Logo WSB")
 ------------------------------------
 
-#### Project COVID-19 > completed tasks:  ![alt text](https://s3.amazonaws.com/ae-lane-report/wp-content/uploads/2020/03/16140821/Document.jpeg "COVID_19")
+## Project COVID-19 > completed tasks:  ![alt text](https://s3.amazonaws.com/ae-lane-report/wp-content/uploads/2020/03/16140821/Document.jpeg "COVID_19")
 
 1. Schema and SQL script
 2. Connecting to db and runing sql script > creating db SQLite
@@ -34,7 +34,7 @@
       - creating maps with inywidual markers, popup with name of coutry, cases > used html tags
 7. Flask server to render index.html
 
-#### Start instructions:
+### Start instructions:
 
 1. `clone` `repo`
 2. `pip install -r requirements.txt`
