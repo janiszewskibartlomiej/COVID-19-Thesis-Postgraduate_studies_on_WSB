@@ -90,7 +90,7 @@ class DataProcessing(ConnectToDb):
             except ValueError:
                 continue
 
-        cases_map.save('mapa.html')
+        cases_map.save('index.html')
 
 
 if __name__ == '__main__':
