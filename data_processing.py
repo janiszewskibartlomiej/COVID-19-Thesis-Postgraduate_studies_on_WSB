@@ -50,7 +50,7 @@ class DataProcessing(ConnectToDb):
         data = ConnectToDb().select_all_records(self.query_select_sum_of_cases_current_day, "")
         return data
 
-    def get_icon_color_and_volume(self, number_of_cases):
+    def get_icon_color(self, number_of_cases):
         for key, volume in self.interval.items():
             if volume[1] > number_of_cases >= volume[0]:
                 return key
@@ -65,7 +65,7 @@ class DataProcessing(ConnectToDb):
         return coordinates
 
     def creating_map(self):
-        titles = 'COVID-19-Thesis Postgraduate studies by Piotr Woźniak & Bartlomiej Janiszewski'
+        title = 'COVID-19-Thesis Postgraduate studies by Piotr Woźniak & Bartlomiej Janiszewski'
         data = DataProcessing().total_current_cases()
 
         cases_map = folium.Map(location=[52.0, 20.0], width='99%', height='99%', left='0%', top='0%', zoom_start=3.5,
