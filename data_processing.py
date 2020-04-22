@@ -104,7 +104,7 @@ class DataProcessing(ConnectToDb):
             except ValueError:
                 continue
 
-        cases_map.save('index.html')
+        cases_map.save('./templates/index.html')
 
 
 if __name__ == '__main__':
