@@ -16,18 +16,18 @@ class DataProcessing(ConnectToDb):
         ca.last_update, co.latlng, co.flag_url
         FROM cases as ca
         JOIN countries as co
-        ON co.id = ca.country_id
+        ON co.country_id = ca.country_id
         GROUP BY ca.country_id, ca.last_update
         HAVING max(ca.last_update)
         """
 
         self.query_select_sum_of_cases_current_day = """
-        SELECT co.country_id, co.name, co.alpha_3_code, ca.confirmed as total_confirmed, ca.deaths as total_deaths, 
+        SELECT ca.country_id, co.name, co.alpha_3_code, ca.confirmed as total_confirmed, ca.deaths as total_deaths, 
         ca.recovered as total_recovered, max(ca.last_update), co.latlng, co.flag_url
-        FROM countries as co
-        JOIN cases as ca
-        ON co.id = ca.country_id
-        GROUP BY co.country_id
+        FROM cases as ca
+        JOIN countries as co
+        ON co.country_id = ca.country_id
+        GROUP BY ca.country_id
         """
 
         self.TOTAL_ALL_CASES_PER_DAY = ConnectToDb().select_all_records(
