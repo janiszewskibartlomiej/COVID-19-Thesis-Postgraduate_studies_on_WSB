@@ -29,17 +29,11 @@ class DataProcessing(ConnectToDb):
         ON co.country_id = ca.country_id
         GROUP BY ca.country_id
         """
-
-        self.TOTAL_ALL_CASES_PER_DAY = ConnectToDb().select_all_records(
-            self.query_select_sum_of_cases_per_day_group_by_id,
-            "")
-        self.TOTAL_CURRENT_CASES = ConnectToDb().select_all_records(self.query_select_sum_of_cases_current_day, "")
-
         self.interval = {
             '#29a329': [1, 1000, 1],
             '#196619': [1000, 5000, 5],
-            '#e6e600': [1000, 10000, 10],
-            '#b3b300': [10000, 25000, 25],
+            '#b3b300': [1000, 10000, 10],
+            '#f2c718': [10000, 25000, 25],
             '#ffcc00': [25000, 50000, 40],
             '#ff9900': [50000, 100000, 50],
             '#ff5c33': [100000, 150000, 60],
@@ -48,10 +42,19 @@ class DataProcessing(ConnectToDb):
             '#ff0000': [300000, 100 ** 10, 100]
         }
 
+    def total_all_cases_per_day(self):
+        data = ConnectToDb().select_all_records(
+            self.query_select_sum_of_cases_per_day_group_by_id, "")
+        return data
+
+    def total_current_cases(self):
+        data = ConnectToDb().select_all_records(self.query_select_sum_of_cases_current_day, "")
+        return data
+
     def get_icon_color_and_volume(self, number_of_cases):
         for key, volume in self.interval.items():
             if volume[1] > number_of_cases >= volume[0]:
-                return key, volume[2]
+                return key
 
     def slice_location(self, coordinates_str):
         coordinates_str = coordinates_str.replace('[', '')
@@ -64,10 +67,12 @@ class DataProcessing(ConnectToDb):
 
     def creating_map(self):
         titles = 'COVID-19-Thesis Postgraduate studies by Piotr Woźniak & Bartlomiej Janiszewski'
+        data = DataProcessing().total_current_cases()
+
         cases_map = folium.Map(location=[52.0, 20.0], width='99%', height='99%', left='0%', top='0%', zoom_start=3.5,
                                max_zoom=6, min_zoom=3)
 
-        for row in self.TOTAL_CURRENT_CASES:
+        for row in data:
             try:
                 coordinates = self.slice_location(row[7])
 
@@ -85,6 +90,16 @@ class DataProcessing(ConnectToDb):
                     Deaths: <b><center><p style="color:black;">{chr(10015)} {deaths}</p></center></b>
                     Recovered: <b><center><p style="color:green;">{chr(128154)} {recovered}</p></center></b>
                              """
+                ).add_to(cases_map)
+
+                color = DataProcessing().get_icon_color_and_volume(row[3])
+
+                folium.CircleMarker(
+                    location=[coordinates[0], coordinates[1]],
+                    radius=10,
+                    color=f"{color}",
+                    fill=True,
+                    fill_color=f"{color}"
                 ).add_to(cases_map)
 
             except ValueError:
