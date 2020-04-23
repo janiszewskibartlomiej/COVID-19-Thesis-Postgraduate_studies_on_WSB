@@ -4,7 +4,7 @@ from data_processing import DataProcessing
 app = Flask(__name__)
 
 
-@app.route('/covid')
+@app.route('/')
 def index():
     DataProcessing().creating_map()
     return render_template('index.html')

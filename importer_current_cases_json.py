@@ -55,7 +55,7 @@ class ImporterCurrentCases(ImporterAllCases):
                 if KeyError == 'AN':
                     continue
         print(f'--> Insert cases from json {path} is done <--')
-        importer.close_connect()
+        imp.close_connect()
 
 
 if __name__ == '__main__':

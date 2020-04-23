@@ -91,7 +91,7 @@ class DataProcessing(ConnectToDb):
                              """
                 ).add_to(cases_map)
 
-                color = DataProcessing().get_icon_color_and_volume(row[3])
+                color = DataProcessing().get_icon_color(row[3])
 
                 folium.CircleMarker(
                     location=[coordinates[0], coordinates[1]],
