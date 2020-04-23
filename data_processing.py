@@ -65,12 +65,21 @@ class DataProcessing(ConnectToDb):
         return coordinates
 
     def creating_map(self):
-        title = 'COVID-19-Thesis Postgraduate studies by Piotr Woźniak & Bartlomiej Janiszewski'
+        title = 'COVID-19 by Bartlomiej Janiszewski & Piotr Woźniak'
+        
         data = DataProcessing().total_current_cases()
 
         cases_map = folium.Map(location=[52.0, 20.0], width='99%', height='99%', left='0%', top='0%', zoom_start=3.5,
                                max_zoom=6, min_zoom=3)
-
+        folium.map.Marker(
+            [63.0, 24.0],
+            icon=DivIcon(
+                icon_size=(325, 150),
+                icon_anchor=(175, 90),
+                html=f'<div style="color: #484545; "><h3>{title}</h3></div>',
+            )
+        ).add_to(cases_map)
+        
         for row in data:
             try:
                 coordinates = self.slice_location(row[7])
