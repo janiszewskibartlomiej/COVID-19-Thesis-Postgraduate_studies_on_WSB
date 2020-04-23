@@ -65,9 +65,9 @@ class DataProcessing(ConnectToDb):
         coordinates = [latitude, longitude]
         return coordinates
 
-    def creating_map(self):
+        def creating_map(self):
         title = 'COVID-19 by Bartlomiej Janiszewski & Piotr Woźniak'
-        
+
         data = DataProcessing().total_current_cases()
 
         cases_map = folium.Map(location=[52.0, 20.0], width='99%', height='99%', left='0%', top='0%', zoom_start=3.5,
@@ -76,11 +76,29 @@ class DataProcessing(ConnectToDb):
             [63.0, 24.0],
             icon=DivIcon(
                 icon_size=(325, 150),
-                icon_anchor=(175, 90),
-                html=f'<div style="color: #484545; "><h3>{title}</h3></div>',
+                icon_anchor=(175, 95),
+                html=f'<div style="color: #484545; position: absolute; left: 0px; top: 0px;  z-index: -1"><h3>{title}</h3></div>',
             )
         ).add_to(cases_map)
-        
+
+        total_data_today = ImporterAllCases().read_json_api(JsonApi.API_TOTAL_TODAY)['data']
+        total_cases = total_data_today['total_cases'].replace(',', ' ')
+        total_deats = total_data_today['death_cases'].replace(',', ' ')
+        total_recovered = total_data_today['recovery_cases'].replace(',', ' ')
+
+        folium.map.Marker(
+            [60.0, 24.0],
+            icon=DivIcon(
+                icon_size=(160, 150),
+                icon_anchor=(220, 30),
+                html=f'<div style="background-color:rgba(255, 255, 255, 0.6)">'
+                f'<h5 style="color: red;">Confirmed: <b>{chr(127973)} {total_cases}</b></h5>'
+                f'<h5 style="color: black;">Deaths: <b>{chr(10015)} {total_deats}</b></h5>'
+                f'<h5 style="color: green;">Recovered: <b>{chr(128154)} {total_recovered}</b></h5>'
+                f'</div>',
+            )
+        ).add_to(cases_map)
+
         for row in data:
             try:
                 coordinates = self.slice_location(row[7])
@@ -91,7 +109,7 @@ class DataProcessing(ConnectToDb):
 
                 folium.Marker(
                     location=[coordinates[0], coordinates[1]],
-                    icon=folium.Icon(color='red', icon='certificate'),
+                    icon=folium.Icon(color='red', icon='certificate', html="position: absolute; z-index: 1"),
                     tooltip=f"""
                     <center><b>{row[1]}</b></center>
                     </br>
