@@ -32,7 +32,11 @@
       - get icon color from prepering dict where keys = number of #colors and valume = list of interval
       - slice location form string of list
       - creating maps with inywidual markers, popup with name of coutry, cases > used html tags
+      - added title in map like marker - DivIcon because in folium we haven't got this function
+      - added table of total current cases like marker 
 7. Flask server to render index.html
+
+[alt text](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/"COVID Project - map")
 
 ### Start instructions:
 
