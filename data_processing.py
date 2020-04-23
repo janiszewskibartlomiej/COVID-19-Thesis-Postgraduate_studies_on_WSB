@@ -2,6 +2,8 @@ import sys
 import folium
 from folium import DivIcon
 from connect_to_db import ConnectToDb
+from importer_all_cases_json import ImporterAllCases
+from path_and_api import JsonApi
 
 sys.setrecursionlimit(10000)
 
@@ -65,8 +67,8 @@ class DataProcessing(ConnectToDb):
         coordinates = [latitude, longitude]
         return coordinates
 
-        def creating_map(self):
-        title = 'COVID-19 by Bartlomiej Janiszewski & Piotr Woźniak'
+    def creating_map(self):
+        title = 'COVID by Piotr Woźniak Bartlomiej Janiszewski'
 
         data = DataProcessing().total_current_cases()
 
@@ -75,9 +77,9 @@ class DataProcessing(ConnectToDb):
         folium.map.Marker(
             [63.0, 24.0],
             icon=DivIcon(
-                icon_size=(325, 150),
-                icon_anchor=(175, 95),
-                html=f'<div style="color: #484545; position: absolute; left: 0px; top: 0px;  z-index: -1"><h3>{title}</h3></div>',
+                icon_size=(197, 50),
+                icon_anchor=(177, 80),
+                html=f'<div style="color: #484545; position: absolute; z-index: -1"><h4>{title}</h4></div>',
             )
         ).add_to(cases_map)
 
@@ -138,5 +140,3 @@ class DataProcessing(ConnectToDb):
 
 if __name__ == '__main__':
     DataProcessing().creating_map()
-
-    # print(DataProcessing().TOTAL_CURRENT_CASES)
