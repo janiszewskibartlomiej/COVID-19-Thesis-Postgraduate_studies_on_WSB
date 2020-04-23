@@ -36,7 +36,7 @@
       - added table of total current cases like marker 
 7. Flask server to render index.html
 
-[alt text](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/"COVID Project - map")
+["COVID-19 Project"](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
 
 ### Start instructions:
 
