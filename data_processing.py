@@ -1,5 +1,6 @@
 import sys
 import folium
+from folium import DivIcon
 from connect_to_db import ConnectToDb
 
 sys.setrecursionlimit(10000)
