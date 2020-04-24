@@ -68,16 +68,16 @@ class DataProcessing(ConnectToDb):
         return coordinates
 
     def creating_map(self):
-        title = 'COVID by Piotr Woźniak Bartlomiej Janiszewski'
+        title = 'COVID-19 Thesis made by Piotr Woźniak & Bartlomiej Janiszewski'
 
         data = DataProcessing().total_current_cases()
 
-        cases_map = folium.Map(location=[52.0, 20.0], width='99%', height='99%', left='0%', top='0%', zoom_start=3.5,
+        cases_map = folium.Map(location=[62.0, 20.0], width='99%', height='99%', left='0%', top='0%', zoom_start=3.5,
                                max_zoom=6, min_zoom=3, titles=title, attr="attribution")
         folium.map.Marker(
-            [63.0, 24.0],
+            [70.0, 26.0],
             icon=DivIcon(
-                icon_size=(197, 50),
+                icon_size=(290, 50),
                 icon_anchor=(179, 85),
                 html=f'<div style="color: #484545; position: absolute; z-index: -1"><h4>{title}</h4></div>',
             )
@@ -89,14 +89,15 @@ class DataProcessing(ConnectToDb):
         total_recovered = f"{total_data_today['recovered']['value']: ,}".replace(',', ' ')
 
         folium.map.Marker(
-            [60.0, 24.0],
+            [70.0, 31.0],
             icon=DivIcon(
-                icon_size=(161, 150),
+                icon_size=(210, 180),
                 icon_anchor=(220, 30),
-                html=f'<div style="background-color:rgba(255, 255, 255, 0.6)">'
-                f'<h5 style="color: red;">Confirmed: <b>{chr(127973)} {total_confirmed}</b></h5>'
-                f'<h5 style="color: black;">Deaths: <b>{chr(10015)} {total_deats}</b></h5>'
-                f'<h5 style="color: green;">Recovered: <b>{chr(128154)} {total_recovered}</b></h5>'
+                html=f'<div style="background-color:rgba(255, 255, 255, 0.4);">'
+                f'<center><h4 style="line-height: 150%";><b>Total cases: </b></h4>'
+                f'<h4 style="color: red; line-height: 150%;">Confirmed: <b>{chr(127973)} {total_confirmed}</b></h4>'
+                f'<h4 style="color: black;">Deaths: <b> {chr(10015)} {total_deats}</b></h4>'
+                f'<h4 style="color: green; line-height: 150%;">Recovered: <b>{chr(128154)} {total_recovered}</b></h4></center>'
                 f'</div>',
             )
         ).add_to(cases_map)
