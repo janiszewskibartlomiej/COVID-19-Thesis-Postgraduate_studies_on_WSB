@@ -40,10 +40,10 @@
 #### Version 1.1:
 
  * added title in map like marker - used DivIcon function, because in folium we haven't got title method
- * added table of sumary total current cases like marker with DivIcon mehod 
+ * added table of sumary total current cases like marker with DivIcon mehod from API json https://covid19.mathdro.id/api
       
       
-["COVID-19 Project"](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
+["COVID-19 Project Web site"](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
 
 ### Start instructions:
 
