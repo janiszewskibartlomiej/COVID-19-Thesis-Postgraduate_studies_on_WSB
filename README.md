@@ -3,7 +3,7 @@
 
 ## Project COVID-19 > completed tasks:  ![alt text](https://s3.amazonaws.com/ae-lane-report/wp-content/uploads/2020/03/16140821/Document.jpeg "COVID_19")
 
-####Version 1.0
+#### Version 1.0
 
 1. Schema and SQL script
 2. Connecting to db and runing sql script > creating db SQLite
@@ -37,7 +37,7 @@
       
 7. Flask server to render index.html
 
-####Version 1.1:
+#### Version 1.1:
 
  * added title in map like marker - used DivIcon function, because in folium we haven't got title method
  * added table of sumary total current cases like marker with DivIcon mehod 
