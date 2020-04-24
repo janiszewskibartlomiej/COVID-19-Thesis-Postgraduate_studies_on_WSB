@@ -73,28 +73,28 @@ class DataProcessing(ConnectToDb):
         data = DataProcessing().total_current_cases()
 
         cases_map = folium.Map(location=[52.0, 20.0], width='99%', height='99%', left='0%', top='0%', zoom_start=3.5,
-                               max_zoom=6, min_zoom=3)
+                               max_zoom=6, min_zoom=3, titles=title, attr="attribution")
         folium.map.Marker(
             [63.0, 24.0],
             icon=DivIcon(
                 icon_size=(197, 50),
-                icon_anchor=(177, 80),
+                icon_anchor=(179, 85),
                 html=f'<div style="color: #484545; position: absolute; z-index: -1"><h4>{title}</h4></div>',
             )
         ).add_to(cases_map)
 
-        total_data_today = ImporterAllCases().read_json_api(JsonApi.API_TOTAL_TODAY)['data']
-        total_cases = total_data_today['total_cases'].replace(',', ' ')
-        total_deats = total_data_today['death_cases'].replace(',', ' ')
-        total_recovered = total_data_today['recovery_cases'].replace(',', ' ')
+        total_data_today = ImporterAllCases().read_json_api(JsonApi.API_TOTAL_TODAY)
+        total_confirmed = f"{total_data_today['confirmed']['value']: ,}".replace(',', ' ')
+        total_deats = f"{total_data_today['deaths']['value']: ,}".replace(',', ' ')
+        total_recovered = f"{total_data_today['recovered']['value']: ,}".replace(',', ' ')
 
         folium.map.Marker(
             [60.0, 24.0],
             icon=DivIcon(
-                icon_size=(160, 150),
+                icon_size=(161, 150),
                 icon_anchor=(220, 30),
                 html=f'<div style="background-color:rgba(255, 255, 255, 0.6)">'
-                f'<h5 style="color: red;">Confirmed: <b>{chr(127973)} {total_cases}</b></h5>'
+                f'<h5 style="color: red;">Confirmed: <b>{chr(127973)} {total_confirmed}</b></h5>'
                 f'<h5 style="color: black;">Deaths: <b>{chr(10015)} {total_deats}</b></h5>'
                 f'<h5 style="color: green;">Recovered: <b>{chr(128154)} {total_recovered}</b></h5>'
                 f'</div>',

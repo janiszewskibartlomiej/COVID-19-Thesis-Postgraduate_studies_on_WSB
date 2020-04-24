@@ -8,4 +8,4 @@ class JsonApi:
     API_COUNTRIES = "https://restcountries.eu/rest/v2/all"
     API_CURRENT_CASES = "https://api.covid19api.com/summary"
     API_ALL_CASES = "https://api.covid19api.com/all"
-    API_TOTAL_TODAY = "https://corona-virus-stats.herokuapp.com/api/v1/cases/general-stats"
+    API_TOTAL_TODAY = "https://covid19.mathdro.id/api"
