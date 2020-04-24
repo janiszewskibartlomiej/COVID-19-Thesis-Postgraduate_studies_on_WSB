@@ -89,7 +89,7 @@ class DataProcessing(ConnectToDb):
         total_recovered = f"{total_data_today['recovered']['value']: ,}".replace(',', ' ')
 
         folium.map.Marker(
-            [70.0, 31.0],
+            [70.0, 32.0],
             icon=DivIcon(
                 icon_size=(210, 180),
                 icon_anchor=(220, 30),
