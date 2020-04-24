@@ -3,6 +3,8 @@
 
 ## Project COVID-19 > completed tasks:  ![alt text](https://s3.amazonaws.com/ae-lane-report/wp-content/uploads/2020/03/16140821/Document.jpeg "COVID_19")
 
+#### Version 1.0
+
 1. Schema and SQL script
 2. Connecting to db and runing sql script > creating db SQLite
     Class with methods:
@@ -32,11 +34,16 @@
       - get icon color from prepering dict where keys = number of #colors and valume = list of interval
       - slice location form string of list
       - creating maps with inywidual markers, popup with name of coutry, cases > used html tags
-      - added title in map like marker - DivIcon because in folium we haven't got this function
-      - added table of total current cases like marker 
+      
 7. Flask server to render index.html
 
-["COVID-19 Project"](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
+#### Version 1.1:
+
+ * Iadded title in map like marker - used DivIcon function, because in folium we haven't got method creating title
+ * I added table of total current cases like marker with DivIcon mehod from API json https://covid19.mathdro.id/api
+      
+      
+["COVID-19 Project Web site"](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
 
 ### Start instructions:
 
