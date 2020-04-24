@@ -39,11 +39,11 @@
 
 #### Version 1.1:
 
- * Iadded title in map like marker - used DivIcon function, because in folium we haven't got method creating title
+ * I added title in map like marker - used DivIcon function, because in folium we haven't got method creating title
  * I added table of total current cases like marker with DivIcon mehod from API json https://covid19.mathdro.id/api
       
       
-["COVID-19 Project Web site"](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
+["COVID-19 Project > Please see on Web site"](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
 
 ### Start instructions:
 
