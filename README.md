@@ -45,7 +45,7 @@
       
 ["COVID-19 Project > Please see on Web site"](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
 
-![alt text](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-24_14h22_30.png "img map")
+![alt text](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-25_08h24_49.png "img map")
 
 ### Start instructions:
 
