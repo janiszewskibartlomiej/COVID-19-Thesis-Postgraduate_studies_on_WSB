@@ -1,12 +1,11 @@
 from flask import Flask, render_template
-from data_processing import DataProcessing
-
+from map_of_the_world import CreatingMap
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    DataProcessing().creating_map()
+    CreatingMap().creating_map_of_the_world()
     return render_template('index.html')
 
 
