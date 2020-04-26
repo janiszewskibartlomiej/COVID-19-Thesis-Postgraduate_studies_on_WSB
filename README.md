@@ -9,9 +9,9 @@
       
 ### * [Website](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
 
-![alt text](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-25_08h24_49.png "img map")
+[![alt text](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-25_08h24_49.png "img map")](https://drive.google.com/file/d/16kNPllVqwDjHt9aSamMeGclegrjLRZQx)
 
-[![movie]](https://drive.google.com/file/d/16kNPllVqwDjHt9aSamMeGclegrjLRZQx/view?usp=drivesdk)
+[![movie](https://drive.google.com/file/d/16kNPllVqwDjHt9aSamMeGclegrjLRZQx)
 
 ### Start instructions:
 
