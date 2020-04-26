@@ -81,6 +81,6 @@ class DataProcessing(ConnectToDb):
 
 
 if __name__ == '__main__':
-    data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=(179, ))
+    data = DataProcessing().total_cases_per_day()
     df = DataProcessing().creating_dateframe(data=data)
     print(df)
