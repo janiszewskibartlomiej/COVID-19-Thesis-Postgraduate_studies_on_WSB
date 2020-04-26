@@ -52,3 +52,4 @@
 1. `clone` `repo`
 2. `pip install -r requirements.txt`
 3. `creating_app.py`
+4. `app.py`

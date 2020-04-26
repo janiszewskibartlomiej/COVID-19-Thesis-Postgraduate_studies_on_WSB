@@ -46,5 +46,5 @@ class ImporterOfCountries(ConnectToDb):
 
 if __name__ == '__main__':
     importer = ImporterOfCountries()
-    data = importer.load_countries_from_api(url=JsonApi.API_COUNTRIES)
-    importer.insert_countries_to_db(data=data)
+    # data = importer.load_countries_from_api(url=JsonApi.API_COUNTRIES)
+    # importer.insert_countries_to_db(data=data)

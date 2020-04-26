@@ -13,7 +13,7 @@ class CreatingMap(DataProcessing):
     def __init__(self):
         super().__init__()
 
-    def creating_map_of_the_world(self):
+    def map_of_the_world(self):
         title = 'COVID-19 Thesis made by Piotr Woźniak & Bartlomiej Janiszewski'
 
         data = DataProcessing().total_current_cases()
@@ -86,4 +86,4 @@ class CreatingMap(DataProcessing):
 
 
 if __name__ == '__main__':
-    CreatingMap().creating_map()
+    run = CreatingMap()

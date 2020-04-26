@@ -1,4 +1,5 @@
 import sys
+import pandas as pd
 from connect_to_db import ConnectToDb
 
 sys.setrecursionlimit(10000)
@@ -10,14 +11,14 @@ class DataProcessing(ConnectToDb):
         super().__init__()
 
         self.query_select_sum_of_cases_per_day_group_by_id = """
-        SELECT ca.country_id, co.name, co.alpha_3_code, sum(ca.confirmed) as total_confirmed, 
+        SELECT sum(ca.confirmed) as total_confirmed, 
         sum(ca.deaths) as total_deaths, sum(ca.recovered) as total_recovered, 
-        ca.last_update, co.latlng, co.flag_url
+        max(ca.last_update)
         FROM cases as ca
         JOIN countries as co
         ON co.country_id = ca.country_id
         GROUP BY ca.country_id, ca.last_update
-        HAVING max(ca.last_update)
+        HAVING ca.country_id = ?
         """
 
         self.query_select_sum_of_cases_current_day = """
@@ -31,9 +32,9 @@ class DataProcessing(ConnectToDb):
 
         self.query_select_total_cases_per_day = """
         SELECT sum(confirmed) as total_confirmed, sum(deaths) as total_deaths, sum(recovered) as total_recovered, 
-        date(last_update) as date_of_update
+        datetime(last_update) as date_of_update
         FROM cases
-        GROUP BY date(last_update)
+        GROUP BY datetime(last_update)
         """
         self.interval = {
             '#29a329': [1, 1000],
@@ -47,9 +48,9 @@ class DataProcessing(ConnectToDb):
             '#ff0000': [250000, 100 ** 10],
         }
 
-    def all_cases_per_day_and_country(self):
+    def all_cases_per_day_where_country_id_equal(self, country_id):
         data = ConnectToDb().select_all_records(
-            self.query_select_sum_of_cases_per_day_group_by_id, "")
+            self.query_select_sum_of_cases_per_day_group_by_id, country_id)
         return data
 
     def total_current_cases(self):
@@ -73,3 +74,12 @@ class DataProcessing(ConnectToDb):
         longitude = float(coordinates[1])
         coordinates = [latitude, longitude]
         return coordinates
+
+    def creating_dateframe(self, data):
+        dateframe = pd.DataFrame(data, columns=['Confirmed', 'Deaths', 'Recovered', 'Date'])
+        return dateframe
+
+
+if __name__ == '__main__':
+    data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=179)
+    df = DataProcessing().creating_dateframe(data=data)
