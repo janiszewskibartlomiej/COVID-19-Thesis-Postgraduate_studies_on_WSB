@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    CreatingMap().creating_map_of_the_world()
+    CreatingMap().map_of_the_world()
     return render_template('index.html')
 
 
