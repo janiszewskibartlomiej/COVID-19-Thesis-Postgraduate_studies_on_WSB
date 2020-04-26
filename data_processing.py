@@ -13,10 +13,10 @@ class DataProcessing(ConnectToDb):
         self.query_select_sum_of_cases_per_day_group_by_id = """
         SELECT sum(ca.confirmed) as total_confirmed, 
         sum(ca.deaths) as total_deaths, sum(ca.recovered) as total_recovered, 
-        max(ca.last_update)
+        ca.last_update
         FROM cases as ca
         JOIN countries as co
-        ON co.country_id = ca.country_id
+        ON ca.country_id = co.country_id
         GROUP BY ca.country_id, ca.last_update
         HAVING ca.country_id = ?
         """
@@ -49,16 +49,16 @@ class DataProcessing(ConnectToDb):
         }
 
     def all_cases_per_day_where_country_id_equal(self, country_id):
-        data = ConnectToDb().select_all_records(
-            self.query_select_sum_of_cases_per_day_group_by_id, country_id)
+        data = ConnectToDb().select_all_records(query=
+            self.query_select_sum_of_cases_per_day_group_by_id, parameter=country_id)
         return data
 
     def total_current_cases(self):
-        data = ConnectToDb().select_all_records(self.query_select_sum_of_cases_current_day, "")
+        data = ConnectToDb().select_all_records(query=self.query_select_sum_of_cases_current_day, parameter="")
         return data
 
     def total_cases_per_day(self):
-        data = ConnectToDb().select_all_records(self.query_select_total_cases_per_day, "")
+        data = ConnectToDb().select_all_records(query=self.query_select_total_cases_per_day, parameter="")
         return data
 
     def get_icon_color(self, number_of_cases):
@@ -81,5 +81,6 @@ class DataProcessing(ConnectToDb):
 
 
 if __name__ == '__main__':
-    data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=179)
+    data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=(179, ))
     df = DataProcessing().creating_dateframe(data=data)
+    print(df)
