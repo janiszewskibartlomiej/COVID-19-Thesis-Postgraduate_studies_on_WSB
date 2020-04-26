@@ -7,7 +7,7 @@
 ### * [Completed tasks](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/completed_tasks.md) 
       
       
-["COVID-19 Project > Please see on Web site"](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
+### * [Web site](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
 
 ![alt text](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-25_08h24_49.png "img map")
 
