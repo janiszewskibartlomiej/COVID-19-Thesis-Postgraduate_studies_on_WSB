@@ -3,7 +3,7 @@ import time
 import requests
 
 from importer_of_countries import ImporterOfCountries
-
+from path_and_api import JsonApi
 
 class ImporterAllCases(ImporterOfCountries):
 
@@ -11,8 +11,8 @@ class ImporterAllCases(ImporterOfCountries):
 
         super().__init__()
 
-        self.query_select_cases_id_and_date = "SELECT province, city, confirmed, recovered, deaths FROM cases WHERE country_id = ? " \
-                                              "and last_update LIKE ? ;"
+        self.query_select_cases_id_and_date = "SELECT province, city, confirmed, recovered, deaths, date(last_update) FROM cases WHERE country_id = ? " \
+                                              "and date(last_update) LIKE ? ;"
         self.query_insert_cases = 'INSERT INTO cases VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?);'
 
     def creating_row_to_insert_db(self, row_dict):
@@ -105,10 +105,5 @@ class ImporterAllCases(ImporterOfCountries):
 
 
 if __name__ == '__main__':
-    importer = ImporterAllCases()
+    ImporterAllCases().load_all_data_from_json_and_insert_to_db(path=JsonApi.API_ALL_CASES)
 
-    # importer.load_all_data_from_json_and_insert_to_db(path=JsonApi.API_ALL_CASES)
-    # importer.load_all_data_from_json_and_insert_to_db(path='./resources/json/all_data.json', api=False)
-
-    # data = importer.read_json_api(JsonApi.API_ALL_CASES)
-    # print('len: ', len(data), '\n', data[0].keys(), '\n', data[0:3], end="")

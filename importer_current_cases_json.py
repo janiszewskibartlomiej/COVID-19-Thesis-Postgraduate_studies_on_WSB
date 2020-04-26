@@ -42,11 +42,10 @@ class ImporterCurrentCases(ImporterAllCases):
 
                 row_like_select_construction = ("", "",
                                                 element['TotalConfirmed'], element['TotalRecovered'],
-                                                element['TotalDeaths'])
+                                                element['TotalDeaths'], element['Date'][:10])
 
                 db_last_update = imp.select_all_records(query=imp.query_select_cases_id_and_date,
-                                                        parameter=(country_id, element['Date']))
-
+                                                        parameter=(country_id, element['Date'][:10]))
                 if row_like_select_construction not in db_last_update or db_last_update == []:
                     imp.insert_record(query=imp.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
@@ -59,9 +58,4 @@ class ImporterCurrentCases(ImporterAllCases):
 
 
 if __name__ == '__main__':
-    importer = ImporterCurrentCases()
-    # importer.load_data_and_write_json(JsonApi.API_CURRENT_CASES, Files.JSON_CURRENT_DATA)
-    # importer.load_data_and_write_json(JsonApi.API_ALL_CASES, Files.JSON_ALL_DATA)
-
-    # importer.load_current_data_from_json_and_insert_to_db(path=JsonApi.API_CURRENT_CASES)
-    # importer.load_current_data_from_json_and_insert_to_db(path='./resources/json/current_data.json', api=False)
+    ImporterCurrentCases().load_current_data_from_json_and_insert_to_db(JsonApi.API_CURRENT_CASES)

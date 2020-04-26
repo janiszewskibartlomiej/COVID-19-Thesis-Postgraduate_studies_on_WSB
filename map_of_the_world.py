@@ -50,6 +50,9 @@ class CreatingMap(DataProcessing):
 
         for row in data:
             try:
+                if (row[3], row[4], row[5]) == (0, 0, 0):
+                    continue
+
                 coordinates = self.slice_location(row[7])
 
                 confirmed = f'{row[3]: ,}'.replace(',', " ")
@@ -86,4 +89,4 @@ class CreatingMap(DataProcessing):
 
 
 if __name__ == '__main__':
-    run = CreatingMap()
+    CreatingMap().map_of_the_world()
