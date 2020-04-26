@@ -1,7 +1,7 @@
-## Completed tasks:
+# Completed tasks:
 
 
-#### Version 1.0
+## Version 1.0
 
 1. Schema and SQL script
 2. Connecting to db and runing sql script > creating db SQLite
@@ -35,7 +35,7 @@
       
 7. Flask server to render index.html
 
-#### Version 1.1:
+## Version 1.1:
 
  * I added title in map like marker - used DivIcon function, because in folium we haven't got method creating title
  * I added table of total current cases like marker with DivIcon mehod from API json https://covid19.mathdro.id/api
