@@ -1,5 +1,5 @@
 ## Completed tasks:
----
+
 
 #### Version 1.0
 
