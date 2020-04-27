@@ -15,6 +15,9 @@
 
 [![Graph of Poland](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-27_00h16_13.png)](http://cadillac.pl/covid/poland.html)
 
+[![Graph of World](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-27_00h16_13.png)](http://cadillac.pl/covid/world.html)
+
+
 ### Start instructions:
 
 1. `clone` `repo`
