@@ -11,7 +11,7 @@
 
 ### * [Start instruction](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB#start-instructions)
 
-[![Movie](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-25_08h24_49.png "img map")](https://drive.google.com/file/d/16kNPllVqwDjHt9aSamMeGclegrjLRZQx)
+[![web of covid](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-25_08h24_49.png "img map")](http://cadillac.pl/covid/)
 
 [![Movie](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-27_00h16_13.png)](https://drive.google.com/file/d/16kNPllVqwDjHt9aSamMeGclegrjLRZQx)
 
