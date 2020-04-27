@@ -7,11 +7,13 @@
 ### * [Completed tasks](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/completed_tasks.md) 
       
       
-### * [Web site](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
+### * [Website](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
 
-![alt text](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-25_08h24_49.png "img map")
+### * [Start instruction](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB#start-instructions)
 
-![alt text]( "graph")
+[![Movie](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-25_08h24_49.png "img map")](https://drive.google.com/file/d/16kNPllVqwDjHt9aSamMeGclegrjLRZQx)
+
+[![Movie](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-27_00h16_13.png)](https://drive.google.com/file/d/16kNPllVqwDjHt9aSamMeGclegrjLRZQx)
 
 ### Start instructions:
 
