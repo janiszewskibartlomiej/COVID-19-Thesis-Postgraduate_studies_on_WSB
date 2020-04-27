@@ -9,7 +9,7 @@
       
 ### * [>>cadillac.pl/covid<<](http://cadillac.pl/covid)
 
-### * [Run aoo](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB#start-instructions)
+### * [Run app](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB#start-instructions)
 
 [![Map of covid](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/templates/2020-04-25_08h24_49.png "img map")](http://cadillac.pl/covid/)
 
