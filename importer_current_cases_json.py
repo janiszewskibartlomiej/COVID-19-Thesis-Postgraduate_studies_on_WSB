@@ -42,10 +42,12 @@ class ImporterCurrentCases(ImporterAllCases):
 
                 row_like_select_construction = ("", "",
                                                 element['TotalConfirmed'], element['TotalRecovered'],
-                                                element['TotalDeaths'], element['Date'][:10])
+                                                element['TotalDeaths'])
 
+                date_element = element['Date'][:10]
                 db_last_update = imp.select_all_records(query=imp.query_select_cases_id_and_date,
-                                                        parameter=(country_id, element['Date'][:10]))
+                                                        parameter=(country_id, date_element + '%'))
+
                 if row_like_select_construction not in db_last_update or db_last_update == []:
                     imp.insert_record(query=imp.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
