@@ -7,7 +7,7 @@
 ### * [Completed tasks](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/completed_tasks.md) 
       
       
-### * [cadillac.pl/covid](http://cadillac.pl/covid)
+### * [>>cadillac.pl/covid](http://cadillac.pl/covid)
 
 ### * [Start instruction](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB#start-instructions)
 
