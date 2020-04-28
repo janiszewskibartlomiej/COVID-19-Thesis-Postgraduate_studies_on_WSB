@@ -58,7 +58,7 @@ class Graphs(DataProcessing):
 
         return figure
 
-    def write_html_graph(self, figure, title):
+    def write_graph_to_html(self, figure, title):
         path = f'./templates/graphs/{title.lower()}.html'
         figure.write_html(path)
 
