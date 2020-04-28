@@ -50,7 +50,7 @@ class DataProcessing(ConnectToDb):
 
     def all_cases_per_day_where_country_id_equal(self, country_id):
         data = ConnectToDb().select_all_records(query=
-            self.query_select_sum_of_cases_per_day_group_by_id, parameter=country_id)
+            self.query_select_sum_of_cases_per_day_group_by_id, parameter=(country_id, ))
         return data
 
     def total_current_cases(self):

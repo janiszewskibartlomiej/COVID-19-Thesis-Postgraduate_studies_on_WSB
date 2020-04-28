@@ -24,17 +24,17 @@ class Graphs(DataProcessing):
 
         fig.add_trace(go.Scatter(x=dataframe['Date'], y=dataframe['Confirmed'],
                                  mode='lines',
-                                 name='Confirmed'+alpha_3_code,
+                                 name='Confirmed' + alpha_3_code,
                                  line=dict(color='red', width=2, dash='solid')))
 
         fig.add_trace(go.Scatter(x=dataframe['Date'], y=dataframe['Deaths'],
                                  mode='lines',
-                                 name='Deaths'+alpha_3_code,
+                                 name='Deaths' + alpha_3_code,
                                  line=dict(color='black', width=2, dash='solid')))
 
         fig.add_trace(go.Scatter(x=dataframe['Date'], y=dataframe['Recovered'],
                                  mode='lines',
-                                 name='Recovered'+alpha_3_code,
+                                 name='Recovered' + alpha_3_code,
                                  line=dict(color='springgreen', width=2, dash='solid')))
         fig.update_layout(title=dict(text=title_of_graph, y=0.94,
                                      x=0.47, xanchor='center', yanchor='top', font_size=32,
@@ -51,11 +51,11 @@ class Graphs(DataProcessing):
     def cases_of_the_world(self):
         data = DataProcessing().total_cases_per_day()
         df = DataProcessing().creating_dateframe(data=data)
-        world = Graphs().creating_one_graph(dataframe=df, country_id=0 )
+        world = Graphs().creating_one_graph(dataframe=df, country_id=0)
         return world
 
     def cases_of_the_poland(self):
-        data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=(179,))
+        data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=179)
         df = DataProcessing().creating_dateframe(data=data)
         poland = Graphs().creating_one_graph(dataframe=df, country_id=179)
         return poland

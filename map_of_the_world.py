@@ -85,7 +85,7 @@ class CreatingMap(DataProcessing):
                 continue
 
         cases_map.save('./templates/index.html')
-        cases_map.save('index.html')
+        cases_map.save('index.html') #only for github
 
 
 if __name__ == '__main__':
