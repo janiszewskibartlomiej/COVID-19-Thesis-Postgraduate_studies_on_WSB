@@ -1,9 +1,6 @@
-import time
-
 from importer_current_cases_json import ImporterCurrentCases
 from map_of_the_world import CreatingMap
 from graphs import Graphs
-from app import app
 from path_and_api import JsonApi
 
 if __name__ == '__main__':
@@ -11,5 +8,3 @@ if __name__ == '__main__':
     CreatingMap().map_of_the_world()
     Graphs().cases_of_the_world()
     Graphs().cases_of_the_poland()
-    time.sleep(3)
-    app.run(debug=True)
