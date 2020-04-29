@@ -44,6 +44,7 @@ class CreatingMap(DataProcessing):
                      f'<h4 style="color: red; line-height: 150%;">Confirmed: <b>{chr(127973)} {total_confirmed}</b></h4>'
                      f'<h4 style="color: black;">Deaths: <b> {chr(10015)} {total_deats}</b></h4>'
                      f'<h4 style="color: green; line-height: 150%;">Recovered: <b>{chr(128154)} {total_recovered}</b></h4></center>'
+                     f'<center><button type="button" onclick=window.open("/world")>Graph</button></center>'
                      f'</div>',
             )
         ).add_to(cases_map)
@@ -85,7 +86,7 @@ class CreatingMap(DataProcessing):
                 continue
 
         cases_map.save('./templates/index.html')
-        cases_map.save('index.html') #only for github
+        cases_map.save('index.html')  # only for github
 
 
 if __name__ == '__main__':

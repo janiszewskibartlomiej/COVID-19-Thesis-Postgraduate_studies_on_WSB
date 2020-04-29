@@ -16,9 +16,14 @@ def graph_poland():
     Graphs().cases_of_the_poland()
     return render_template('./graphs/poland.html')
 
+@app.route('/world')
+def graph_world():
+    Graphs().cases_of_the_world()
+    return render_template('./graphs/world.html')
+
 
 @app.route('/germany_vs_poland')
-def graph_world():
+def graph_germany_vs_poland():
     Graphs().cases_of_the_world()
     return render_template('./graphs/germany_vs_poland.html')
 
