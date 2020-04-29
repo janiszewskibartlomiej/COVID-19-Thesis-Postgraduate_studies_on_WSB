@@ -1,4 +1,8 @@
-from flask import Flask, render_template, render_template_string
+import time
+
+from flask import Flask, render_template
+
+from data_processing import DataProcessing
 from map_of_the_world import CreatingMap
 from graphs import Graphs
 
@@ -13,24 +17,24 @@ def index():
 
 @app.route('/poland')
 def graph_poland():
-    Graphs().cases_of_the_poland()
     return render_template('./graphs/poland.html')
 
 
 @app.route('/graph=<int:id>', methods=['GET', 'POST'])
 def graph(id):
-    get_graph = Graphs().join_two_graphs(first_country_id=179, second_country_id=20)
-    return render_template('./graphs/'+get_graph+'.html')
+    if id == 0:
+        return render_template('./graphs/world.html')
+
+    data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=id)
+    df = DataProcessing().creating_dateframe(data=data)
+    get_graph = Graphs().get_graph(dataframe=df, country_id=id, write=True)
+    return render_template('./graphs/' + get_graph[1] + '.html')
 
 
-@app.route('/world.html')
-def graph_world_html():
-    return render_template('./graphs/world.html')
-
-
-@app.route('/germany_vs_poland')
-def graph_germany_vs_poland():
-    return render_template('./graphs/germany_vs_poland.html')
+@app.route('/join=<int:first_id>&with=<int:second_id>')
+def join_graphs(first_id, second_id):
+    get_graphs = Graphs().join_two_graphs(first_country_id=first_id, second_country_id=second_id)
+    return render_template('./graphs/' + get_graphs[1] + '.html')
 
 
 if __name__ == '__main__':

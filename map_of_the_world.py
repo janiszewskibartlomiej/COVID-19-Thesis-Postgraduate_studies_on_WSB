@@ -40,12 +40,12 @@ class CreatingMap(DataProcessing):
                 icon_size=(210, 180),
                 icon_anchor=(220, 30),
                 html=f'<div style="background-color:rgba(255, 255, 255, 0.4);">'
-                     f'<center><h4 style="line-height: 150%";><b>Total cases: </b></h4>'
-                     f'<h4 style="color: red; line-height: 150%;">Confirmed: <b>{chr(127973)} {total_confirmed}</b></h4>'
-                     f'<h4 style="color: black;">Deaths: <b> {chr(10015)} {total_deats}</b></h4>'
-                     f'<h4 style="color: green; line-height: 150%;">Recovered: <b>{chr(128154)} {total_recovered}</b></h4></center>'
-                     f'<center><button type="button" onclick=window.open("/world.html")>Graph</button></center>'
-                     f'</div>',
+                f'<center><h4 style="line-height: 150%";><b>Total cases: </b></h4>'
+                f'<h4 style="color: red; line-height: 150%;">Confirmed: <b>{chr(127973)} {total_confirmed}</b></h4>'
+                f'<h4 style="color: black;">Deaths: <b> {chr(10015)} {total_deats}</b></h4>'
+                f'<h4 style="color: green; line-height: 150%;">Recovered: <b>{chr(128154)} {total_recovered}</b></h4></center>'
+                f'<center><button type="button" onclick=window.open("/graph=0")>Graph</button></center>'
+                f'</div>',
             )
         ).add_to(cases_map)
 
