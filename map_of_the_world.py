@@ -44,7 +44,7 @@ class CreatingMap(DataProcessing):
                 f'<h4 style="color: red; line-height: 150%;">Confirmed: <b>{chr(127973)} {total_confirmed}</b></h4>'
                 f'<h4 style="color: black;">Deaths: <b> {chr(10015)} {total_deats}</b></h4>'
                 f'<h4 style="color: green; line-height: 150%;">Recovered: <b>{chr(128154)} {total_recovered}</b></h4></center>'
-                f'<center><button type="button" onclick=window.open("/graph=0")>Graph</button></center>'
+                f'<center><button type="button" style="color:red;" onclick=window.open("/graph=0")>Graph</button></center>'
                 f'</div>',
             )
         ).add_to(cases_map)
@@ -62,6 +62,14 @@ class CreatingMap(DataProcessing):
 
                 folium.Marker(
                     location=[coordinates[0], coordinates[1]],
+                    popup=folium.Popup(html=f"""
+                    <center><b>{row[1]}</b></center>
+                    </br>
+                    Confirmed: <b><center><p style="color:red;">{chr(127973)} {confirmed}</p></center></b>
+                    Deaths: <b><center><p style="color:black;">{chr(10015)} {deaths}</p></center></b>
+                    Recovered: <b><center><p style="color:green;">{chr(128154)} {recovered}</p></center></b>
+                    <center><button type="button" style="color:red ;" onclick=window.open("/graph={row[0]}")>Graph</button></center>
+                             """),
                     icon=folium.Icon(color='red', icon='certificate', html="position: absolute; z-index: 1"),
                     tooltip=f"""
                     <center><b>{row[1]}</b></center>
@@ -69,6 +77,7 @@ class CreatingMap(DataProcessing):
                     Confirmed: <b><center><p style="color:red;">{chr(127973)} {confirmed}</p></center></b>
                     Deaths: <b><center><p style="color:black;">{chr(10015)} {deaths}</p></center></b>
                     Recovered: <b><center><p style="color:green;">{chr(128154)} {recovered}</p></center></b>
+                    <center><button type="button" onclick=window.open("/graph={row[0]}")>Graph</button></center>
                              """
                 ).add_to(cases_map)
 
