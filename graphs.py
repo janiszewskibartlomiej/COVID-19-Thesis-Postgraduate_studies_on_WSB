@@ -8,7 +8,7 @@ class Graphs(DataProcessing):
         super().__init__()
 
     def write_graph_to_html(self, figure, title):
-        path = f'./templates/graphs/{title.lower()}.html'
+        path = f'./templates/graphs/{title}.html'
         figure.write_html(path)
 
     def creating_figure_with_data(self, figure, dataframe, alpha_3_code, title_of_graph=' ', dash='solid'):
@@ -101,7 +101,10 @@ class Graphs(DataProcessing):
                                                    title_of_graph=title_graph, dash='dash')
         title_file_split = title_graph.split(' ')[2:]
         title_file = '_'.join(title_file_split)
-        self.write_graph_to_html(figure=graph, title=title_file)
+        title_file_lower = title_file.lower()
+        self.write_graph_to_html(figure=graph, title=title_file_lower)
+
+        return title_file_lower
 
 
 if __name__ == '__main__':
