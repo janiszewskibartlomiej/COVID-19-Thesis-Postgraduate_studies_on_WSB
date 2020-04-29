@@ -59,25 +59,19 @@ class CreatingMap(DataProcessing):
                 confirmed = f'{row[3]: ,}'.replace(',', " ")
                 deaths = f'{row[4]: ,}'.replace(',', " ")
                 recovered = f'{row[5]: ,}'.replace(',', " ")
-
                 folium.Marker(
                     location=[coordinates[0], coordinates[1]],
-                    popup=folium.Popup(html=f"""
-                    <center><b>{row[1]}</b></center>
+                    popup=folium.Popup(html=f"""<div style="opacity:1.3;">
+                    <center><b style="font-size:13px;">{row[1]}</b></center>
                     </br>
-                    Confirmed: <b><center><p style="color:red;">{chr(127973)} {confirmed}</p></center></b>
-                    Deaths: <b><center><p style="color:black;">{chr(10015)} {deaths}</p></center></b>
-                    Recovered: <b><center><p style="color:green;">{chr(128154)} {recovered}</p></center></b>
-                    <center><button type="button" style="color:red ;" onclick=window.open("/graph={row[0]}")>Graph</button></center>
-                             """),
+                    Confirmed: <b><center><p style="color:red;  font-size:14px; margin-block-start: 0.6em;">{chr(127973)} {confirmed}</p></center></b>
+                    Deaths: <b><center><p style="color:black; font-size:14px; margin-block-start: 0.6em;">{chr(10015)} {deaths}</p></center></b>
+                    Recovered: <b><center><p style="color:green; font-size:14px; margin-block-start: 0.6em;">{chr(128154)} {recovered}</p></center></b>
+                    <center><button type="button" style="color:red; line-height: 1;" onclick=window.open("/graph={row[0]}")>Graph</button></center>
+                             </div>""", max_width=150),
                     icon=folium.Icon(color='red', icon='certificate', html="position: absolute; z-index: 1"),
                     tooltip=f"""
-                    <center><b>{row[1]}</b></center>
-                    </br>
-                    Confirmed: <b><center><p style="color:red;">{chr(127973)} {confirmed}</p></center></b>
-                    Deaths: <b><center><p style="color:black;">{chr(10015)} {deaths}</p></center></b>
-                    Recovered: <b><center><p style="color:green;">{chr(128154)} {recovered}</p></center></b>
-                    <center><button type="button" onclick=window.open("/graph={row[0]}")>Graph</button></center>
+                    <center>Click me</center>
                              """
                 ).add_to(cases_map)
 
