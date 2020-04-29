@@ -32,8 +32,8 @@ class ImporterOfCountries(ConnectToDb):
     def insert_countries_to_db(self, data):
         conn = ConnectToDb()
         for row in data:
-            parameters = row.values()
-            parameters = tuple(parameters)
+            get_parameters = row.values()
+            parameters = tuple(get_parameters)
             query = 'INSERT INTO countries VALUES(null, ?, ?, ?, ?, ?, ?);'
             try:
                 conn.insert_record(query=query, parameters=parameters)
@@ -46,5 +46,5 @@ class ImporterOfCountries(ConnectToDb):
 
 if __name__ == '__main__':
     importer = ImporterOfCountries()
-    # data = importer.load_countries_from_api(url=JsonApi.API_COUNTRIES)
-    # importer.insert_countries_to_db(data=data)
+    data = importer.load_countries_from_api(url=JsonApi.API_COUNTRIES)
+    importer.insert_countries_to_db(data=data)

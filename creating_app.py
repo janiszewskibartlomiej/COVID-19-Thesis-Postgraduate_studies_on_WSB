@@ -19,3 +19,4 @@ if __name__ == '__main__':
 
     Graphs().cases_of_the_world()
     Graphs().cases_of_the_poland()
+    Graphs().join_two_graphs(first_country_id=85, second_country_id=179) # get graph of Germany vs Poland

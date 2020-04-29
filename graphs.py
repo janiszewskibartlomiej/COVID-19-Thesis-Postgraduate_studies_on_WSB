@@ -1,6 +1,5 @@
 import plotly.graph_objects as go
 from data_processing import DataProcessing
-from connect_to_db import ConnectToDb
 
 
 class Graphs(DataProcessing):
@@ -8,11 +7,9 @@ class Graphs(DataProcessing):
     def __init__(self):
         super().__init__()
 
-    def get_name_and_3code_country(self, country_id):
-        select = ConnectToDb().select_one_record(
-            query='SELECT name, alpha_3_code from countries WHERE country_id = ?',
-            parameter=(country_id,))
-        return select
+    def write_graph_to_html(self, figure, title):
+        path = f'./templates/graphs/{title.lower()}.html'
+        figure.write_html(path)
 
     def creating_figure_with_data(self, figure, dataframe, alpha_3_code, title_of_graph=' ', dash='solid'):
         figure.add_trace(go.Scatter(x=dataframe['Date'], y=dataframe['Confirmed'],
@@ -54,13 +51,11 @@ class Graphs(DataProcessing):
         title_file = title_of_graph.split(" ")[-1]
 
         if write:
-            Graphs().write_html_graph(figure=figure, title=title_file)
+            Graphs().write_graph_to_html(figure=figure, title=title_file)
 
         return figure
 
-    def write_graph_to_html(self, figure, title):
-        path = f'./templates/graphs/{title.lower()}.html'
-        figure.write_html(path)
+
 
     def cases_of_the_world(self, write=False):
         data = DataProcessing().total_cases_per_day()
@@ -104,13 +99,14 @@ class Graphs(DataProcessing):
         title_graph = f'Cases of {first_country[0]} vs {second_country[0]}'
         graph = Graphs().creating_figure_with_data(figure=figure, dataframe=second_df, alpha_3_code=second_alpha_3_code,
                                                    title_of_graph=title_graph, dash='dash')
-        title_file = title_graph.split(' ')[2:]
-        title_file = '_'.join(title_file)
-        self.write_html_graph(figure=graph, title=title_file)
+        title_file_split = title_graph.split(' ')[2:]
+        title_file = '_'.join(title_file_split)
+        self.write_graph_to_html(figure=graph, title=title_file)
 
 
 if __name__ == '__main__':
     Graphs().cases_of_the_world(write=True)
     Graphs().cases_of_the_poland()
 
-    Graphs().join_two_graphs(first_country_id=179, second_country_id=0)
+    Graphs().join_two_graphs(first_country_id=0, second_country_id=179)
+    Graphs().join_two_graphs(first_country_id=85, second_country_id=179)

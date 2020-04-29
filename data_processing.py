@@ -61,6 +61,12 @@ class DataProcessing(ConnectToDb):
         data = ConnectToDb().select_all_records(query=self.query_select_total_cases_per_day, parameter="")
         return data
 
+    def get_name_and_3code_country(self, country_id):
+        select = ConnectToDb().select_one_record(
+            query='SELECT name, alpha_3_code from countries WHERE country_id = ?',
+            parameter=(country_id,))
+        return select
+
     def get_icon_color(self, number_of_cases):
         for key, volume in self.interval.items():
             if volume[1] > number_of_cases >= volume[0]:
@@ -69,9 +75,9 @@ class DataProcessing(ConnectToDb):
     def slice_location(self, coordinates_str):
         coordinates_str = coordinates_str.replace('[', '')
         coordinates_str = coordinates_str.replace(']', '')
-        coordinates = coordinates_str.split(',')
-        latitude = float(coordinates[0])
-        longitude = float(coordinates[1])
+        coordinates_split = coordinates_str.split(',')
+        latitude = float(coordinates_split[0])
+        longitude = float(coordinates_split[1])
         coordinates = [latitude, longitude]
         return coordinates
 
@@ -83,5 +89,5 @@ class DataProcessing(ConnectToDb):
 if __name__ == '__main__':
     data = DataProcessing().total_cases_per_day()
     df = DataProcessing().creating_dateframe(data=data)
-    df.to_csv(path_or_buf='./tests/total_cases_df.csv', encoding='utf-8')
+    df.to_csv(path_or_buf='tests/total_cases_df.csv', encoding='utf-8')
     print(df)

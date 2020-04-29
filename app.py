@@ -17,10 +17,10 @@ def graph_poland():
     return render_template('./graphs/poland.html')
 
 
-@app.route('/world')
+@app.route('/germany_vs_poland')
 def graph_world():
     Graphs().cases_of_the_world()
-    return render_template('./graphs/world.html')
+    return render_template('./graphs/germany_vs_poland.html')
 
 
 if __name__ == '__main__':
