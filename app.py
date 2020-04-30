@@ -17,7 +17,7 @@ def graph_poland():
     return render_template('./graphs/poland.html')
 
 
-@app.route('/graph=<int:id>', methods=['GET', 'POST'])
+@app.route('/graph=<int:id>')
 def graph(id):
     if id == 0:
         return render_template('./graphs/world.html')

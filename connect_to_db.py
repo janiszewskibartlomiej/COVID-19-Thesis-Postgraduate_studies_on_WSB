@@ -4,9 +4,9 @@ from path_and_api import Files
 
 class ConnectToDb:
 
-    def __init__(self, db='sql.sqlite'):
-
-        self.conn = sqlite3.connect(db)
+    def __init__(self, db='db.sqlite'):
+        self.db = db
+        self.conn = sqlite3.connect(self.db)
         self.c = self.conn.cursor()
 
     def run_sql_script(self, scripts):
@@ -45,4 +45,5 @@ class ConnectToDb:
 
 if __name__ == '__main__':
     run = ConnectToDb()
+    # print(run.select_one_record(query='SELECT * FROM cases WHERE country_id = ?', parameter=(179, )))
     run.run_sql_script(Files.SQL_SCRIPT)
