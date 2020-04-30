@@ -1,9 +1,9 @@
 ## Problems and solution of them:
 
 1. Schema - we should know what of column we want use and what kind of date we need.
-  - We changed schema a few times because needed some informations and one times we needed to change API 
+  - We changed schema a few times because needed some information's and one times we needed to change API 
 2. Find good API with good structure to our schema.
-  - We choired four API's
+  - We chose four API's
 3. We connected  four difference API's with difference json structure.
 4. Import Big Data - 302 000 records and optimization of loading data.
   - First imports = 480 minutes.
