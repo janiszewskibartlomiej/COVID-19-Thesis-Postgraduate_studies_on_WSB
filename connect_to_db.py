@@ -4,7 +4,7 @@ from path_and_api import Files
 
 class ConnectToDb:
 
-    def __init__(self, db='db.sqlite'):
+    def __init__(self, db='sql.sqlite'):
 
         self.conn = sqlite3.connect(db)
         self.c = self.conn.cursor()

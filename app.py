@@ -1,10 +1,7 @@
-import time
-
 from flask import Flask, render_template
-
 from data_processing import DataProcessing
-from map_of_the_world import CreatingMap
 from graphs import Graphs
+from map_of_the_world import CreatingMap
 
 app = Flask(__name__)
 
