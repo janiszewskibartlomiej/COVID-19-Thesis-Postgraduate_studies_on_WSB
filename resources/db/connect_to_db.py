@@ -1,12 +1,11 @@
+import pathlib
 import sqlite3
 from path_and_api import Files
-
-
 class ConnectToDb:
 
-    def __init__(self, db='db.sqlite'):
-        self.db = db
-        self.conn = sqlite3.connect(self.db)
+    def __init__(self):
+        db_path = pathlib.Path('db.sqlite').absolute()
+        self.conn = sqlite3.connect(db_path)
         self.c = self.conn.cursor()
 
     def run_sql_script(self, scripts):

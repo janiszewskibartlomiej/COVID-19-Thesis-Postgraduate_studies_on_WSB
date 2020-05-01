@@ -1,3 +1,4 @@
+import pathlib
 import sys
 import folium
 from folium import DivIcon
@@ -87,9 +88,9 @@ class CreatingMap(DataProcessing):
 
             except ValueError:
                 continue
-
-        cases_map.save('./templates/index.html')
-        cases_map.save('index.html')  # only for github
+        p = pathlib.Path('templates/index.html').absolute()
+        cases_map.save(p)
+        cases_map.save('../index.html')  # only for github
 
 
 if __name__ == '__main__':

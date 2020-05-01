@@ -89,5 +89,5 @@ class DataProcessing(ConnectToDb):
 if __name__ == '__main__':
     data = DataProcessing().total_cases_per_day()
     df = DataProcessing().creating_dateframe(data=data)
-    df.to_csv(path_or_buf='tests/total_cases_df.csv', encoding='utf-8')
+    df.to_csv(path_or_buf='../tests/total_cases_df.csv', encoding='utf-8')
     print(df)
