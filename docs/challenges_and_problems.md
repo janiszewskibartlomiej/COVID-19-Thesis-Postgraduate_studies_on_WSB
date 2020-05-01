@@ -15,4 +15,4 @@
  - We had duplicate value in the current date.
 7. Refactor. 
  - We had to separate some code for new methods.
- - creating flex methods.
+ - Creating flexible methods.
