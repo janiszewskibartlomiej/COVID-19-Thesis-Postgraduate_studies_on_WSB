@@ -40,6 +40,8 @@
  1. Title in map like marker - used DivIcon function, because in folium we haven't got method creating title
  2. Table of total current cases like marker with DivIcon method from API json https://covid19.mathdro.id/api
  3. Class Graphs with elastic methods to fast creating JS graphs [plotly lib] to every country in our database. This class we can use also to api json if we process data in pandas. Simple method processing data from DB to DF we have also.   
- 4. Separation of methods in graphs.py because I need more flex methods
- 5. New method -  Join two graphs 
+ 4. Separation of methods in graphs.py because I need more flex methods.
+ 5. New method -  Join two graphs and run everything from url parameter.
+ 6. Added button in every popup box, when user click on - run the creating of graph.
+ 7. Implementing every logic in Flask server.
  

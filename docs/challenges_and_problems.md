@@ -16,3 +16,10 @@
 7. Refactor. 
  - We had to separate some code for new methods.
  - Creating flexible methods.
+8. Implementing BE methods to FE and connected them in many library.
+ - Used HTML5 and CSS3 to presentation values.
+  - Used JS to click action on button - Creating graph.
+  - Catching functionality from  url parameters and run method  of presentation graphs
+  - Implementing every logic in Flask server.
+ 9. Folium library have limit about added header and some of information on map.
+  - We added information like open popup and used HTML and CSS. 
