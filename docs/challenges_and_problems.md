@@ -12,3 +12,7 @@
   - We found solution and changed to 10 000.
   - We had to change connection with  db to first class - not inheritance class.
 6. We found good SQL query's to filter data from three API - we needed many testing.
+ - We had duplicate value in the current date.
+7. Refactor. 
+ - We had to separate some code for new methods.
+ - creating flex methods.
