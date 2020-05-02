@@ -67,6 +67,12 @@ class DataProcessing(ConnectToDb):
             parameter=(country_id,))
         return select
 
+    def get_id_and_name_of_country(self):
+        select = ConnectToDb().select_all_records(
+            query='SELECT co.country_id, co.name from countries as co join cases as ca on co.country_id = ca.country_id group by co.country_id having ca.confirmed > 0',
+            parameter="")
+        return select
+
     def get_icon_color(self, number_of_cases):
         for key, volume in self.interval.items():
             if volume[1] > number_of_cases >= volume[0]:

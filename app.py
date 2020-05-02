@@ -28,12 +28,18 @@ def graph(id):
     return render_template('./graphs/' + get_graph[1] + '.html')
 
 
+@app.route('/graphs')
+def choice_two_graphs():
+    countries = DataProcessing().get_id_and_name_of_country()
+    return render_template('join_graphs.html', countries=countries)
+
+
 @app.route('/join=<int:first_id>&with=<int:second_id>')
-def join_graphs(first_id, second_id):
+def join_two_graphs(first_id, second_id):
     get_graphs = Graphs().join_two_graphs(first_country_id=first_id, second_country_id=second_id)
     return render_template('./graphs/' + get_graphs[1] + '.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    # app.run(host='192.168.8.108', port=9000, debug=True)
+    # app.run(debug=True)
+    app.run(host='192.168.8.108', port=9000, debug=True)
