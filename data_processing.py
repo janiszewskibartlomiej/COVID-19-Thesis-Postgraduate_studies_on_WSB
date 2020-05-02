@@ -1,6 +1,6 @@
 import sys
 import pandas as pd
-from connect_to_db import ConnectToDb
+from db.connect_to_db import ConnectToDb
 
 sys.setrecursionlimit(10000)
 

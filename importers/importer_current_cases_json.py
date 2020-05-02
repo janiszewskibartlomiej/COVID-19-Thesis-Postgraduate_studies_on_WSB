@@ -1,7 +1,6 @@
 import time
-
-from importer_all_cases_json import ImporterAllCases
-from path_and_api import *
+from importers.importer_all_cases_json import ImporterAllCases
+from resources.path_and_api import JsonApi, Files
 
 
 class ImporterCurrentCases(ImporterAllCases):
@@ -47,7 +46,6 @@ class ImporterCurrentCases(ImporterAllCases):
                 date_element = element['Date'][:10]
                 db_last_update = imp.select_all_records(query=imp.query_select_cases_id_and_date,
                                                         parameter=(country_id, date_element + '%'))
-
                 if row_like_select_construction not in db_last_update or db_last_update == []:
                     imp.insert_record(query=imp.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
@@ -61,3 +59,4 @@ class ImporterCurrentCases(ImporterAllCases):
 
 if __name__ == '__main__':
     ImporterCurrentCases().load_current_data_from_json_and_insert_to_db(JsonApi.API_CURRENT_CASES)
+    # ImporterCurrentCases().load_current_data_from_json_and_insert_to_db(Files.JSON_CURRENT_DATA, api=False)

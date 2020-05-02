@@ -1,8 +1,8 @@
 import sys
 import folium
 from folium import DivIcon
-from importer_all_cases_json import ImporterAllCases
-from path_and_api import JsonApi
+from importers.importer_all_cases_json import ImporterAllCases
+from resources.path_and_api import JsonApi
 from data_processing import DataProcessing
 
 sys.setrecursionlimit(10000)
@@ -89,7 +89,7 @@ class CreatingMap(DataProcessing):
                 continue
 
         cases_map.save('./templates/index.html')
-        cases_map.save('index.html')  # only for github
+        cases_map.save('../index.html')  # only for github
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from data_processing import DataProcessing
 from graphs import Graphs
-from map_of_the_world import CreatingMap
+from web.map_of_the_world import CreatingMap
 
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     CreatingMap().map_of_the_world()
-    return render_template('index.html')
+    return render_template('./template/index.html')
 
 
 @app.route('/poland')

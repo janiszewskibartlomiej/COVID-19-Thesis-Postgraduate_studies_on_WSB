@@ -1,15 +1,13 @@
 import json
 import time
 import requests
-
-from importer_of_countries import ImporterOfCountries
-from path_and_api import JsonApi
+from importers.importer_of_countries import ImporterOfCountries
+from resources.path_and_api import Files, JsonApi
 
 
 class ImporterAllCases(ImporterOfCountries):
 
     def __init__(self):
-
         super().__init__()
 
         self.query_select_cases_id_and_date = """
@@ -108,3 +106,4 @@ class ImporterAllCases(ImporterOfCountries):
 
 if __name__ == '__main__':
     ImporterAllCases().load_all_data_from_json_and_insert_to_db(path=JsonApi.API_ALL_CASES)
+    # ImporterAllCases().load_all_data_from_json_and_insert_to_db(path=Files.JSON_ALL_DATA, api=False)

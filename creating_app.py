@@ -1,9 +1,9 @@
 import time
 
-from map_of_the_world import CreatingMap
-from path_and_api import *
-from importer_all_cases_json import ImporterAllCases
-from importer_current_cases_json import ImporterCurrentCases
+from web.map_of_the_world import CreatingMap
+from resources.path_and_api import *
+from importers.importer_all_cases_json import ImporterAllCases
+from importers.importer_current_cases_json import ImporterCurrentCases
 from graphs import Graphs
 
 if __name__ == '__main__':

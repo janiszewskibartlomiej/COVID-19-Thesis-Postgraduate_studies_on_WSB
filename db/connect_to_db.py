@@ -1,19 +1,17 @@
 import sqlite3
-from path_and_api import Files
 
 
 class ConnectToDb:
 
-    def __init__(self, db='db.sqlite'):
+    def __init__(self, db=r'D:/GITHUB/COVID-19-Thesis-Postgraduate_studies_on_WSB/db.sqlite'):
         self.db = db
         self.conn = sqlite3.connect(self.db)
         self.c = self.conn.cursor()
 
     def run_sql_script(self, scripts):
-        conn = ConnectToDb()
         with open(scripts, mode='r', encoding='utf-8') as file:
             query = file.read()
-            conn.execute_script(query=query)
+            self.execute_script(query=query)
         print(f'\n --> Script "{file.name}" executed <--')
 
     def row_factory(self):

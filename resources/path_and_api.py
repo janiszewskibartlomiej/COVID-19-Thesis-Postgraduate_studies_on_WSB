@@ -1,8 +1,7 @@
 class Files:
-    JSON_ALL_DATA = "./resources/json/all_data.json"
-    JSON_CURRENT_DATA = "./resources/json/current_data.json"
-    SQL_SCRIPT = './resources/sql/db_init.sql'
-
+    JSON_ALL_DATA = "../resources/json/all_data.json"
+    JSON_CURRENT_DATA = "../resources/json/current_data.json"
+    SQL_SCRIPT = 'db_init.sql'
 
 class JsonApi:
     API_COUNTRIES = "https://restcountries.eu/rest/v2/all"
