@@ -31,7 +31,7 @@ def graph(id):
 @app.route('/graphs')
 def choice_two_graphs():
     countries = DataProcessing().get_id_and_name_of_country()
-    return render_template('join_graphs.html', countries=countries)
+    return render_template('join-graphs.html', countries=countries)
 
 
 @app.route('/join=<int:first_id>&with=<int:second_id>')

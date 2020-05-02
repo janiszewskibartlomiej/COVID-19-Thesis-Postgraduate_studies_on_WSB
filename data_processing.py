@@ -1,9 +1,12 @@
 import sys
+import os
 import pandas as pd
 from connect_to_db import ConnectToDb
 
 sys.setrecursionlimit(10000)
 
+root_path = os.getcwd()
+os.chdir(root_path)
 
 class DataProcessing(ConnectToDb):
 

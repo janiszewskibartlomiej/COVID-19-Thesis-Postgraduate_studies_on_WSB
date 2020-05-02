@@ -1,3 +1,5 @@
+import os
+
 import plotly.graph_objects as go
 from data_processing import DataProcessing
 
@@ -99,7 +101,7 @@ class Graphs(DataProcessing):
         graph = Graphs().creating_figure_with_data(figure=figure, dataframe=second_df, alpha_3_code=second_alpha_3_code,
                                                    title_of_graph=title_graph, dash='dash')
         title_file_split = title_graph.split(' ')[2:]
-        title_file = '_'.join(title_file_split)
+        title_file = '-'.join(title_file_split)
         title_file_lower = title_file.lower()
         self.write_graph_to_html(figure=graph, title=title_file_lower)
 
