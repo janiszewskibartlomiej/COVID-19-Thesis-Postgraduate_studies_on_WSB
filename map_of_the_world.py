@@ -14,7 +14,7 @@ class CreatingMap(DataProcessing):
         super().__init__()
 
     def map_of_the_world(self):
-        title = 'COVID-19 Thesis made by Piotr Woźniak & Bartlomiej Janiszewski'
+        title = 'COVID-19 Thesis by Bartlomiej Janiszewski & Piotr Woźniak'
 
         data = DataProcessing().total_current_cases()
 
@@ -23,8 +23,8 @@ class CreatingMap(DataProcessing):
         folium.map.Marker(
             [70.0, 26.0],
             icon=DivIcon(
-                icon_size=(290, 50),
-                icon_anchor=(179, 85),
+                icon_size=(300, 50),
+                icon_anchor=(178, 85),
                 html=f'<div style="color: #484545; position: absolute; z-index: -1"><h4>{title}</h4></div>',
             )
         ).add_to(cases_map)
@@ -38,7 +38,7 @@ class CreatingMap(DataProcessing):
             [70.0, 32.0],
             icon=DivIcon(
                 icon_size=(210, 180),
-                icon_anchor=(220, 40),
+                icon_anchor=(227, 40),
                 html=f'<div style="background-color:rgba(255, 255, 255, 0.4);">'
                 f'<center><h4 style="line-height: 150%";><b>Total cases: </b></h4>'
                 f'<h4 style="color: red; line-height: 150%;">Confirmed: <b>{chr(127973)} {total_confirmed}</b></h4>'
