@@ -8,6 +8,7 @@ sys.setrecursionlimit(10000)
 root_path = os.getcwd()
 os.chdir(root_path)
 
+
 class DataProcessing(ConnectToDb):
 
     def __init__(self):
@@ -16,7 +17,7 @@ class DataProcessing(ConnectToDb):
         self.query_select_sum_of_cases_per_day_group_by_id = """
         SELECT sum(ca.confirmed) as total_confirmed, 
         sum(ca.deaths) as total_deaths, sum(ca.recovered) as total_recovered, 
-        ca.last_update
+        max(ca.last_update)
         FROM cases as ca
         JOIN countries as co
         ON ca.country_id = co.country_id
@@ -53,7 +54,8 @@ class DataProcessing(ConnectToDb):
 
     def all_cases_per_day_where_country_id_equal(self, country_id):
         data = ConnectToDb().select_all_records(query=
-            self.query_select_sum_of_cases_per_day_group_by_id, parameter=(country_id, ))
+                                                self.query_select_sum_of_cases_per_day_group_by_id,
+                                                parameter=(country_id,))
         return data
 
     def total_current_cases(self):
@@ -90,13 +92,28 @@ class DataProcessing(ConnectToDb):
         coordinates = [latitude, longitude]
         return coordinates
 
-    def creating_dateframe(self, data):
+    def get_dateframe(self, data):
         dateframe = pd.DataFrame(data, columns=['Confirmed', 'Deaths', 'Recovered', 'Date'])
         return dateframe
 
+    def get_dateframe_diff(self, data):
+        df = self.get_dateframe(data=data)
+        print('dddddddddddddddddd', df)
+        df_without_date = df.drop(labels='Date', axis=1)
+        df_date = df.drop(labels=['Confirmed', 'Deaths', 'Recovered'], axis=1)
+        df_diff = df_without_date.diff(axis=0)
+        df_diff_with_date = df_diff.join(df_date)
+        df_diff_with_date.drop(labels=[0], axis=0)
+        return df_diff_with_date
+
 
 if __name__ == '__main__':
-    data = DataProcessing().total_cases_per_day()
-    df = DataProcessing().creating_dateframe(data=data)
-    df.to_csv(path_or_buf='tests/total_cases_df.csv', encoding='utf-8')
+    data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=179)
+    df = DataProcessing().get_dateframe(data=data)
     print(df)
+
+    df_diff = DataProcessing().get_dateframe_diff(data=data)
+    print(df_diff)
+
+    df.to_csv(path_or_buf='tests/total_cases_df.csv', encoding='utf-8')
+    df_diff.to_csv(path_or_buf='tests/total_cases_df_diff.csv', encoding='utf-8')
