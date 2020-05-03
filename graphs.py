@@ -60,7 +60,7 @@ class Graphs(DataProcessing):
 
     def cases_of_the_world(self, write=False):
         data = DataProcessing().total_cases_per_day()
-        df = DataProcessing().creating_dateframe(data=data)
+        df = DataProcessing().get_dateframe(data=data)
         if write:
             write = True
         world = Graphs().get_graph(dataframe=df, country_id=0, write=write)
@@ -68,7 +68,7 @@ class Graphs(DataProcessing):
 
     def cases_of_the_poland(self):
         data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=179)
-        df = DataProcessing().creating_dateframe(data=data)
+        df = DataProcessing().get_dateframe(data=data)
         poland = Graphs().get_graph(dataframe=df, country_id=179, write=True)
         return poland
 
@@ -82,7 +82,7 @@ class Graphs(DataProcessing):
             first_country = Graphs().get_name_and_3code_country(country_id=first_country_id)
             first_data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=first_country_id)
 
-        first_df = DataProcessing().creating_dateframe(data=first_data)
+        first_df = DataProcessing().get_dateframe(data=first_data)
         first_alpha_3_code = first_country[1]
         fig = go.Figure()
         figure = Graphs().creating_figure_with_data(figure=fig, dataframe=first_df, alpha_3_code=first_alpha_3_code,
@@ -95,7 +95,7 @@ class Graphs(DataProcessing):
             second_country = Graphs().get_name_and_3code_country(country_id=second_country_id)
             second_data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=second_country_id)
 
-        second_df = DataProcessing().creating_dateframe(data=second_data)
+        second_df = DataProcessing().get_dateframe(data=second_data)
         second_alpha_3_code = second_country[1]
         title_graph = f'Cases of {first_country[0]} vs {second_country[0]}'
         graph = Graphs().creating_figure_with_data(figure=figure, dataframe=second_df, alpha_3_code=second_alpha_3_code,
@@ -114,3 +114,8 @@ if __name__ == '__main__':
 
     Graphs().join_two_graphs(first_country_id=0, second_country_id=179)
     Graphs().join_two_graphs(first_country_id=85, second_country_id=179)
+
+    data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=179)
+    df = DataProcessing().get_dateframe_diff(data=data)
+    df.to_csv(path_or_buf='tests/diff-poland.csv', encoding='utf-8')
+    Graphs().get_graph(dataframe=df, country_id=179, write=True)
