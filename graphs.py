@@ -92,7 +92,7 @@ class Graphs(DataProcessing):
         first_alpha_3_code = first_country[1]
         fig = go.Figure()
         figure = self.creating_figure_with_data(figure=fig, dataframe=first_df, alpha_3_code=first_alpha_3_code,
-                                                    dash='solid')
+                                                dash='solid')
         if second_country_id == 0:
             second_country = ('World', 'WOR')
             second_data = self.total_cases_per_day()
@@ -112,6 +112,16 @@ class Graphs(DataProcessing):
         self.write_graph_to_html(figure=graph, title=title_file_lower)
 
         return graph, title_file_lower
+
+    def cases_of_the_world(self, write=True):
+        data = DataProcessing().total_cases_per_day()
+        df = DataProcessing().get_dateframe(data=data)
+        if write:
+            write = True
+        else:
+            write = False
+        world = Graphs().get_graph(dataframe=df, country_id=0, write=write)
+        return world
 
 
 if __name__ == '__main__':

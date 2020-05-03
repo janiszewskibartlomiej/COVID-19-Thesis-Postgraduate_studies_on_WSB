@@ -37,7 +37,7 @@ class CreatingMap(DataProcessing):
         folium.map.Marker(
             [70.0, 32.0],
             icon=DivIcon(
-                icon_size=(210, 180),
+                icon_size=(230, 180),
                 icon_anchor=(227, 40),
                 html=f'<div style="background-color:rgba(255, 255, 255, 0.4);">'
                 f'<center><h4 style="line-height: 150%";><b>Total cases: </b></h4>'
@@ -45,8 +45,10 @@ class CreatingMap(DataProcessing):
                 f'<h4 style="color: black;">Deaths: <b> {chr(10015)} {total_deats}</b></h4>'
                 f'<h4 style="color: green; line-height: 150%;">Recovered: <b>{chr(128154)} {total_recovered}</b></h4></center>'
                 f'<div style=" display: flex; justify-content: space-around">'
-                f'<button class="btn btn-primary btn-sm" type="button" style="    padding: 5px 5px;" onclick=window.open("/graphs","_self")>Join two graphs</button> <button class="btn btn-primary btn-sm" type="button" style=" padding: 5px 5px;" onclick=window.open("/graph=0")>World graph</button> </div>'
-                f'</div>',
+                f'<button class="btn btn-primary btn-sm" type="button" style=" padding: 5px 5px;" onclick=window.open("/graph=0")>{chr(128200)} total</button>'
+                f'<button class="btn btn-primary btn-sm" type="button" style=" padding: 5px 5px; border-color: red;" onclick=window.open("/graph-diff=0")>{chr(128200)} /day</button>'
+                f'<button class="btn btn-primary btn-sm" type="button" style="    padding: 5px 5px;" onclick=window.open("/graphs","_self")>Join 2{chr(128200)}</button>'
+                f'</div>'
             )
         ).add_to(cases_map)
 
@@ -68,8 +70,8 @@ class CreatingMap(DataProcessing):
                     Confirmed: <b><center><p style="color:red;  font-size:14px; margin-block-start: 0.6em;">{chr(127973)} {confirmed}</p></center></b>
                     Deaths: <b><center><p style="color:black; font-size:14px; margin-block-start: 0.6em;">{chr(10015)} {deaths}</p></center></b>
                     Recovered: <b><center><p style="color:green; font-size:14px; margin-block-start: 0.6em;">{chr(128154)} {recovered}</p></center></b>
-                    <center><button type="button" class="btn btn-primary btn-sm" style=" padding: 5px; line-height: 1;" onclick=window.open("/graph={row[0]}")>Graph total cases</button></center>
-                    <center><button type="button" class="btn btn-primary btn-sm" style=" padding: 5px; line-height: 1; border-color: red; margin-block-start: 0.9em;     border-width: 2px;" onclick=window.open("/graph-diff={row[0]}")>Graph casses per day</button></center>
+                    <center><button type="button" class="btn btn-primary btn-sm" style=" padding: 5px; line-height: 1;" onclick=window.open("/graph={row[0]}")>{chr(128200)} total</button></center>
+                    <center><button type="button" class="btn btn-primary btn-sm" style=" padding: 5px; line-height: 1; border-color: red; margin-block-start: 0.9em;     border-width: 2px;" onclick=window.open("/graph-diff={row[0]}")>{chr(128200)} per day</button></center>
                              </div>""", max_width=150),
                     icon=folium.Icon(color='red', icon='certificate', html="position: absolute; z-index: 1"),
                     tooltip=f"""
