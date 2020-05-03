@@ -30,17 +30,16 @@ class ImporterOfCountries(ConnectToDb):
             return solution
 
     def insert_countries_to_db(self, data):
-        conn = ConnectToDb()
         for row in data:
             get_parameters = row.values()
             parameters = tuple(get_parameters)
             query = 'INSERT INTO countries VALUES(null, ?, ?, ?, ?, ?, ?);'
             try:
-                conn.insert_record(query=query, parameters=parameters)
+                self.insert_record(query=query, parameters=parameters)
                 print('Insert record: ', parameters)
             except sqlite3.IntegrityError:
                 continue
-        conn.close_connect()
+        self.close_connect()
         return print(f'--> Script {ImporterOfCountries.insert_countries_to_db.__name__} executed <--')
 
 

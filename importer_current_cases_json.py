@@ -12,15 +12,13 @@ class ImporterCurrentCases(ImporterAllCases):
 
     def load_current_data_from_json_and_insert_to_db(self, path, api=True):
 
-        imp = ImporterCurrentCases()
-
         if api is True:
-            data = imp.read_json_api(path)
+            data = self.read_json_api(path)
         else:
-            data = imp.read_json_file(path)
+            data = self.read_json_file(path)
 
-        load_data = imp.load_name_and_id_of_countries()
-        symbol_dict = imp.create_dict_of_countries_name_and_id(load_data)
+        load_data = self.load_name_and_id_of_countries()
+        symbol_dict = self.create_dict_of_countries_name_and_id(load_data)
 
         for element in data['Countries']:
             try:
@@ -38,7 +36,7 @@ class ImporterCurrentCases(ImporterAllCases):
                     'last_update': element['Date']
                 }
 
-                parameters = imp.creating_row_to_insert_db(row_dict=row)
+                parameters = self.creating_row_to_insert_db(row_dict=row)
 
                 row_like_select_construction = ("", "",
                                                 element['TotalConfirmed'], element['TotalRecovered'],
@@ -46,18 +44,18 @@ class ImporterCurrentCases(ImporterAllCases):
                 if row_like_select_construction == ("", "", 0, 0, 0):
                     continue
                 date_element = element['Date'][:10]
-                db_last_update = imp.select_all_records(query=imp.query_select_cases_id_and_date,
+                db_last_update = self.select_all_records(query=self.query_select_cases_id_and_date,
                                                         parameter=(country_id, date_element + '%'))
 
                 if row_like_select_construction not in db_last_update or db_last_update == []:
-                    imp.insert_record(query=imp.query_insert_cases, parameters=parameters)
+                    self.insert_record(query=self.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
 
             except KeyError:
                 if KeyError == 'AN':
                     continue
         print(f'--> Insert cases from json {path} is done <--')
-        imp.close_connect()
+        self.close_connect()
 
 
 if __name__ == '__main__':

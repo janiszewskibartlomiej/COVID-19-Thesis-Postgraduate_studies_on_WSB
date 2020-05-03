@@ -114,5 +114,5 @@ if __name__ == '__main__':
     df_diff = DataProcessing().get_dateframe_diff(data=data)
     print(df_diff)
 
-    df.to_csv(path_or_buf='tests/total_cases_df.csv', encoding='utf-8')
-    df_diff.to_csv(path_or_buf='tests/total_cases_df_diff.csv', encoding='utf-8')
+    df.to_csv(path_or_buf='tests/poland_df.csv', encoding='utf-8')
+    df_diff.to_csv(path_or_buf='tests/poland_diff.csv', encoding='utf-8')

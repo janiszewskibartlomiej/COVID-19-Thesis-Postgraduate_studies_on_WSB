@@ -41,7 +41,7 @@ class Graphs(DataProcessing):
 
     def get_graph(self, dataframe, country_id=0, write=False, diff=False):
         if country_id > 0:
-            country = Graphs().get_name_and_3code_country(country_id=country_id)
+            country = self.get_name_and_3code_country(country_id=country_id)
 
             if diff:
                 title_of_graph = f'Cases of the {country[0]} per day'
@@ -64,8 +64,8 @@ class Graphs(DataProcessing):
             diff = True
         else:
             diff = False
-        figure = Graphs().creating_figure_with_data(figure=fig, dataframe=dataframe, alpha_3_code=alpha_3_code,
-                                                    title_of_graph=title_of_graph, diff=diff)
+        figure = self.creating_figure_with_data(figure=fig, dataframe=dataframe, alpha_3_code=alpha_3_code,
+                                                title_of_graph=title_of_graph, diff=diff)
 
         if diff:
             title_file = title_of_graph.split(" ")[-3]
@@ -75,34 +75,33 @@ class Graphs(DataProcessing):
             title_file_lower = title_file.lower()
 
         if write:
-            Graphs().write_graph_to_html(figure=figure, title=title_file_lower)
+            self.write_graph_to_html(figure=figure, title=title_file_lower)
 
         return figure, title_file_lower
-
 
     def join_two_graphs(self, first_country_id, second_country_id):
         if first_country_id == 0:
             first_country = ('World', 'WOR')
-            first_data = DataProcessing().total_cases_per_day()
+            first_data = self.total_cases_per_day()
 
         else:
-            first_country = Graphs().get_name_and_3code_country(country_id=first_country_id)
-            first_data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=first_country_id)
+            first_country = self.get_name_and_3code_country(country_id=first_country_id)
+            first_data = self.all_cases_per_day_where_country_id_equal(country_id=first_country_id)
 
-        first_df = DataProcessing().get_dateframe(data=first_data)
+        first_df = self.get_dateframe(data=first_data)
         first_alpha_3_code = first_country[1]
         fig = go.Figure()
-        figure = Graphs().creating_figure_with_data(figure=fig, dataframe=first_df, alpha_3_code=first_alpha_3_code,
+        figure = self.creating_figure_with_data(figure=fig, dataframe=first_df, alpha_3_code=first_alpha_3_code,
                                                     dash='solid')
         if second_country_id == 0:
             second_country = ('World', 'WOR')
-            second_data = DataProcessing().total_cases_per_day()
+            second_data = self.total_cases_per_day()
 
         else:
-            second_country = Graphs().get_name_and_3code_country(country_id=second_country_id)
-            second_data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=second_country_id)
+            second_country = self.get_name_and_3code_country(country_id=second_country_id)
+            second_data = self.all_cases_per_day_where_country_id_equal(country_id=second_country_id)
 
-        second_df = DataProcessing().get_dateframe(data=second_data)
+        second_df = self.get_dateframe(data=second_data)
         second_alpha_3_code = second_country[1]
         title_graph = f'Cases of {first_country[0]} vs {second_country[0]}'
         graph = Graphs().creating_figure_with_data(figure=figure, dataframe=second_df, alpha_3_code=second_alpha_3_code,

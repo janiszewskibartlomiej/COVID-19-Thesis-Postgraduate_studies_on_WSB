@@ -43,9 +43,8 @@ class ImporterAllCases(ImporterOfCountries):
     def load_name_and_id_of_countries(self):
 
         query = 'SELECT alpha_2_code, country_id FROM countries;'
-        connect = ImporterAllCases()
-        list_of_data = connect.select_all_records(query=query, parameter='')
-        connect.close_connect()
+        list_of_data = self.select_all_records(query=query, parameter='')
+        self.close_connect()
         print(f'--> Script {ImporterAllCases.load_name_and_id_of_countries.__name__} executed <--')
         return list_of_data
 
@@ -60,15 +59,14 @@ class ImporterAllCases(ImporterOfCountries):
     def load_all_data_from_json_and_insert_to_db(self, path, api=True):
 
         time_start = time.time()
-        importer = ImporterAllCases()
 
         if api is True:
-            data = importer.read_json_api(path)
+            data = self.read_json_api(path)
         else:
-            data = importer.read_json_file(path)
+            data = self.read_json_file(path)
 
-        load_countries = importer.load_name_and_id_of_countries()
-        symbol_dict = importer.create_dict_of_countries_name_and_id(load_countries)
+        load_countries = self.load_name_and_id_of_countries()
+        symbol_dict = self.create_dict_of_countries_name_and_id(load_countries)
         for element in data:
             try:
                 coutry_code = element['CountryCode']
@@ -83,7 +81,7 @@ class ImporterAllCases(ImporterOfCountries):
                     'deaths': element['Deaths'],
                     'last_update': element['Date']
                 }
-                parameters = importer.creating_row_to_insert_db(row_dict=row)
+                parameters = self.creating_row_to_insert_db(row_dict=row)
 
                 row_cases = (element['Province'], element['City'],
                              element['Confirmed'], element['Recovered'], element['Deaths'])
@@ -92,7 +90,7 @@ class ImporterAllCases(ImporterOfCountries):
                                          0, 0, 0)
 
                 if row_cases != verify_duplicate_zero:
-                    importer.insert_record(query=self.query_insert_cases, parameters=parameters)
+                    self.insert_record(query=self.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
 
             except KeyError:
@@ -103,7 +101,7 @@ class ImporterAllCases(ImporterOfCountries):
         time_stop = time.time()
         delta = time_stop - time_start
         print('Import time is ', round(delta / 60, 2), ' minutes')
-        importer.close_connect()
+        self.close_connect()
 
 
 if __name__ == '__main__':

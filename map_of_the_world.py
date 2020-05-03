@@ -16,7 +16,7 @@ class CreatingMap(DataProcessing):
     def map_of_the_world(self):
         title = 'COVID-19 Thesis by Bartlomiej Janiszewski & Piotr Woźniak'
 
-        data = DataProcessing().total_current_cases()
+        data = self.total_current_cases()
 
         cases_map = folium.Map(location=[62.0, 20.0], width='99%', height='99%', left='0%', top='0%', zoom_start=3.5,
                                max_zoom=6, min_zoom=3.5, titles=title, attr="attribution")

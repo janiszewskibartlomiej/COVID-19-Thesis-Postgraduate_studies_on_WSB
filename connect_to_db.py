@@ -44,5 +44,6 @@ class ConnectToDb:
 
 if __name__ == '__main__':
     run = ConnectToDb()
-    print(run.select_one_record(query='SELECT * FROM cases WHERE country_id = ?', parameter=(179, )))
+    print(
+        run.select_one_record(query='SELECT *, max(last_update) FROM cases WHERE country_id = ?', parameter=(179,)))
     # run.run_sql_script(Files.SQL_SCRIPT)
