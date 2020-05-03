@@ -21,7 +21,9 @@
     <center>
         <section class="modal-content">
             <div>
-                <h5 class="modal-title" style="margin-top: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,.2);">Choice countries to join in graphs</h5>
+                <h5 class="modal-title"
+                    style="margin-top: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,.2);">Choice
+                    countries to join in graphs</h5>
                 <div class="modal-body">
                     <div class="form-group col-md-4">
                         <label style="font-size: 1.1rem;" for="inputState">First country</label>
@@ -45,8 +47,11 @@
                         </select>
                     </div>
                 </div>
-                <div style="margin-bottom: 1rem; padding-top: 1em; border-top: 1px solid rgba(0,0,0,.2);">
-                    <a class="btn btn-primary" id="button" href="#" role="button">Generate</a>
+                <div style="margin-bottom: 1rem; padding-top: 1em; border-top: 1px solid rgba(0,0,0,.2); display: flex;
+justify-content: space-around;">
+                    <a class="btn btn-primary" id="button_map" href="/" role="button">Map</a>
+                    <a class="btn btn-primary" id="button" href="#" role="button"
+                       style="border-color: red;">Generate</a>
                 </div>
             </div>
         </section>
@@ -61,6 +66,7 @@
         window.open(set_url);}
         return false;
         };
+
 
 
 

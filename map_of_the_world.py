@@ -68,7 +68,8 @@ class CreatingMap(DataProcessing):
                     Confirmed: <b><center><p style="color:red;  font-size:14px; margin-block-start: 0.6em;">{chr(127973)} {confirmed}</p></center></b>
                     Deaths: <b><center><p style="color:black; font-size:14px; margin-block-start: 0.6em;">{chr(10015)} {deaths}</p></center></b>
                     Recovered: <b><center><p style="color:green; font-size:14px; margin-block-start: 0.6em;">{chr(128154)} {recovered}</p></center></b>
-                    <center><button type="button" class="btn btn-primary btn-sm" style=" padding: 5px; "line-height: 1;" onclick=window.open("/graph={row[0]}")>Graph</button></center>
+                    <center><button type="button" class="btn btn-primary btn-sm" style=" padding: 5px; line-height: 1;" onclick=window.open("/graph={row[0]}")>Graph total cases</button></center>
+                    <center><button type="button" class="btn btn-primary btn-sm" style=" padding: 5px; line-height: 1; border-color: red; margin-block-start: 0.9em;     border-width: 2px;" onclick=window.open("/graph-diff={row[0]}")>Graph casses per day</button></center>
                              </div>""", max_width=150),
                     icon=folium.Icon(color='red', icon='certificate', html="position: absolute; z-index: 1"),
                     tooltip=f"""
