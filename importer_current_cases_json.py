@@ -43,7 +43,8 @@ class ImporterCurrentCases(ImporterAllCases):
                 row_like_select_construction = ("", "",
                                                 element['TotalConfirmed'], element['TotalRecovered'],
                                                 element['TotalDeaths'])
-
+                if row_like_select_construction == ("", "", 0, 0, 0):
+                    continue
                 date_element = element['Date'][:10]
                 db_last_update = imp.select_all_records(query=imp.query_select_cases_id_and_date,
                                                         parameter=(country_id, date_element + '%'))
