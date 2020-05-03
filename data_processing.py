@@ -98,7 +98,6 @@ class DataProcessing(ConnectToDb):
 
     def get_dateframe_diff(self, data):
         df = self.get_dateframe(data=data)
-        print('dddddddddddddddddd', df)
         df_without_date = df.drop(labels='Date', axis=1)
         df_date = df.drop(labels=['Confirmed', 'Deaths', 'Recovered'], axis=1)
         df_diff = df_without_date.diff(axis=0)
