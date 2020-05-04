@@ -1,9 +1,9 @@
 import json
 import time
 import requests
-
 from importer_of_countries import ImporterOfCountries
 from path_and_api import JsonApi
+from connect_to_db import ConnectToDb
 
 
 class ImporterAllCases(ImporterOfCountries):
@@ -13,7 +13,7 @@ class ImporterAllCases(ImporterOfCountries):
         super().__init__()
 
         self.query_select_cases_id_and_date = """
-        SELECT province, city, confirmed, recovered, deaths FROM cases WHERE country_id = ? and last_update LIKE ?;
+        SELECT province, city, confirmed, recovered, deaths FROM cases WHERE country_id = ? and last_update LIKE ? ;
         """
         self.query_insert_cases = 'INSERT INTO cases VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?);'
 
@@ -43,7 +43,7 @@ class ImporterAllCases(ImporterOfCountries):
     def load_name_and_id_of_countries(self):
 
         query = 'SELECT alpha_2_code, country_id FROM countries;'
-        list_of_data = self.select_all_records(query=query, parameter='')
+        list_of_data = ConnectToDb().select_all_records(query=query, parameter='')
         self.close_connect()
         print(f'--> Script {ImporterAllCases.load_name_and_id_of_countries.__name__} executed <--')
         return list_of_data
@@ -90,7 +90,7 @@ class ImporterAllCases(ImporterOfCountries):
                                          0, 0, 0)
 
                 if row_cases != verify_duplicate_zero:
-                    self.insert_record(query=self.query_insert_cases, parameters=parameters)
+                    ConnectToDb().insert_record(query=self.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
 
             except KeyError:

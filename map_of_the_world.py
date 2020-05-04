@@ -40,15 +40,15 @@ class CreatingMap(DataProcessing):
                 icon_size=(230, 180),
                 icon_anchor=(227, 40),
                 html=f'<div style="background-color:rgba(255, 255, 255, 0.4);">'
-                f'<center><h4 style="line-height: 150%";><b>Total cases: </b></h4>'
-                f'<h4 style="color: red; line-height: 150%;">Confirmed: <b>{chr(127973)} {total_confirmed}</b></h4>'
-                f'<h4 style="color: black;">Deaths: <b> {chr(10015)} {total_deats}</b></h4>'
-                f'<h4 style="color: green; line-height: 150%;">Recovered: <b>{chr(128154)} {total_recovered}</b></h4></center>'
-                f'<div style=" display: flex; justify-content: space-around">'
-                f'<button class="btn btn-primary btn-sm" type="button" style=" padding: 5px 5px;" onclick=window.open("/graph=0")>{chr(128200)} total</button>'
-                f'<button class="btn btn-primary btn-sm" type="button" style=" padding: 5px 5px; border-color: red;" onclick=window.open("/graph-diff=0")>{chr(128200)} /day</button>'
-                f'<button class="btn btn-primary btn-sm" type="button" style="    padding: 5px 5px;" onclick=window.open("/graphs","_self")>Join 2{chr(128200)}</button>'
-                f'</div>'
+                     f'<center><h4 style="line-height: 150%";><b>Total cases: </b></h4>'
+                     f'<h4 style="color: red; line-height: 150%;">Confirmed: <b>{chr(127973)} {total_confirmed}</b></h4>'
+                     f'<h4 style="color: black;">Deaths: <b> {chr(10015)} {total_deats}</b></h4>'
+                     f'<h4 style="color: green; line-height: 150%;">Recovered: <b>{chr(128154)} {total_recovered}</b></h4></center>'
+                     f'<div style=" display: flex; justify-content: space-around">'
+                     f'<button class="btn btn-primary btn-sm" type="button" style=" padding: 5px 5px;" onclick=window.open("/graph=0")>{chr(128200)} total</button>'
+                     f'<button class="btn btn-primary btn-sm" type="button" style=" padding: 5px 5px; border-color: red;" onclick=window.open("/graph-diff=0")>{chr(128200)} /day</button>'
+                     f'<button class="btn btn-primary btn-sm" type="button" style="    padding: 5px 5px;" onclick=window.open("/graphs","_self")>Join 2{chr(128200)}</button>'
+                     f'</div>'
             )
         ).add_to(cases_map)
 

@@ -1,5 +1,9 @@
+import os
 import sqlite3
-from path_and_api import Files
+
+
+# root_path = os.getcwd()
+# os.chdir(root_path)
 
 
 class ConnectToDb:
@@ -45,5 +49,5 @@ class ConnectToDb:
 if __name__ == '__main__':
     run = ConnectToDb()
     print(
-        run.select_one_record(query='SELECT *, max(last_update) FROM cases WHERE country_id = ?', parameter=(179,)))
+        run.select_all_records(query='SELECT *, max(last_update) FROM cases WHERE country_id = ?', parameter=(179,)))
     # run.run_sql_script(Files.SQL_SCRIPT)

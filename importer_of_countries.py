@@ -2,7 +2,7 @@ import json
 import sqlite3
 from urllib.request import urlopen
 from connect_to_db import ConnectToDb
-from path_and_api import *
+from path_and_api import JsonApi
 
 
 class ImporterOfCountries(ConnectToDb):
@@ -35,7 +35,7 @@ class ImporterOfCountries(ConnectToDb):
             parameters = tuple(get_parameters)
             query = 'INSERT INTO countries VALUES(null, ?, ?, ?, ?, ?, ?);'
             try:
-                self.insert_record(query=query, parameters=parameters)
+                ConnectToDb().insert_record(query=query, parameters=parameters)
                 print('Insert record: ', parameters)
             except sqlite3.IntegrityError:
                 continue
