@@ -1,6 +1,6 @@
 import time
 from map_of_the_world import CreatingMap
-from path_and_api import JsonApi, Files
+from resources.path_and_api import JsonApi, Files
 from importer_all_cases_json import ImporterAllCases
 from importer_current_cases_json import ImporterCurrentCases
 

@@ -2,7 +2,7 @@ import json
 import time
 import requests
 from importer_of_countries import ImporterOfCountries
-from path_and_api import JsonApi
+from resources.path_and_api import JsonApi
 from connect_to_db import ConnectToDb
 
 

@@ -2,7 +2,7 @@ import sys
 import folium
 from folium import DivIcon
 from importer_all_cases_json import ImporterAllCases
-from path_and_api import JsonApi
+from resources.path_and_api import JsonApi
 from data_processing import DataProcessing
 
 sys.setrecursionlimit(10000)

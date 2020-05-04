@@ -1,7 +1,7 @@
 import time
 from connect_to_db import ConnectToDb
 from importer_all_cases_json import ImporterAllCases
-from path_and_api import JsonApi
+from resources.path_and_api import JsonApi
 
 
 class ImporterCurrentCases(ImporterAllCases):
@@ -62,4 +62,6 @@ class ImporterCurrentCases(ImporterAllCases):
 if __name__ == '__main__':
     ImporterCurrentCases().load_current_data_from_json_and_insert_to_db(JsonApi.API_CURRENT_CASES)
 
-    run = ImporterCurrentCases()
+    db_last_update = ConnectToDb().select_all_records(query=ImporterCurrentCases().query_select_cases_id_and_date,
+                                                      parameter=(179, '2020-05-04' + '%'))
+    print(db_last_update)

@@ -2,7 +2,7 @@ import json
 import sqlite3
 from urllib.request import urlopen
 from connect_to_db import ConnectToDb
-from path_and_api import JsonApi
+from resources.path_and_api import JsonApi
 
 
 class ImporterOfCountries(ConnectToDb):
