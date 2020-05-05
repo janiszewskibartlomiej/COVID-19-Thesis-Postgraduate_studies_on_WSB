@@ -44,14 +44,28 @@ class ImporterCurrentCases(ImporterAllCases):
                 if row_like_select_construction == ("", "", 0, 0, 0):
                     continue
 
+                conn = ConnectToDb()
+
                 date_element = element['Date'][:10]
-                db_last_update = ConnectToDb().select_all_records(query=self.query_select_cases_id_and_date,
-                                                                  parameter=(country_id, date_element + '%'))
+                db_last_update = conn.select_all_records(query=self.query_select_cases_id_and_date,
+                                                         parameter=(country_id, date_element + '%'))
+                print('select row ', db_last_update)
 
-                if row_like_select_construction not in db_last_update or db_last_update == []:
-                    ConnectToDb().insert_record(query=self.query_insert_cases, parameters=parameters)
-                    print('Insert record: ', parameters)
+                if db_last_update:
+                    conn.delete_record(
+                        query='DELETE FROM cases WHERE country_id = ? and last_update LIKE ?;',
+                        parameters=(country_id, date_element + '%'))
 
+                db_last_update = conn.select_all_records(query=self.query_select_cases_id_and_date,
+                                                         parameter=(country_id, date_element + '%'))
+
+                print('select after delete ', db_last_update)
+                conn.insert_record(query=self.query_insert_cases, parameters=parameters)
+                print('Insert record: ', parameters)
+
+                db_last_update = conn.select_all_records(query=self.query_select_cases_id_and_date,
+                                                         parameter=(country_id, date_element + '%'))
+                print('select after update ', db_last_update)
             except KeyError:
                 if KeyError == 'AN':
                     continue
@@ -62,6 +76,15 @@ class ImporterCurrentCases(ImporterAllCases):
 if __name__ == '__main__':
     ImporterCurrentCases().load_current_data_from_json_and_insert_to_db(JsonApi.API_CURRENT_CASES)
 
-    db_last_update = ConnectToDb().select_all_records(query=ImporterCurrentCases().query_select_cases_id_and_date,
-                                                      parameter=(179, '2020-05-04' + '%'))
-    print(db_last_update)
+    # db_last_update = ConnectToDb().select_all_records(query=ImporterCurrentCases().query_select_cases_id_and_date,
+    #                                                   parameter=(130, '2020-05-04' + '%'))
+    # print('select row ', db_last_update)
+    #
+    # if db_last_update:
+    #     ConnectToDb().delete_record(
+    #         query='DELETE FROM cases WHERE country_id = ? and last_update LIKE ?;',
+    #         parameters=(130, '2020-05-04' + '%'))
+    #
+    # db_last_update = ConnectToDb().select_all_records(query=ImporterCurrentCases().query_select_cases_id_and_date,
+    #                                                   parameter=(130, '2020-05-04' + '%'))
+    # print('select after delete ', db_last_update)

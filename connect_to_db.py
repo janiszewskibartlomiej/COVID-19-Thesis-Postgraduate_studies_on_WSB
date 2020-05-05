@@ -26,6 +26,10 @@ class ConnectToDb:
         self.c.execute(query, parameters)
         self.conn.commit()
 
+    def delete_record(self, query, parameters):
+        self.c.execute(query, parameters)
+        self.conn.commit()
+
     def select_one_record(self, query, parameter):
         self.c.execute(query, parameter)
         return self.c.fetchone()
