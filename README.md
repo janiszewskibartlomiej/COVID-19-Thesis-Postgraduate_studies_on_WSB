@@ -8,7 +8,7 @@
 
 ### * [Challenges and problems](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/docs/challenges_and_problems.md)
       
-### * [>>Web/covid<<](http://cadillac.pl/covid)
+### * [>>Web/covid<<](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
 
 ### * [Run app](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB#start-instructions)
 
