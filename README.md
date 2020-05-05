@@ -12,7 +12,9 @@
 
 ### * [Run app](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB#start-instructions)
 
-[![Map of covid](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/docs/img/2020-04-25_08h24_49.png "img map")](http://cadillac.pl/covid/)
+[![Map of covid](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/docs/img/2020-04-25_08h24_49.png "img map")](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
+
+[![Graph of Poland per day](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/docs/img/2020-05-05_15h42_00.png)
 
 [![Graph of Poland](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/docs/img/2020-04-27_00h16_13.png)](http://cadillac.pl/covid/poland.html)
 
