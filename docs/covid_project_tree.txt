@@ -1,0 +1,69 @@
+Project_COVID-19-Thesis_Postgraduate_Studies_on_WSB:
+|   .gitignore
+|   app.py
+|   connect_to_db.py
+|   covid_tree.txt
+|   creating_app.py
+|   data_processing.py
+|   db.sqlite
+|   graphs.py
+|   importer_all_cases_json.py
+|   importer_current_cases_json.py
+|   importer_of_countries.py
+|   index.html
+|   map_of_the_world.py
+|   README.md
+|   refreshe_data.py
+|   requirements.txt
+|   
++---docs
+|   |   challenges_and_problems.md
+|   |   completed_tasks.md
+|   |   
+|   +---img
+|   |       2020-04-25_08h24_49.png
+|   |       2020-04-27_00h16_13.png
+|   |       2020-04-27_16h59_21.png
+|   |       2020-04-29_09h34_51.png
+|   |       2020-05-05_15h42_00.png
+|   |       
+|   \---schema
+|           shemaOfCovidDB.pdf
+|           shemaOfCovidDB.png
+|           
++---resources
+|   |   path_and_api.py
+|   |   
+|   +---csv
+|   |       time_series_covid19_confirmed_global.csv
+|   |       time_series_covid19_deaths_global.csv
+|   |       time_series_covid19_recovered_global.csv
+|   |           
+|   +---json
+|   |       all_data.json
+|   |       current_data.json
+|   |       
+|   +---sql
+|   |       db_init.sql
+|   |       
+|   |        
++---templates
+|   |   index.html
+|   |   join-graphs.html
+|   |   
+|   \---graphs
+|           poland-diff.html
+|           poland-vs-germany.html
+|           poland.html
+|           world-diff.html
+|           
++---tests
+|       poland-diff.csv
+|       poland_df.csv
+|       poland_diff.csv
+|       total_cases_df.csv
+|       total_cases_df_date.csv
+|       total_cases_df_diff.csv
+|       total_cases_df_new_df.csv
+|       total_cases_df_wait.csv
+|       world_diff.csv
