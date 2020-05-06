@@ -11,9 +11,9 @@ os.chdir(root_path)
 
 class DataProcessing:
 
-    def __init__(self):
+    def __init__(self, db_connection):
 
-        self.connection = ConnectToDb()
+        self.connection = db_connection
 
         self.query_select_sum_of_cases_per_day_group_by_id = """
         SELECT sum(ca.confirmed) as total_confirmed, 
