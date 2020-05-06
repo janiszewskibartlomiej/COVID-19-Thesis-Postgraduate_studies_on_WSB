@@ -54,3 +54,4 @@ def join_two_graphs(first_id, second_id):
 if __name__ == '__main__':
     app.run(debug=True)
     # app.run(host='192.168.8.108', port=9000, debug=True)
+    # app.run(host='192.168.56.1', port=9000, debug=True)

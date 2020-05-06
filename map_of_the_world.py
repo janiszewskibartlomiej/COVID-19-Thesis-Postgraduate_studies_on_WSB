@@ -65,7 +65,7 @@ class CreatingMap(DataProcessing):
                 folium.Marker(
                     location=[coordinates[0], coordinates[1]],
                     popup=folium.Popup(html=f"""<div style="opacity:1.3;">
-                    <center><b style="font-size:13px;">{row[1]}</b></center>
+                    <center><b style="font-size:13px;"><img src={row[8]} alt="Flag" width="28px" style="border: solid gray 1px"> <div style="margin-top:2px;">{row[1]}</div></b></center>
                     </br>
                     Confirmed: <b><center><p style="color:red;  font-size:14px; margin-block-start: 0.6em;">{chr(127973)} {confirmed}</p></center></b>
                     Deaths: <b><center><p style="color:black; font-size:14px; margin-block-start: 0.6em;">{chr(10015)} {deaths}</p></center></b>
