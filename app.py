@@ -41,7 +41,7 @@ def graph_diff(id):
 
 @app.route('/graphs')
 def choice_two_graphs():
-    countries = DataProcessing().get_id_and_name_of_country()
+    countries = DataProcessing().get_id_and_name_of_countries()
     return render_template('join-graphs.html', countries=countries)
 
 
