@@ -32,31 +32,31 @@
 
 ### Klasa ImporterCurrentCases:
 	* __init__                                      << inicjalizacja zadeklarowanych i dziedziczonych zmiennych
-	* load_current_data_from_json_and_insert_to_db
+	* load_current_data_from_json_and_insert_to_db  << ladowanie danych z API JSON i ich zapis w bazie danych według storzonej struktury, wraz z walidacją rekordów i usuwaniem duplikatów w danym dniu
 
 
 ### Klasa DataProcessing:
 	* __init__                                      << inicjalizacja zadeklarowanych i dziedziczonych zmiennych
-	* all_cases_per_day_where_country_id_equal
-	* get_dateframe
-	* get_dateframe_diff
-	* get_icon_color
-	* get_id_and_name_of_country
-	* get_name_and_3code_country
-	* slice_location
-	* total_cases_per_day
-	* total_current_cases
+	* all_cases_per_day_where_country_id_equal      << pobieranie wszytskich przypadków z podziałem na dni dla zadeklarowanego 'id' kraju 
+	* get_dateframe                                 << tworzenie ramki danych z podanego źródła
+	* get_dateframe_diff                            << tworzenie ramki danych wyliczonymi różnicami pomiędzy wierszami [ilość przypadków w danym dniu] 
+	* get_icon_color                                << pobieranie koloru ikony [z własnego słownika] w zależności od ilości zachorowanych 
+	* get_id_and_name_of_countries                  << pobieranie listy krajów z ich nazwą  i 'id' 
+	* get_name_and_3code_country                    << pobieranie nazwy kraju i kodu trzy literowego po wskazanym 'id' kraju 
+	* slice_location                                << tworzenie listy z szerokością i długościa geograficzną na podstawie przekazanego stringa 
+	* total_cases_per_day                           << pobieranie wszystkih przypadków z bazy danych i ich grupowanie względem dni
+	* total_current_cases                           << pobieranie wszytskich przypadków, które sa w dniu obecnym i pogrupowanie na względem 'id' kraju
 
 
 ### Klasa CreatingMap:
 	* __init__              << inicjalizacja zadeklarowanych i dzidziczonych zmiennych
-	* map_of_the_world
+	* map_of_the_world      << tworzenie mapy świata świata wraz z trzema różnymi markerami, nagłówiem, przycisków, zestawieniami dla całego świata oraz danymi dla konkretnego kraju.  
 
 
 ### Klasa Graphs:
 	* __init__                      << inicjalizacja zadeklarowanych i dziedziczonych zmiennych
-	* cases_of_the_world
-	* creating_figure_with_data
-	* get_graph
-	* join_two_graphs
-	* write_graph_to_html
+	* cases_of_the_world            << generowanie wykresu dla całego świata
+	* creating_figure_with_data     << tworzenie obiektu 'Figure' w bibliotece 'Plotly' wraz z deklaracją wyświetlanych parammetrów wykresu
+	* get_graph                     << generowanie wykresu dla danego kraju 
+	* join_two_graphs               << generowanie połączonych wykresów na podstawie zadeklarowanych  krajów
+	* write_graph_to_html           << zapis wykresu do pliku html
