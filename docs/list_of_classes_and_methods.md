@@ -21,13 +21,13 @@
 
 ### Klasa ImporterAllCases:
 	* __init__                                    << inicjalizacja zadeklarowanych i dziedziczonych zmiennych 
-	* create_dict_of_countries_name_and_id
-	* creating_row_to_insert_db
-	* load_all_data_from_json_and_insert_to_db
-	* load_data_and_write_json
-	* load_name_and_id_of_countries
-	* read_json_api
-	* read_json_file
+	* create_dict_of_countries_name_and_id        << stworzenie słownika z kluczem w postaci nazwy i wartoscią z 'id' kraju z bazy
+	* creating_row_to_insert_db                   << stworzenie rekordu zgodnego ze strukturą w bazie danych
+	* load_all_data_from_json_and_insert_to_db    << załadowanie wszytsich danych z API JSON i zapis rekordów w bazie danych według storzonej struktury, wraz z walidacją i niezapisywaniem rekordów z wartościami zerowymi
+	* load_data_and_write_json                    << załadowanie danych z API JSON i zapis do pliku
+	* load_alpha2code_and_id_of_countries         << załadowanie listy kodów państw [dwu literowych] i ich 'id'
+	* read_json_api                               << odczyt danych z API JSON 
+	* read_json_file                              << odczyt danych z pliku JSON 
 
 
 ### Klasa ImporterCurrentCases:

@@ -40,12 +40,12 @@ class ImporterAllCases(ImporterOfCountries):
         with open(file=file_name, mode='w', encoding='utf-8') as f:
             json.dump(data, f)
 
-    def load_name_and_id_of_countries(self):
+    def load_alpha2code_and_id_of_countries(self):
 
         query = 'SELECT alpha_2_code, country_id FROM countries;'
         list_of_data = ConnectToDb().select_all_records(query=query, parameter='')
         self.close_connect()
-        print(f'--> Script {ImporterAllCases.load_name_and_id_of_countries.__name__} executed <--')
+        print(f'--> Script {ImporterAllCases.load_alpha2code_and_id_of_countries.__name__} executed <--')
         return list_of_data
 
     def create_dict_of_countries_name_and_id(self, data):
@@ -65,7 +65,7 @@ class ImporterAllCases(ImporterOfCountries):
         else:
             data = self.read_json_file(path)
 
-        load_countries = self.load_name_and_id_of_countries()
+        load_countries = self.load_alpha2code_and_id_of_countries()
         symbol_dict = self.create_dict_of_countries_name_and_id(load_countries)
         for element in data:
             try:
