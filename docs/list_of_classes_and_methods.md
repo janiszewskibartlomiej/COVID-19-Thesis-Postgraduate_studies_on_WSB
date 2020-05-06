@@ -2,16 +2,16 @@
 
 
 ### Klasa ConnectToDb:
- * '__init__'              << inicjalizacja zadeklarowanych zmiennych 
- * close_connect           << zamknięcie połączenia z bazą danych
- * commit                  << zapis rekordu w bazie danych
- * delete_record           << kasowanie rekordu w bazie danych
- * execute_script          << wykonanie zapytanie do bazy na podstawie query SQL
- * insert_record           << wysłanie rekordu do bazy danych wraz z zapisem
- * row_factory             << ustawienie SQLite na fukcję pobierania obiektu [nazwy kolumn + rekordy]
- * run_sql_script          << uruchomienie skryptu SQL 
- * select_all_records      << pobieranie wielu rekordów z bazy
- * select_one_record       << pobranie tylko jednego rekordu
+	* __init__                << inicjalizacja zadeklarowanych zmiennych 
+	* close_connect           << zamknięcie połączenia z bazą danych
+	* commit                  << zapis rekordu w bazie danych
+	* delete_record           << kasowanie rekordu w bazie danych
+	* execute_script          << wykonanie zapytanie do bazy na podstawie query SQL
+	* insert_record           << wysłanie rekordu do bazy danych wraz z zapisem
+	* row_factory             << ustawienie SQLite na fukcję pobierania obiektu [nazwy kolumn + rekordy]
+	* run_sql_script          << uruchomienie skryptu SQL 
+	* select_all_records      << pobieranie wielu rekordów z bazy
+	* select_one_record       << pobranie tylko jednego rekordu
 
 
 ### Klasa ImporterOfCountries:
