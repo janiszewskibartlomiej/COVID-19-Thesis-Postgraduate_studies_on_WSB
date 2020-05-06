@@ -9,10 +9,11 @@ root_path = os.getcwd()
 os.chdir(root_path)
 
 
-class DataProcessing(ConnectToDb):
+class DataProcessing:
 
     def __init__(self):
-        super().__init__()
+
+        self.connection = ConnectToDb()
 
         self.query_select_sum_of_cases_per_day_group_by_id = """
         SELECT sum(ca.confirmed) as total_confirmed, 
@@ -53,27 +54,27 @@ class DataProcessing(ConnectToDb):
         }
 
     def all_cases_per_day_where_country_id_equal(self, country_id):
-        data = ConnectToDb().select_all_records(query=
+        data = self.connection.select_all_records(query=
                                                 self.query_select_sum_of_cases_per_day_group_by_id,
                                                 parameter=(country_id,))
         return data
 
     def total_current_cases(self):
-        data = ConnectToDb().select_all_records(query=self.query_select_sum_of_cases_current_day, parameter="")
+        data = self.connection.select_all_records(query=self.query_select_sum_of_cases_current_day, parameter="")
         return data
 
     def total_cases_per_day(self):
-        data = ConnectToDb().select_all_records(query=self.query_select_total_cases_per_day, parameter="")
+        data = self.connection.select_all_records(query=self.query_select_total_cases_per_day, parameter="")
         return data
 
     def get_name_and_3code_country(self, country_id):
-        select = ConnectToDb().select_one_record(
+        select = self.connection.select_one_record(
             query='SELECT name, alpha_3_code from countries WHERE country_id = ?',
             parameter=(country_id,))
         return select
 
     def get_id_and_name_of_countries(self):
-        select = ConnectToDb().select_all_records(
+        select = self.connection.select_all_records(
             query='SELECT co.country_id, co.name from countries as co join cases as ca on co.country_id = ca.country_id group by co.country_id having ca.confirmed > 0',
             parameter="")
         return select
