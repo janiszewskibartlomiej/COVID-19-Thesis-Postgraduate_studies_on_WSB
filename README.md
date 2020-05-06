@@ -7,6 +7,8 @@
 ### * [Completed tasks](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/docs/completed_tasks.md) 
 
 ### * [Challenges and problems](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/docs/challenges_and_problems.md)
+
+### * [List of classes and methods in PL](https://github.com/janiszewskibartlomiej/COVID-19-Thesis-Postgraduate_studies_on_WSB/blob/master/docs/list_of_classes_and_methods.md)
       
 ### * [>>Web/covid<<](https://janiszewskibartlomiej.github.io/COVID-19-Thesis-Postgraduate_studies_on_WSB/)
 
