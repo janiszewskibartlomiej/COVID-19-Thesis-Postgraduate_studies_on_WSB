@@ -1,6 +1,7 @@
 import sys
 import os
 import pandas as pd
+
 from connect_to_db import ConnectToDb
 
 sys.setrecursionlimit(10000)
@@ -108,11 +109,14 @@ class DataProcessing:
 
 
 if __name__ == '__main__':
-    data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=179)
-    df = DataProcessing().get_dateframe(data=data)
+    connection = ConnectToDb()
+    data_processing = DataProcessing(connection)
+
+    data = data_processing.all_cases_per_day_where_country_id_equal(country_id=179)
+    df = data_processing.get_dateframe(data=data)
     print(df)
 
-    df_diff = DataProcessing().get_dateframe_diff(data=data)
+    df_diff = data_processing.get_dateframe_diff(data=data)
     print(df_diff)
 
     df.to_csv(path_or_buf='tests/poland_df.csv', encoding='utf-8')

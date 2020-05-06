@@ -1,6 +1,8 @@
 import sys
 import folium
 from folium import DivIcon
+
+from connect_to_db import ConnectToDb
 from importer_all_cases_json import ImporterAllCases
 from resources.path_and_api import JsonApi
 from data_processing import DataProcessing
@@ -8,15 +10,16 @@ from data_processing import DataProcessing
 sys.setrecursionlimit(10000)
 
 
-class CreatingMap(DataProcessing):
+class CreatingMap:
 
     def __init__(self):
-        super().__init__()
+        connection = ConnectToDb()
+        self.data_processing = DataProcessing(connection)
 
     def map_of_the_world(self):
         title = 'COVID-19 Thesis by Bartlomiej Janiszewski & Piotr Woźniak'
 
-        data = self.total_current_cases()
+        data = self.data_processing.total_current_cases()
 
         cases_map = folium.Map(location=[62.0, 20.0], width='99%', height='99%', left='0%', top='0%', zoom_start=3.5,
                                max_zoom=6, min_zoom=3.5, titles=title, attr="attribution")
@@ -57,7 +60,7 @@ class CreatingMap(DataProcessing):
                 if (row[3], row[4], row[5]) == (0, 0, 0):
                     continue
 
-                coordinates = self.slice_location(row[7])
+                coordinates = self.data_processing.slice_location(row[7])
 
                 confirmed = f'{row[3]: ,}'.replace(',', " ")
                 deaths = f'{row[4]: ,}'.replace(',', " ")
@@ -79,7 +82,7 @@ class CreatingMap(DataProcessing):
                              """
                 ).add_to(cases_map)
 
-                color = DataProcessing().get_icon_color(row[3])
+                color = self.data_processing.get_icon_color(row[3])
 
                 folium.CircleMarker(
                     location=[coordinates[0], coordinates[1]],
