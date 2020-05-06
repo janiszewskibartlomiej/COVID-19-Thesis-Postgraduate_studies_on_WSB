@@ -2,7 +2,7 @@
 
 
 ### Klasa ConnectToDb:
-	* __init__                << inicjalizacja zadeklarowanych zmiennych 
+ * __init__                << inicjalizacja zadeklarowanych zmiennych 
 	* close_connect           << zamknięcie połączenia z bazą danych
 	* commit                  << zapis rekordu w bazie danych
 	* delete_record           << kasowanie rekordu w bazie danych
