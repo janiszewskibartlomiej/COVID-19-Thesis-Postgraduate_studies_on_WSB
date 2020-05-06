@@ -23,3 +23,9 @@
   - Implementing every logic in Flask server.
  9. Folium library have limit about added header and some of information on map.
   - We added information like open popup and used HTML and CSS. 
+10. Counting diff between rows:
+ - In SQL is not easy to do. I decided use Pandas methods and generate dateframe with solution of count
+ - We must change logic about importing current data
+11. API bugs:
+ - same of value is duplicate and I saw in my graphs anomalies in data .
+ - a few rows have counting cases and these rows should delete
