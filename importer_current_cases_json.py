@@ -17,7 +17,7 @@ class ImporterCurrentCases(ImporterAllCases):
         else:
             data = self.read_json_file(path)
 
-        load_data = self.load_name_and_id_of_countries()
+        load_data = self.load_alpha2code_and_id_of_countries()
         symbol_dict = self.create_dict_of_countries_name_and_id(load_data)
 
         for element in data['Countries']:
