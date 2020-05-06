@@ -98,6 +98,9 @@ class CreatingMap:
         cases_map.save('./templates/index.html')
         cases_map.save('index.html')  # only for github
 
+        # https://python-visualization.github.io/folium/flask.html
+        return cases_map._repr_html_()
+
 
 if __name__ == '__main__':
     CreatingMap().map_of_the_world()

@@ -10,8 +10,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    CreatingMap().map_of_the_world()
-    return render_template('index.html')
+    rendered_map = CreatingMap().map_of_the_world()
+    return rendered_map
 
 
 @app.route('/graph=<int:id>')
