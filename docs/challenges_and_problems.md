@@ -8,8 +8,7 @@
 4. Import Big Data - 302 000 records and optimization of loading data.
   - First imports = 480 minutes.
   - We used exceptions because we saw many rows are with 0 value - those 'if' method are reduced time import to ~~ 80 minutes.
-5.  Loading  about ten thousand rows - in core python  we have default limit five thousand.
-  - We found solution and changed to 10 000.
+5.  Loading  about ten thousand rows.
   - We had to change connection with  db to first class - not inheritance class.
 6. We found good SQL query's to filter data from three API - we needed many testing.
  - We had duplicate value in the current date.
