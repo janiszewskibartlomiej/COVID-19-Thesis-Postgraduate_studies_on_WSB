@@ -55,9 +55,6 @@ class ImporterCurrentCases(ImporterAllCases):
                         query='DELETE FROM cases WHERE country_id = ? and last_update LIKE ?;',
                         parameters=(country_id, date_element + '%'))
 
-                self.connection.select_all_records(query=self.query_select_cases_id_and_date,
-                                                         parameter=(country_id, date_element + '%'))
-
                 self.connection.insert_record(query=self.query_insert_cases, parameters=parameters)
                 print('Insert record: ', parameters)
 
