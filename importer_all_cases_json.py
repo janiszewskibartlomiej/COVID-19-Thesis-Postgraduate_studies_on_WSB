@@ -1,16 +1,14 @@
 import json
 import time
 import requests
-from importer_of_countries import ImporterOfCountries
 from resources.path_and_api import JsonApi
 from connect_to_db import ConnectToDb
 
 
-class ImporterAllCases(ImporterOfCountries):
+class ImporterAllCases:
 
     def __init__(self):
-
-        super().__init__()
+        self.connection = ConnectToDb()
 
         self.query_select_cases_id_and_date = """
         SELECT province, city, confirmed, recovered, deaths FROM cases WHERE country_id = ? and last_update LIKE ? ;
@@ -43,8 +41,8 @@ class ImporterAllCases(ImporterOfCountries):
     def load_alpha2code_and_id_of_countries(self):
 
         query = 'SELECT alpha_2_code, country_id FROM countries;'
-        list_of_data = ConnectToDb().select_all_records(query=query, parameter='')
-        self.close_connect()
+        list_of_data = self.connection.select_all_records(query=query, parameter='')
+        self.connection.close_connect()
         print(f'--> Script {ImporterAllCases.load_alpha2code_and_id_of_countries.__name__} executed <--')
         return list_of_data
 
@@ -90,7 +88,7 @@ class ImporterAllCases(ImporterOfCountries):
                                          0, 0, 0)
 
                 if row_cases != verify_duplicate_zero:
-                    ConnectToDb().insert_record(query=self.query_insert_cases, parameters=parameters)
+                    self.connection.insert_record(query=self.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
 
             except KeyError:
@@ -101,7 +99,7 @@ class ImporterAllCases(ImporterOfCountries):
         time_stop = time.time()
         delta = time_stop - time_start
         print('Import time is ', round(delta / 60, 2), ' minutes')
-        self.close_connect()
+        self.connection.close_connect()
 
 
 if __name__ == '__main__':

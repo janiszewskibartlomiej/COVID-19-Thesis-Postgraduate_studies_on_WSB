@@ -1,13 +1,17 @@
 import unittest
+import random
+from connect_to_db import ConnectToDb
 from data_processing import DataProcessing
+
 
 class DataProcesingTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
         self.dp = DataProcessing()
+        self.conn = ConnectToDb()
+        self.data_processing = DataProcessing()
 
     def test_get_icon_color(self):
-
         self.assertEqual(self.dp.get_icon_color(1), '#29a329')
         self.assertEqual(self.dp.get_icon_color(999), '#29a329')
         self.assertEqual(self.dp.get_icon_color(1000), '#196619')
@@ -27,6 +31,24 @@ class DataProcesingTestCase(unittest.TestCase):
         self.assertEqual(self.dp.get_icon_color(250000), '#ff0000')
         self.assertEqual(self.dp.get_icon_color(100 ** 4), '#ff0000')
 
+    def test_connection_db(self):
+        country_id = random.randint(1, 250)
+        print(country_id)
+        query = self.conn.select_all_records(query='SELECT *, max(last_update) FROM cases WHERE country_id = ?',
+                                             parameter=(country_id,))
+        self.assertIsNotNone(query)
+        self.assertEqual(query[2], country_id)
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_dataframe(self):
+        data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=179)
+        df = self.data_processing.get_dateframe(data=data)
+        print(df)
+
+        df_diff = self.data_processing.get_dateframe_diff(data=data)
+        print(df_diff)
+
+        df.to_csv(path_or_buf='tests/poland_df.csv', encoding='utf-8')
+        df_diff.to_csv(path_or_buf='tests/poland_diff.csv', encoding='utf-8')
+
+        if __name__ == '__main__':
+            unittest.main()

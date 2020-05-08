@@ -4,22 +4,22 @@ from importer_all_cases_json import ImporterAllCases
 from resources.path_and_api import JsonApi
 
 
-class ImporterCurrentCases(ImporterAllCases):
+class ImporterCurrentCases:
 
     def __init__(self):
 
-        super().__init__()
         self.connection = ConnectToDb()
+        self.all_cases = ImporterAllCases()
 
     def load_current_data_from_json_and_insert_to_db(self, path, api=True):
 
         if api is True:
-            data = self.read_json_api(path)
+            data = self.all_cases.read_json_api(path)
         else:
-            data = self.read_json_file(path)
+            data = self.all_cases.read_json_file(path)
 
-        load_data = self.load_alpha2code_and_id_of_countries()
-        symbol_dict = self.create_dict_of_countries_name_and_id(load_data)
+        load_data = self.all_cases.load_alpha2code_and_id_of_countries()
+        symbol_dict = self.all_cases.create_dict_of_countries_name_and_id(load_data)
 
         for element in data['Countries']:
             try:
@@ -37,7 +37,7 @@ class ImporterCurrentCases(ImporterAllCases):
                     'last_update': element['Date']
                 }
 
-                parameters = self.creating_row_to_insert_db(row_dict=row)
+                parameters = self.all_cases.creating_row_to_insert_db(row_dict=row)
 
                 row_like_select_construction = ("", "",
                                                 element['TotalConfirmed'], element['TotalRecovered'],
@@ -46,7 +46,7 @@ class ImporterCurrentCases(ImporterAllCases):
                     continue
 
                 date_element = element['Date'][:10]
-                db_last_update = self.connection.select_all_records(query=self.query_select_cases_id_and_date,
+                db_last_update = self.connection.select_all_records(query=self.all_cases.query_select_cases_id_and_date,
                                                                     parameter=(country_id, date_element + '%'))
 
                 if db_last_update:
@@ -54,14 +54,14 @@ class ImporterCurrentCases(ImporterAllCases):
                         query='DELETE FROM cases WHERE country_id = ? and last_update LIKE ?;',
                         parameters=(country_id, date_element + '%'))
 
-                self.connection.insert_record(query=self.query_insert_cases, parameters=parameters)
+                self.connection.insert_record(query=self.all_cases.query_insert_cases, parameters=parameters)
                 print('Insert record: ', parameters)
 
             except KeyError:
                 if KeyError == 'AN':
                     continue
         print(f'--> Insert cases from json {path} is done <--')
-        self.close_connect()
+        self.connection.close_connect()
 
 
 if __name__ == '__main__':

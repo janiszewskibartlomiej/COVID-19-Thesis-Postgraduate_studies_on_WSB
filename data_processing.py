@@ -53,8 +53,8 @@ class DataProcessing:
 
     def all_cases_per_day_where_country_id_equal(self, country_id):
         data = self.connection.select_all_records(query=
-                                                self.query_select_sum_of_cases_per_day_group_by_id,
-                                                parameter=(country_id,))
+                                                  self.query_select_sum_of_cases_per_day_group_by_id,
+                                                  parameter=(country_id,))
         return data
 
     def total_current_cases(self):
@@ -103,16 +103,3 @@ class DataProcessing:
         df_diff_with_date = df_diff.join(df_date)
         df_diff_with_date.drop(labels=[0], axis=0)
         return df_diff_with_date
-
-
-if __name__ == '__main__':
-    data_processing = DataProcessing()
-    data = data_processing.all_cases_per_day_where_country_id_equal(country_id=179)
-    df = data_processing.get_dateframe(data=data)
-    print(df)
-
-    df_diff = data_processing.get_dateframe_diff(data=data)
-    print(df_diff)
-
-    df.to_csv(path_or_buf='tests/poland_df.csv', encoding='utf-8')
-    df_diff.to_csv(path_or_buf='tests/poland_diff.csv', encoding='utf-8')
