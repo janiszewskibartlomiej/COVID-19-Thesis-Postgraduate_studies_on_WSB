@@ -9,6 +9,7 @@ class ImporterCurrentCases(ImporterAllCases):
     def __init__(self):
 
         super().__init__()
+        self.connection = ConnectToDb()
 
     def load_current_data_from_json_and_insert_to_db(self, path, api=True):
 
@@ -44,28 +45,22 @@ class ImporterCurrentCases(ImporterAllCases):
                 if row_like_select_construction == ("", "", 0, 0, 0):
                     continue
 
-                conn = ConnectToDb()
 
                 date_element = element['Date'][:10]
-                db_last_update = conn.select_all_records(query=self.query_select_cases_id_and_date,
+                db_last_update = self.connection.select_all_records(query=self.query_select_cases_id_and_date,
                                                          parameter=(country_id, date_element + '%'))
-                print('select row ', db_last_update)
 
                 if db_last_update:
-                    conn.delete_record(
+                    self.connection.delete_record(
                         query='DELETE FROM cases WHERE country_id = ? and last_update LIKE ?;',
                         parameters=(country_id, date_element + '%'))
 
-                db_last_update = conn.select_all_records(query=self.query_select_cases_id_and_date,
+                self.connection.select_all_records(query=self.query_select_cases_id_and_date,
                                                          parameter=(country_id, date_element + '%'))
 
-                print('select after delete ', db_last_update)
-                conn.insert_record(query=self.query_insert_cases, parameters=parameters)
+                self.connection.insert_record(query=self.query_insert_cases, parameters=parameters)
                 print('Insert record: ', parameters)
 
-                db_last_update = conn.select_all_records(query=self.query_select_cases_id_and_date,
-                                                         parameter=(country_id, date_element + '%'))
-                print('select after update ', db_last_update)
             except KeyError:
                 if KeyError == 'AN':
                     continue
