@@ -1,6 +1,6 @@
 import os
+import sys
 import sqlite3
-
 
 # root_path = os.getcwd()
 # os.chdir(root_path)
@@ -43,9 +43,6 @@ class ConnectToDb:
         self.conn.commit()
         self.c.close()
 
-    def commit(self):
-        self.conn.commit()
-
     def close_connect(self):
         self.c.close()
 
@@ -55,3 +52,4 @@ if __name__ == '__main__':
     print(
         run.select_all_records(query='SELECT *, max(last_update) FROM cases WHERE country_id = ?', parameter=(179,)))
     # run.run_sql_script(Files.SQL_SCRIPT)
+    print(sys.path)

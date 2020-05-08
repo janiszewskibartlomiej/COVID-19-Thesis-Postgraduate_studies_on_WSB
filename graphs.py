@@ -2,10 +2,10 @@ import plotly.graph_objects as go
 from data_processing import DataProcessing
 
 
-class Graphs(DataProcessing):
+class Graphs:
 
     def __init__(self):
-        super().__init__()
+        self.data_processing = DataProcessing()
 
     def write_graph_to_html(self, figure, title):
         path = f'./templates/graphs/{title}.html'
@@ -39,7 +39,7 @@ class Graphs(DataProcessing):
 
     def get_graph(self, dataframe, country_id=0, write=False, diff=False):
         if country_id > 0:
-            country = self.get_name_and_3code_country(country_id=country_id)
+            country = self.data_processing.get_name_and_3code_country(country_id=country_id)
 
             if diff:
                 title_of_graph = f'Cases of the {country[0]} per day'
@@ -80,30 +80,30 @@ class Graphs(DataProcessing):
     def join_two_graphs(self, first_country_id, second_country_id):
         if first_country_id == 0:
             first_country = ('World', 'WOR')
-            first_data = self.total_cases_per_day()
+            first_data = self.data_processing.total_cases_per_day()
 
         else:
-            first_country = self.get_name_and_3code_country(country_id=first_country_id)
-            first_data = self.all_cases_per_day_where_country_id_equal(country_id=first_country_id)
+            first_country = self.data_processing.get_name_and_3code_country(country_id=first_country_id)
+            first_data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=first_country_id)
 
-        first_df = self.get_dateframe(data=first_data)
+        first_df = self.data_processing.get_dateframe(data=first_data)
         first_alpha_3_code = first_country[1]
         fig = go.Figure()
         figure = self.creating_figure_with_data(figure=fig, dataframe=first_df, alpha_3_code=first_alpha_3_code,
                                                 dash='solid')
         if second_country_id == 0:
             second_country = ('World', 'WOR')
-            second_data = self.total_cases_per_day()
+            second_data = self.data_processing.total_cases_per_day()
 
         else:
-            second_country = self.get_name_and_3code_country(country_id=second_country_id)
-            second_data = self.all_cases_per_day_where_country_id_equal(country_id=second_country_id)
+            second_country = self.data_processing.get_name_and_3code_country(country_id=second_country_id)
+            second_data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=second_country_id)
 
-        second_df = self.get_dateframe(data=second_data)
+        second_df = self.data_processing.get_dateframe(data=second_data)
         second_alpha_3_code = second_country[1]
         title_graph = f'Cases of {first_country[0]} vs {second_country[0]}'
-        graph = Graphs().creating_figure_with_data(figure=figure, dataframe=second_df, alpha_3_code=second_alpha_3_code,
-                                                   title_of_graph=title_graph, dash='dash')
+        graph = self.creating_figure_with_data(figure=figure, dataframe=second_df, alpha_3_code=second_alpha_3_code,
+                                               title_of_graph=title_graph, dash='dash')
         title_file_split = title_graph.split(' ')[2:]
         title_file = '-'.join(title_file_split)
         title_file_lower = title_file.lower()
@@ -112,13 +112,13 @@ class Graphs(DataProcessing):
         return graph, title_file_lower
 
     def cases_of_the_world(self, write=True):
-        data = DataProcessing().total_cases_per_day()
-        df = DataProcessing().get_dateframe(data=data)
+        data = self.data_processing.total_cases_per_day()
+        df = self.data_processing.get_dateframe(data=data)
         if write:
             write = True
         else:
             write = False
-        world = Graphs().get_graph(dataframe=df, country_id=0, write=write)
+        world = self.get_graph(dataframe=df, country_id=0, write=write)
         return world
 
 

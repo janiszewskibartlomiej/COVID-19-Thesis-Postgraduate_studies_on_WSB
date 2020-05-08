@@ -45,10 +45,9 @@ class ImporterCurrentCases(ImporterAllCases):
                 if row_like_select_construction == ("", "", 0, 0, 0):
                     continue
 
-
                 date_element = element['Date'][:10]
                 db_last_update = self.connection.select_all_records(query=self.query_select_cases_id_and_date,
-                                                         parameter=(country_id, date_element + '%'))
+                                                                    parameter=(country_id, date_element + '%'))
 
                 if db_last_update:
                     self.connection.delete_record(

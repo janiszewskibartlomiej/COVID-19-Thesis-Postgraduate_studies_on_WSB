@@ -5,7 +5,9 @@ from connect_to_db import ConnectToDb
 from resources.path_and_api import JsonApi
 
 
-class ImporterOfCountries(ConnectToDb):
+class ImporterOfCountries:
+    def __init__(self):
+        self.connection = ConnectToDb()
 
     def load_countries_from_api(self, url):
         with urlopen(url) as file:
@@ -39,7 +41,7 @@ class ImporterOfCountries(ConnectToDb):
                 print('Insert record: ', parameters)
             except sqlite3.IntegrityError:
                 continue
-        self.close_connect()
+        self.connection.close_connect()
         return print(f'--> Script {ImporterOfCountries.insert_countries_to_db.__name__} executed <--')
 
 
