@@ -7,7 +7,7 @@ import pandas
 
 from connect_to_db import ConnectToDb
 from data_processing import DataProcessing
-# from tests.conftest import TestMethods
+# from tests.test_methods import TestMethods
 
 x = os.path.abspath('..')
 x = x.replace('\\', '/')
