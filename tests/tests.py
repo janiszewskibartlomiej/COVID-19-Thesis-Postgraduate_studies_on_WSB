@@ -59,7 +59,6 @@ class DataProcesingTestCase(unittest.TestCase):
 
     def test_select_all_records_where_declare_id(self):
         country_id = get_list_country_id()
-        print(country_id)
         query = self.conn.select_all_records(query='SELECT *, max(last_update) FROM cases WHERE country_id = ?',
                                              parameter=(country_id,))
         self.assertIsNotNone(query)
@@ -68,7 +67,6 @@ class DataProcesingTestCase(unittest.TestCase):
 
     def test_dataframe_diff(self):
         country_id = get_list_country_id()
-        print(country_id)
         data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=country_id)
         self.assertIsNotNone(data)
         self.assertNotEqual(data, [])
@@ -83,7 +81,6 @@ class DataProcesingTestCase(unittest.TestCase):
         df.to_csv(path_or_buf='tests/poland_df.csv', encoding='utf-8')
         search = os.path.abspath('poland_df.csv')
         self.assertTrue(search)
-        print(search)
         assert 'poland_df.csv' in search
         df_diff.to_csv(path_or_buf='tests/poland_diff.csv', encoding='utf-8')
         search2 = os.path.abspath('poland_diff.csv')
@@ -92,7 +89,6 @@ class DataProcesingTestCase(unittest.TestCase):
 
     def test_dataframe(self):
         country_id = get_list_country_id()
-        print(country_id)
         data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=country_id)
         df = self.data_processing.get_dateframe(data=data)
         self.assertIsNotNone(df)
