@@ -2,20 +2,22 @@ import os
 import time
 import unittest
 import random
-import pytest
+# import pytest
 import pandas
 
 from connect_to_db import ConnectToDb
 from data_processing import DataProcessing
+# from tests.conftest import TestMethods
 
 x = os.path.abspath('..')
 x = x.replace('\\', '/')
 os.chdir(x)
 
+connection = ConnectToDb()
 
 def get_list_country_id():
     query = r'SELECT country_id FROM cases where confirmed > 0 group by country_id'
-    data = ConnectToDb().select_all_records(query=query, parameter='')
+    data = connection.select_all_records(query=query, parameter='')
     list_id = [x[0] for x in data]
     choise = random.choice(list_id)
     return choise
@@ -23,7 +25,7 @@ def get_list_country_id():
 
 def get_list_locations():
     query = r'SELECT co.latlng FROM countries as co left join cases as ca on co.country_id = ca.country_id where ca.confirmed > 0 group by co.country_id'
-    data = ConnectToDb().select_all_records(query=query, parameter='')
+    data = connection.select_all_records(query=query, parameter='')
     list_id = [x[0] for x in data]
     choise = random.choice(list_id)
     return choise
