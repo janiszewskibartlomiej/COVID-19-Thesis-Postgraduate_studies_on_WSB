@@ -1,41 +1,26 @@
-import os
 import time
 import unittest
-import random
 # import pytest
+import os
 import pandas
-
+import plotly.graph_objects as go
+from test_methods import TestMethods
 from connect_to_db import ConnectToDb
 from data_processing import DataProcessing
-# from tests.test_methods import TestMethods
+from graphs import Graphs
 
-x = os.path.abspath('..')
-x = x.replace('\\', '/')
-os.chdir(x)
-
-connection = ConnectToDb()
-
-def get_list_country_id():
-    query = r'SELECT country_id FROM cases where confirmed > 0 group by country_id'
-    data = connection.select_all_records(query=query, parameter='')
-    list_id = [x[0] for x in data]
-    choise = random.choice(list_id)
-    return choise
+path_root = os.path.abspath('..')
+# x = x.replace('\\', '/')
+print(path_root)
+os.chdir(path_root)
 
 
-def get_list_locations():
-    query = r'SELECT co.latlng FROM countries as co left join cases as ca on co.country_id = ca.country_id where ca.confirmed > 0 group by co.country_id'
-    data = connection.select_all_records(query=query, parameter='')
-    list_id = [x[0] for x in data]
-    choise = random.choice(list_id)
-    return choise
-
-
-class DataProcesingTestCase(unittest.TestCase):
+class DataProcessingTestCase(unittest.TestCase):
 
     def setUp(self):
         self.conn = ConnectToDb()
         self.data_processing = DataProcessing()
+        self.test_methods = TestMethods()
 
     def test_get_icon_color(self):
         self.assertEqual(self.data_processing.get_icon_color(1), '#29a329')
@@ -58,7 +43,7 @@ class DataProcesingTestCase(unittest.TestCase):
         self.assertEqual(self.data_processing.get_icon_color(100 ** 4), '#ff0000')
 
     def test_select_all_records_where_declare_id(self):
-        country_id = get_list_country_id()
+        country_id = self.test_methods.get_list_country_id()
         query = self.conn.select_all_records(query='SELECT *, max(last_update) FROM cases WHERE country_id = ?',
                                              parameter=(country_id,))
         self.assertIsNotNone(query)
@@ -66,7 +51,7 @@ class DataProcesingTestCase(unittest.TestCase):
         self.assertTrue(query, list)
 
     def test_dataframe_diff(self):
-        country_id = get_list_country_id()
+        country_id = self.test_methods.get_list_country_id()
         data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=country_id)
         self.assertIsNotNone(data)
         self.assertNotEqual(data, [])
@@ -88,14 +73,14 @@ class DataProcesingTestCase(unittest.TestCase):
         self.assertTrue(search2)
 
     def test_dataframe(self):
-        country_id = get_list_country_id()
+        country_id = self.test_methods.get_list_country_id()
         data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=country_id)
         df = self.data_processing.get_dateframe(data=data)
         self.assertIsNotNone(df)
         self.assertTrue(isinstance(df, pandas.DataFrame))
 
     def test_coordinates(self):
-        location = get_list_locations()
+        location = self.test_methods.get_list_locations()
         test_location = self.data_processing.slice_location(location)
         self.assertTrue(isinstance(test_location[0], float))
         self.assertTrue(isinstance(test_location[1], float))
@@ -134,7 +119,7 @@ class DataProcesingTestCase(unittest.TestCase):
         self.assertTrue(time.strftime(data[0][3]))
 
     def test_name_3code_country(self):
-        country_id = get_list_country_id()
+        country_id = self.test_methods.get_list_country_id()
         data = self.data_processing.get_name_and_3code_country(country_id=country_id)
         self.assertTrue(isinstance(data[0], str))
         self.assertTrue(isinstance(data[1], str))
@@ -151,5 +136,24 @@ class DataProcesingTestCase(unittest.TestCase):
         assert data.__len__() > 0
 
 
+class GraphsTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.graphs = Graphs()
+
+    def test_write_grap(self):
+        title = 'write_test'
+        file = 'templates/graphs/write_test.html'
+        self.graphs.write_graph_to_html(figure=go.Figure(), title=title)
+        search = os.path.abspath(file)
+        print('search: ', search)
+        self.assertIn(title, search)
+        self.assertTrue(search)
+        os.remove(file)
+        self.assertFalse(os.path.isfile(file))
+
+    def test_figure(self):
+        pass
+    
 if __name__ == '__main__':
     unittest.main()
