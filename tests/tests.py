@@ -3,6 +3,7 @@ import unittest
 # import pytest
 import os
 import pandas
+import plotly
 import plotly.graph_objects as go
 from test_methods import TestMethods
 from connect_to_db import ConnectToDb
@@ -140,6 +141,7 @@ class GraphsTestCase(unittest.TestCase):
 
     def setUp(self):
         self.graphs = Graphs()
+        self.test_methods = TestMethods()
 
     def test_write_grap(self):
         title = 'write_test'
@@ -154,6 +156,28 @@ class GraphsTestCase(unittest.TestCase):
 
     def test_figure(self):
         pass
-    
+
+    def test_graph(self):
+        pass
+
+    def test_join_graphs(self):
+        country_id1 = self.test_methods.get_list_country_id()
+        country_id2 = self.test_methods.get_list_country_id()
+        graph = self.graphs.join_two_graphs(first_country_id=country_id1, second_country_id=country_id2)
+        self.assertTrue(isinstance(graph, tuple))
+        self.assertTrue(isinstance(graph[1], str))
+        self.assertTrue(isinstance(graph[0], plotly.graph_objects.Figure))
+        print(graph[1])
+        os.remove('templates/graphs/' + graph[1] + '.html')
+        print(type(graph[0]))
+
+
+    def test_cases_world(self):
+        world = self.graphs.cases_of_the_world(write=False)
+        self.assertTrue(world)
+        self.assertTrue(isinstance(world, tuple))
+        self.assertTrue(isinstance(world[0], plotly.graph_objects.Figure))
+
+
 if __name__ == '__main__':
     unittest.main()
