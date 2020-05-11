@@ -1,5 +1,6 @@
 # Completed tasks:
 
+#### EVERY TASKS >> TESTING TESTSTING AND TESTING 
 
 ## Version 1.0
 
