@@ -29,5 +29,5 @@
 
 1. `clone` `repo`
 2. `pip install -r requirements.txt`
-3. `creating_app.py`
+3. `creating_app.py`   >>data import time ~~ 80 minutes<<
 4. `app.py`
