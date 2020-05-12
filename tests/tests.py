@@ -1,3 +1,4 @@
+import sys
 import time
 import unittest
 # import pytest
@@ -44,7 +45,7 @@ class DataProcessingTestCase(unittest.TestCase):
         self.assertEqual(self.data_processing.get_icon_color(100 ** 4), '#ff0000')
 
     def test_select_all_records_where_declare_id(self):
-        country_id = self.test_methods.get_list_country_id()
+        country_id = self.test_methods.get_country_id()
         query = self.conn.select_all_records(query='SELECT *, max(last_update) FROM cases WHERE country_id = ?',
                                              parameter=(country_id,))
         self.assertIsNotNone(query)
@@ -52,7 +53,7 @@ class DataProcessingTestCase(unittest.TestCase):
         self.assertTrue(query, list)
 
     def test_dataframe_diff(self):
-        country_id = self.test_methods.get_list_country_id()
+        country_id = self.test_methods.get_country_id()
         data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=country_id)
         self.assertIsNotNone(data)
         self.assertNotEqual(data, [])
@@ -66,22 +67,22 @@ class DataProcessingTestCase(unittest.TestCase):
         self.assertEqual(df_diff.columns[-1], 'Date')
         df.to_csv(path_or_buf='tests/poland_df.csv', encoding='utf-8')
         search = os.path.abspath('poland_df.csv')
-        self.assertTrue(search)
+        self.assertTrue(os.path.exists(search))
         assert 'poland_df.csv' in search
         df_diff.to_csv(path_or_buf='tests/poland_diff.csv', encoding='utf-8')
         search2 = os.path.abspath('poland_diff.csv')
         self.assertIn('poland_diff.csv', search2)
-        self.assertTrue(search2)
+        self.assertTrue(os.path.exists(search2))
 
     def test_dataframe(self):
-        country_id = self.test_methods.get_list_country_id()
+        country_id = self.test_methods.get_country_id()
         data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=country_id)
         df = self.data_processing.get_dateframe(data=data)
         self.assertIsNotNone(df)
         self.assertTrue(isinstance(df, pandas.DataFrame))
 
     def test_coordinates(self):
-        location = self.test_methods.get_list_locations()
+        location = self.test_methods.get_location()
         test_location = self.data_processing.slice_location(location)
         self.assertTrue(isinstance(test_location[0], float))
         self.assertTrue(isinstance(test_location[1], float))
@@ -120,7 +121,8 @@ class DataProcessingTestCase(unittest.TestCase):
         self.assertTrue(time.strftime(data[0][3]))
 
     def test_name_3code_country(self):
-        country_id = self.test_methods.get_list_country_id()
+        country_id = self.test_methods.get_country_id()
+        print(country_id)
         data = self.data_processing.get_name_and_3code_country(country_id=country_id)
         self.assertTrue(isinstance(data[0], str))
         self.assertTrue(isinstance(data[1], str))
@@ -142,6 +144,7 @@ class GraphsTestCase(unittest.TestCase):
     def setUp(self):
         self.graphs = Graphs()
         self.test_methods = TestMethods()
+        self.data_processing = DataProcessing()
 
     def test_write_grap(self):
         title = 'write_test'
@@ -150,7 +153,7 @@ class GraphsTestCase(unittest.TestCase):
         search = os.path.abspath(file)
         print('search: ', search)
         self.assertIn(title, search)
-        self.assertTrue(search)
+        self.assertTrue(os.path.exists(search))
         os.remove(file)
         self.assertFalse(os.path.isfile(file))
 
@@ -158,11 +161,31 @@ class GraphsTestCase(unittest.TestCase):
         pass
 
     def test_graph(self):
-        pass
+        country_id = self.test_methods.get_country_id()
+        data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=country_id)
+        dataframe = self.data_processing.get_dateframe(data=data)
+        graph = self.graphs.get_graph(country_id=country_id, dataframe=dataframe, diff=False, write=False)
+        self.assertTrue(isinstance(graph, tuple))
+        self.assertTrue(isinstance(graph[1], str))
+        self.assertTrue(isinstance(graph[0], plotly.graph_objects.Figure))
+
+    def test_diff_graph(self):
+        country_id = self.test_methods.get_country_id()
+        data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=country_id)
+        dataframe = self.data_processing.get_dateframe_diff(data=data)
+        path = 'tests/test-diff.csv'
+        dataframe.to_csv(path_or_buf=path, encoding='utf-8')
+        search = os.path.abspath(path)
+        self.assertTrue(os.path.exists(search))
+        os.remove(search)
+        graph = self.graphs.get_graph(country_id=country_id, dataframe=dataframe, diff=True, write=False)
+        self.assertTrue(isinstance(graph, tuple))
+        self.assertTrue(isinstance(graph[1], str))
+        self.assertTrue(isinstance(graph[0], plotly.graph_objects.Figure))
 
     def test_join_graphs(self):
-        country_id1 = self.test_methods.get_list_country_id()
-        country_id2 = self.test_methods.get_list_country_id()
+        country_id1 = self.test_methods.get_country_id()
+        country_id2 = self.test_methods.get_country_id()
         graph = self.graphs.join_two_graphs(first_country_id=country_id1, second_country_id=country_id2)
         self.assertTrue(isinstance(graph, tuple))
         self.assertTrue(isinstance(graph[1], str))
@@ -170,7 +193,6 @@ class GraphsTestCase(unittest.TestCase):
         print(graph[1])
         os.remove('templates/graphs/' + graph[1] + '.html')
         print(type(graph[0]))
-
 
     def test_cases_world(self):
         world = self.graphs.cases_of_the_world(write=False)

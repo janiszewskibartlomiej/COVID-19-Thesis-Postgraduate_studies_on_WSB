@@ -123,8 +123,6 @@ class Graphs:
 
 
 if __name__ == '__main__':
-    Graphs().join_two_graphs(first_country_id=0, second_country_id=179)
-    Graphs().join_two_graphs(first_country_id=85, second_country_id=179)
 
     data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=179)
     df = DataProcessing().get_dateframe_diff(data=data)
