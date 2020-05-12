@@ -158,7 +158,20 @@ class GraphsTestCase(unittest.TestCase):
         self.assertFalse(os.path.isfile(file))
 
     def test_figure(self):
-        pass
+        country_id = self.test_methods.get_country_id()
+        self.assertTrue(isinstance(country_id, int))
+        data = self.data_processing.all_cases_per_day_where_country_id_equal(country_id=country_id)
+        self.assertTrue(isinstance(data, list))
+        self.assertTrue(isinstance(data[1], tuple))
+        assert len(data) > 0
+        dataframe = self.data_processing.get_dateframe(data=data)
+        self.assertTrue(isinstance(dataframe, pandas.DataFrame))
+        alpha_3_code = ConnectToDb().select_one_record(
+            query='SELECT co.alpha_3_code from countries as co join cases as ca on co.country_id = ca.country_id group by co.country_id having co.country_id = ?',
+            parameter=(country_id,))
+        self.assertTrue(isinstance(alpha_3_code[0], str))
+        figure = self.graphs.creating_figure_with_data(figure=go.Figure(), dataframe=dataframe, alpha_3_code=alpha_3_code[0])
+        self.assertTrue(isinstance(figure, plotly.graph_objects.Figure))
 
     def test_graph(self):
         country_id = self.test_methods.get_country_id()
