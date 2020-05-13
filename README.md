@@ -30,5 +30,5 @@
 1. `clone` `repo`
 2. `pip install -r requirements.txt`
 3. `creating_app.py`   >>data import time ~~ 80 minutes<<  sometimes API is locking - please run one more time
-4. `tests/tests.py`  If tests pass v
+4. `tests/tests.py`  If tests pass > 5.
 5. `app.py`
