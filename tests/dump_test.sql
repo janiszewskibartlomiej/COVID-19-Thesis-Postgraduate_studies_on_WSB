@@ -1,5 +1,10 @@
-PRAGMA foreign_keys=OFF;
-begin TRANSACTION;
+PRAGMA foreign_keys = ON;
+
+
+DROP TABLE IF EXISTS cases;
+DROP TABLE IF EXISTS countries;
+
+
 CREATE TABLE countries(
   country_id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
