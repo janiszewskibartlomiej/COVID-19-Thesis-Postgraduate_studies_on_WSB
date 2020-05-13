@@ -10,7 +10,6 @@ class CreatingMap:
     def __init__(self):
         self.data_processing = DataProcessing()
 
-
     def map_of_the_world(self):
         title = 'COVID-19 Thesis by Bartlomiej Janiszewski & Piotr Woźniak'
 
@@ -92,7 +91,3 @@ class CreatingMap:
 
         cases_map.save('./templates/index.html')
         cases_map.save('index.html')  # only for github
-
-
-if __name__ == '__main__':
-    CreatingMap().map_of_the_world()

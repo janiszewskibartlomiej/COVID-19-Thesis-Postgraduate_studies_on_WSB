@@ -62,20 +62,3 @@ class ImporterCurrentCases:
                     continue
         print(f'--> Insert cases from json {path} is done <--')
         self.connection.close_connect()
-
-
-if __name__ == '__main__':
-    ImporterCurrentCases().load_current_data_from_json_and_insert_to_db(JsonApi.API_CURRENT_CASES)
-
-    # db_last_update = ConnectToDb().select_all_records(query=ImporterCurrentCases().query_select_cases_id_and_date,
-    #                                                   parameter=(130, '2020-05-04' + '%'))
-    # print('select row ', db_last_update)
-    #
-    # if db_last_update:
-    #     ConnectToDb().delete_record(
-    #         query='DELETE FROM cases WHERE country_id = ? and last_update LIKE ?;',
-    #         parameters=(130, '2020-05-04' + '%'))
-    #
-    # db_last_update = ConnectToDb().select_all_records(query=ImporterCurrentCases().query_select_cases_id_and_date,
-    #                                                   parameter=(130, '2020-05-04' + '%'))
-    # print('select after delete ', db_last_update)

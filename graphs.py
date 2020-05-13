@@ -120,16 +120,3 @@ class Graphs:
             write = False
         world = self.get_graph(dataframe=df, country_id=0, write=write)
         return world
-
-
-if __name__ == '__main__':
-
-    data = DataProcessing().all_cases_per_day_where_country_id_equal(country_id=179)
-    df = DataProcessing().get_dateframe_diff(data=data)
-    df2 = DataProcessing().get_dateframe(data=data)
-    df.to_csv(path_or_buf='tests/poland-diff.csv', encoding='utf-8')
-    x = Graphs().get_graph(dataframe=df, country_id=179, write=True, diff=True)
-    x[0].show()
-
-    y = Graphs().get_graph(dataframe=df2, country_id=179, write=True, diff=False)
-    y[0].show()

@@ -100,7 +100,3 @@ class ImporterAllCases:
         delta = time_stop - time_start
         print('Import time is ', round(delta / 60, 2), ' minutes')
         self.connection.close_connect()
-
-
-if __name__ == '__main__':
-    ImporterAllCases().load_all_data_from_json_and_insert_to_db(path=JsonApi.API_ALL_CASES)

@@ -66,11 +66,11 @@ class DataProcessingTestCase(unittest.TestCase):
         self.assertIsNotNone(df_diff)
         self.assertEqual(df_diff.columns[-1], 'Date')
         df.to_csv(path_or_buf='tests/poland_df.csv', encoding='utf-8')
-        search = os.path.abspath('poland_df.csv')
+        search = os.path.abspath('tests/poland_df.csv')
         self.assertTrue(os.path.exists(search))
         assert 'poland_df.csv' in search
         df_diff.to_csv(path_or_buf='tests/poland_diff.csv', encoding='utf-8')
-        search2 = os.path.abspath('poland_diff.csv')
+        search2 = os.path.abspath('tests/poland_diff.csv')
         self.assertIn('poland_diff.csv', search2)
         self.assertTrue(os.path.exists(search2))
 
@@ -151,7 +151,6 @@ class GraphsTestCase(unittest.TestCase):
         file = 'templates/graphs/write_test.html'
         self.graphs.write_graph_to_html(figure=go.Figure(), title=title)
         search = os.path.abspath(file)
-        print('search: ', search)
         self.assertIn(title, search)
         self.assertTrue(os.path.exists(search))
         os.remove(file)
@@ -203,9 +202,7 @@ class GraphsTestCase(unittest.TestCase):
         self.assertTrue(isinstance(graph, tuple))
         self.assertTrue(isinstance(graph[1], str))
         self.assertTrue(isinstance(graph[0], plotly.graph_objects.Figure))
-        print(graph[1])
         os.remove('templates/graphs/' + graph[1] + '.html')
-        print(type(graph[0]))
 
     def test_cases_world(self):
         world = self.graphs.cases_of_the_world(write=False)
