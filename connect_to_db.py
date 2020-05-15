@@ -1,5 +1,4 @@
 import os
-import sys
 import sqlite3
 
 
@@ -9,8 +8,8 @@ import sqlite3
 
 class ConnectToDb:
 
-    def __init__(self, db='db.sqlite'):
-        self.db = db
+    def __init__(self):
+        self.db = 'db.sqlite'
         self.conn = sqlite3.connect(self.db)
         self.c = self.conn.cursor()
 
@@ -46,3 +45,4 @@ class ConnectToDb:
 
     def close_connect(self):
         self.c.close()
+

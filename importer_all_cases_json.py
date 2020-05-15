@@ -1,7 +1,6 @@
 import json
 import time
 import requests
-from resources.path_and_api import JsonApi
 from connect_to_db import ConnectToDb
 
 
@@ -28,6 +27,7 @@ class ImporterAllCases:
     def read_json_api(self, api):
 
         response = requests.get(api)
+        time.sleep(7)
         data = response.json()
         return data
 
@@ -64,7 +64,10 @@ class ImporterAllCases:
             data = self.read_json_file(path)
 
         load_countries = self.load_alpha2code_and_id_of_countries()
+        time.sleep(3)
         symbol_dict = self.create_dict_of_countries_name_and_id(load_countries)
+        time.sleep(3)
+
         for element in data:
             try:
                 coutry_code = element['CountryCode']
@@ -88,7 +91,7 @@ class ImporterAllCases:
                                          0, 0, 0)
 
                 if row_cases != verify_duplicate_zero:
-                    self.connection.insert_record(query=self.query_insert_cases, parameters=parameters)
+                    ConnectToDb().insert_record(query=self.query_insert_cases, parameters=parameters)
                     print('Insert record: ', parameters)
 
             except KeyError:

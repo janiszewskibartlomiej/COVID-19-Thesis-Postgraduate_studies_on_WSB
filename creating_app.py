@@ -12,9 +12,9 @@ if __name__ == '__main__':
 
     countries_data = ImporterOfCountries().load_countries_from_api(JsonApi.API_COUNTRIES)
     ImporterOfCountries().insert_countries_to_db(countries_data)
-    time.sleep(10)
+    time.sleep(5)
     ImporterAllCases().load_all_data_from_json_and_insert_to_db(path=JsonApi.API_ALL_CASES, api=True)
-    time.sleep(10)
+    time.sleep(5)
     ImporterCurrentCases().load_current_data_from_json_and_insert_to_db(path=JsonApi.API_CURRENT_CASES, api=True)
 
     CreatingMap().map_of_the_world()

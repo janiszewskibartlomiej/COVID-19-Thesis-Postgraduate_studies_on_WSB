@@ -1,7 +1,6 @@
 import time
 from connect_to_db import ConnectToDb
 from importer_all_cases_json import ImporterAllCases
-from resources.path_and_api import JsonApi
 
 
 class ImporterCurrentCases:
@@ -19,7 +18,9 @@ class ImporterCurrentCases:
             data = self.all_cases.read_json_file(path)
 
         load_data = self.all_cases.load_alpha2code_and_id_of_countries()
+        time.sleep(3)
         symbol_dict = self.all_cases.create_dict_of_countries_name_and_id(load_data)
+        time.sleep(3)
 
         for element in data['Countries']:
             try:
@@ -54,7 +55,7 @@ class ImporterCurrentCases:
                         query='DELETE FROM cases WHERE country_id = ? and last_update LIKE ?;',
                         parameters=(country_id, date_element + '%'))
 
-                self.connection.insert_record(query=self.all_cases.query_insert_cases, parameters=parameters)
+                ConnectToDb().insert_record(query=self.all_cases.query_insert_cases, parameters=parameters)
                 print('Insert record: ', parameters)
 
             except KeyError:
