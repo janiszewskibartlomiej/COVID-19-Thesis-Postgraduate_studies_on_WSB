@@ -83,6 +83,8 @@ class ImporterAllCases:
                     'last_update': element['Date']
                 }
                 parameters = self.creating_row_to_insert_db(row_dict=row)
+                if parameters[2] != '':
+                    continue
 
                 row_cases = (element['Province'], element['City'],
                              element['Confirmed'], element['Recovered'], element['Deaths'])

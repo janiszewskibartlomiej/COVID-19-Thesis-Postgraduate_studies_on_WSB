@@ -1,6 +1,7 @@
 import time
 from connect_to_db import ConnectToDb
 from importer_all_cases_json import ImporterAllCases
+from resources.path_and_api import JsonApi
 
 
 class ImporterCurrentCases:
@@ -63,3 +64,6 @@ class ImporterCurrentCases:
                     continue
         print(f'--> Insert cases from json {path} is done <--')
         self.connection.close_connect()
+
+if __name__ == '__main__':
+    ImporterCurrentCases().load_current_data_from_json_and_insert_to_db(path=JsonApi.API_CURRENT_CASES, api=True)
