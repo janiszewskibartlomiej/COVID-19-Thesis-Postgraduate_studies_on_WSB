@@ -16,5 +16,5 @@ if __name__ == '__main__':
     ImporterAllCases().load_all_data_from_json_and_insert_to_db(path=JsonApi.API_ALL_CASES, api=True)
     time.sleep(5)
     ImporterCurrentCases().load_current_data_from_json_and_insert_to_db(path=JsonApi.API_CURRENT_CASES, api=True)
-
+    time.sleep(3)
     CreatingMap().map_of_the_world()
