@@ -1,6 +1,6 @@
 import folium
 from folium import DivIcon
-from Scratches.importer_all_cases_json import ImporterAllCases
+from importer_cases_json import ImporterCases
 from resources.path_and_api import JsonApi
 from data_processing import DataProcessing
 
@@ -35,7 +35,7 @@ class CreatingMap:
             ),
         ).add_to(cases_map)
 
-        total_data_today = ImporterAllCases().read_json_api(JsonApi.API_TOTAL_TODAY)
+        total_data_today = ImporterCases().read_json_api(JsonApi.API_TOTAL_TODAY)
         total_confirmed = f"{total_data_today['confirmed']['value']: ,}".replace(
             ",", " "
         )
