@@ -29,7 +29,6 @@ def graph_diff(id):
     if id == 0:
         data = DataProcessing().total_cases_per_day()
         df = DataProcessing().get_dateframe_diff(data=data)
-        # df.to_csv(path_or_buf='tests/world_diff.csv', encoding='utf-8')
         Graphs().get_graph(dataframe=df, country_id=0, write=True, diff=True)
         return render_template("./graphs/world-diff.html")
 

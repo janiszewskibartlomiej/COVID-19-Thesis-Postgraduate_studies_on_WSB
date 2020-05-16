@@ -1,20 +1,14 @@
-import os
 import sqlite3
 
 
-# root_path = os.getcwd()
-# os.chdir(root_path)
-
-
 class ConnectToDb:
-
     def __init__(self):
-        self.db = 'db.sqlite'
+        self.db = "db.sqlite"
         self.conn = sqlite3.connect(self.db)
         self.c = self.conn.cursor()
 
     def run_sql_script(self, scripts):
-        with open(scripts, mode='r', encoding='utf-8') as file:
+        with open(scripts, mode="r", encoding="utf-8") as file:
             query = file.read()
             self.execute_script(query=query)
         print(f'\n --> Script "{file.name}" executed <--')
@@ -45,4 +39,3 @@ class ConnectToDb:
 
     def close_connect(self):
         self.c.close()
-

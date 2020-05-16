@@ -1,10 +1,5 @@
-import sys
-import os
 import pandas as pd
 from connect_to_db import ConnectToDb
-
-root_path = os.getcwd()
-os.chdir(root_path)
 
 
 class DataProcessing:
@@ -12,7 +7,7 @@ class DataProcessing:
         super().__init__()
         self.connection = ConnectToDb()
 
-        self.query_select_sum_of_cases_per_day_group_by_id = """
+        self.query_select_sum_of_cases_per_day_group_by_id = r"""
         SELECT sum(ca.confirmed) as total_confirmed, 
         sum(ca.deaths) as total_deaths, sum(ca.recovered) as total_recovered, 
         max(ca.last_update)
@@ -23,7 +18,7 @@ class DataProcessing:
         HAVING ca.country_id = ?
         """
 
-        self.query_select_sum_of_cases_current_day = """
+        self.query_select_sum_of_cases_current_day = r"""
         SELECT ca.country_id, co.name, co.alpha_3_code, ca.confirmed as total_confirmed, ca.deaths as total_deaths, 
         ca.recovered as total_recovered, max(ca.last_update), co.latlng, co.flag_url
         FROM cases as ca
@@ -32,7 +27,7 @@ class DataProcessing:
         GROUP BY ca.country_id
         """
 
-        self.query_select_total_cases_per_day = """
+        self.query_select_total_cases_per_day = r"""
         SELECT sum(confirmed) as total_confirmed, sum(deaths) as total_deaths, sum(recovered) as total_recovered, 
         datetime(last_update) as date_of_update
         FROM cases
@@ -71,14 +66,14 @@ class DataProcessing:
 
     def get_name_and_3code_country(self, country_id):
         select = self.connection.select_one_record(
-            query="SELECT name, alpha_3_code from countries WHERE country_id = ?",
+            query=r"SELECT name, alpha_3_code from countries WHERE country_id = ?",
             parameter=(country_id,),
         )
         return select
 
     def get_id_and_name_of_countries(self):
         select = self.connection.select_all_records(
-            query="SELECT co.country_id, co.name from countries as co join cases as ca on co.country_id = ca.country_id group by co.country_id having ca.confirmed > 0",
+            query=r"SELECT co.country_id, co.name from countries as co join cases as ca on co.country_id = ca.country_id group by co.country_id having ca.confirmed > 0",
             parameter="",
         )
         return select
