@@ -136,6 +136,7 @@ class ImporterCases:
 
         if current_cases:
             print("Import time current cases = ", round(delta / 60, 2), " minutes")
-        print("Import time historical cases = ", round(delta / 60, 2), " minutes")
+        else:
+            print("Import time historical cases = ", round(delta / 60, 2), " minutes")
 
         self.connection.close_connect()
